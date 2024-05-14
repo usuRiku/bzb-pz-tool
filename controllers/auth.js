@@ -64,5 +64,5 @@ module.exports.googleLogin = async (req, res) => {
 
 module.exports.logout = async (req, res) => {
     req.session.destroy();
-    res.redirect('/home');
+    res.redirect('/');
 }

@@ -15,4 +15,4 @@ button.addEventListener("click", (e) => {
         }
         form.classList.add('was-validated')
     }, false)
-});
+},{once: true});

@@ -53,7 +53,7 @@ app.use(session(sessionConfig));
 app.use(flash());
 
 //middleware
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -72,7 +72,7 @@ mongoose.set('strictQuery', true);
 //ejs
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname + "views"));
 
 
 //routes middleware

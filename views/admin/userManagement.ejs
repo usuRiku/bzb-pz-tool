@@ -1,0 +1,23 @@
+<% layout("layouts/boilerplate") %>
+<div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+        <h1>登録されたユーザー一覧</h1>
+        <table class="table table-striped table-hover my-2">
+            <tbody>
+                <th scope="col">期</th>
+                <th scope="col">サークルネーム</th>
+                <th scope="col">操作</th>
+                <% for(let user of users) {%>
+                    <tr>
+                    <td><%= user.grade %></td>
+                    <td><a href="/mypage/<%= user._id %>"><%= user.circleName %></a></td>
+                    <td>
+                        <form action="/mypage/<%=user._id%>?_method=DELETE" method="POST" class = "d-inline delete-forms"><button type="button" class="btn btn-danger btn-sm deleteEl">削除</button></form>
+                    </td>
+                </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="/javascript/admin/userManagement.js"></script>

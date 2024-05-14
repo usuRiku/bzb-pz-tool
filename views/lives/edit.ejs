@@ -1,0 +1,40 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/newLive.css">
+<div class="row col-12 col-md-6 offset-md-3">
+    <h1>ライブ編集フォーム</h1>
+    <h3 id = "msg"></h3>
+    <form action="/lives" method="POST" class = "validation" novalidate>
+        <div>
+            <label for="name" class="col-form-label me-3">ライブ名</label>
+            <input type="text" id="name" name="live[name]" class="form-control" value = <%=live.name%> required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="date" class="col-form-label" multiple>開催日</label>
+            <% const dateString = `${live.date.getFullYear()}-${('0' + (live.date.getMonth() + 1)).slice(-2)}-${('0' + live.date.getDate()).slice(-2)}` %>
+            <input type="date" id = "date" name="live[date]" class = "form-control" value = <%=dateString%> required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="place" class="col-form-label" multiple>開催場所</label>
+            <input type="text" id = "location" name="live[location]" class = "form-control"value = <%=live.location%> required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="time" class="col-form-label" multiple>開始時間</label>
+            <input type="time" id = "time" name="live[time]" class = "form-control" value=<%=live.time%> required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-success mt-3" id = "submitButton">ライブを編集</button>
+    </form>
+</div>
+<script src="/javascript/validateForms.js"></script>

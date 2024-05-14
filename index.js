@@ -1,0 +1,113 @@
+if (process.env.NODE_ENV != "production") {
+    require("dotenv").config();
+};
+const express = require("express");
+const ejsMate = require("ejs-mate");
+const path = require("path");
+const mongoose = require("mongoose");
+const session = require("express-session");
+const flash = require("connect-flash");
+const methodOverride = require('method-override');
+const Joi = require("joi");
+const MongoStore = require('connect-mongo');
+const User = require("./models/user");
+
+const sessionSecret = process.env.SESSION_SECRET;
+const PORT=process.env.PORT || 3000;
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/bzb-pa-tool";
+
+const homeRoutes = require("./routes/home");
+const livesRoutes = require("./routes/lives");
+const authRoutes = require("./routes/auth");
+const myPageRoutes = require("./routes/myPage");
+const adminRoutes = require("./routes/admin");
+const ExpressError = require("./utils/ExpressError");
+const app = express();
+
+//session
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    crypto: {
+        secret: sessionSecret
+    },
+    touchAfter: 24 * 3600
+});
+
+store.on("error", () => {
+    console.log("セッションストアエラー", e);
+} )
+
+const sessionConfig = {
+    store,
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000 * 60 * 60 * 24 * 7
+    }
+};
+
+
+app.use(session(sessionConfig));
+
+app.use(flash());
+
+//middleware
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(methodOverride('_method'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use((req, res, next) => {
+    res.locals.success = req.flash("success");
+    res.locals.error = req.flash("error");
+    res.locals.currentUser = req.session.user;
+    session.redirectUrl = req.originalUrl;
+    console.log(session.redirectUrl);
+    next();
+});
+
+//mongoose
+mongoose.set('strictQuery', true);
+
+//ejs
+app.engine("ejs", ejsMate);
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+
+//routes middleware
+app.use("/", homeRoutes);
+app.use("/lives", livesRoutes);
+app.use("/", authRoutes);
+app.use("/mypage", myPageRoutes);
+app.use("/admin", adminRoutes);
+
+
+app.all('*', (req, res, next) => {
+    next(new ExpressError('ページが見つかりませんでした', 404));
+});
+
+//dbUrl
+mongoose.connect(dbUrl, { useNewUrlParser: true })
+    .then(() => {
+        console.log('MongoDBコネクションOK！！');
+    })
+    .catch(err => {
+        console.log("MongoDBコネクションエラー！！！'");
+        console.log(err);
+    });
+
+app.use((err, req, res, next) => {
+    const { statusCode = 500 } = err;
+    if (statusCode === 404) {
+        res.status(statusCode).render('errors/notFound', { err });
+    } else {
+        console.log(err);
+        res.status(statusCode).render("errors/error", { err });
+    }
+    next();
+});
+
+app.listen(PORT, () => {
+    console.log("listening server");
+});

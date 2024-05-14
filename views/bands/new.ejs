@@ -1,0 +1,72 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/newPatable.css">
+<div class="row col-12 col-lg-6 offset-lg-3">
+    <h1><%=live.name%><br>
+        PA表新規作成フォーム</h1>
+    <h5 id = "msg"></h3>
+    <% url = `/lives/${live._id}/` %>
+    <form action="<%= url %>" method="POST" class = "validation" novalidate>
+        <div>
+            <label for="name" class="col-form-label me-3">バンド名</label>
+            <input type="text" id="name" name="band[name]" class="form-control" required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="leader" class="col-form-label">バンドリーダー</label>
+            <input type="leader" id = "leader" name="band[leader]" class = "form-control" required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="se" class="col-form-label">SE(登場曲)</label>
+            <input type="text" id = "se" name="band[se]" class = "form-control" required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="seArtist" class="col-form-label">SEアーティスト</label>
+            <input type="text" id = "seArtist" name="band[seArtist]" class = "form-control" required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="time" class="col-form-label">出演時間</label>
+            <input type="number" id = "time" name="band[time]" class = "form-control" value="5" step = 5 min = 0 required>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="songNumber" class="col-form-label">演奏曲数</label>
+            <select name="band[songNumber]" id="songNumber" class = "form-select">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <div class="valid-feedback">
+                OK!
+            </div>
+        </div>
+        <div>
+            <label for="songs" class = "col-form-label">セットリスト</label>
+            <%- include("../partials/newBandForm/songs")%>
+        </div>
+        <button type="button" class="btn btn-success my-3" id="submitButton">PA表を新規作成</button>
+    </form>
+</div>
+<script src = "/javascript/newBand.js"></script>
+<script src="/javascript/validateForms.js"></script>
+<script>
+</script>

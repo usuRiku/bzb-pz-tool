@@ -1,0 +1,14 @@
+<div class="accordion" id="songs">
+    <% for(let i = 1; i <= 10; i++){ %>
+    <div class="accordion-item hidden" id = "accordion<%=i%>">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target=<%="#"+i%> aria-expanded="true" aria-controls=<%=i%>><%=i%>曲目</button>
+        </h2>
+        <div id=<%=i%> class="accordion-collapse collapse" data-bs-parent="#songs">
+            <div class="accordion-body">
+                <%-include("./song", {i});%>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>

@@ -1,0 +1,45 @@
+<div class="container text-center mt-3">
+    <div class="row">
+        <div class="col-12 col-lg-6 offset-lg-3">
+            <h1 class="text-center"> <%= band.name %></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 ">
+            <span >作成者：<%=band.author.grade%>期<%= band.author.circleName %></span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-10 offset-lg-1">
+            <table class="table table-bordered paTable">
+                <tr>
+                    <th scope="row">グループ名</th>
+                    <td colspan="5"><%= band.name %></td>
+                </tr>
+                <tr>
+                    <th scope="row">リーダー</th>
+                    <td colspan="5"><%= band.leader %></td>
+                </tr>
+                <tr>
+                    <th scope="row">SE(登場曲)</th>
+                    <td colspan="5"><%= band.se %> / <%= band.seArtist %></td>
+                </tr>
+                <tr>
+                    <th scope="row">出演時間</th>
+
+                    <td colspan="1"><%= band.time %>分</td>
+                    <td colspan="1"></td>
+                    <td colspan="1">曲数</td>
+                    <td colspan="1"><%= band.songNumber %></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <% for(let i = 0; i < 5; i++){ %>
+        <div class = "my-5">
+            <h2><%= i + 1 %>曲目</h2>
+            <%- include("./paTableSong", {i}) %>
+        </div>
+        <% if(i === band.songs.length - 1) break %>
+    <% } %>
+</div>

@@ -1,0 +1,28 @@
+<nav class="fixed-top navbar navbar-expand-md navbar-dark bg-dark">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="/">bzb-pa-tool</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+              <a class="nav-link" href="/">ホーム</a>
+              <a class="nav-link" href="/lives">ライブ一覧</a>
+          </div>
+          <div class="navbar-nav ms-auto">
+            <% if(!currentUser){ %>
+              <a class="nav-link" href="/login">ログイン</a>
+              <a class="nav-link" href="/register">ユーザー新規登録</a>
+            <% }else{ %>
+              <% if(!(currentUser.email === "admin@admin.com" )){ %>
+                <a class="nav-link" href="/mypage/<%= currentUser._id %>"><%= currentUser.circleName %>マイページ</a>
+                <% }else{ %>
+                  <a class="nav-link" href="/admin">管理者ページ</a>
+              <% } %>
+              <a class="nav-link" href="/logout">ログアウト</a>
+            <% } %>
+          </div>
+      </div>
+  </div>
+</nav>

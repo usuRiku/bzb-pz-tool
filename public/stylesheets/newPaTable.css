@@ -1,0 +1,15 @@
+.hidden{
+    display: none;
+}
+
+.display{
+    display: block;
+}
+
+#msg{
+    color: red;
+}
+
+.input-group-text{
+    width:33%;
+}

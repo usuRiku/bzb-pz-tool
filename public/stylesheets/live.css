@@ -1,0 +1,39 @@
+#list{
+    margin-top:2rem;
+}
+
+.handle{
+    cursor: move;
+    display:inline;
+}
+
+.bi-chevron-bar-expand .cards{
+    display: flex;
+    flex-direction: row;
+    margin-right: 2rem;
+    margin-top: 1rem;
+}
+
+.card-body{
+    margin-left: 3rem;
+}
+
+.hiddenBtn{
+    cursor: pointer;
+}
+
+.hidden{
+    display: none;
+}
+
+#order{
+    width:10%;
+}
+
+#operation{
+    width: 20%;
+}
+
+form{
+    display: inline;
+}

@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/stylesheets/paTable.css">
+<div class="row">
+    <div class="col-10 offset-1">
+        <table class="table table-bordered">
+            <tr>
+                <th scope="row" class="fs-5">マイク</th>
+                <th scope="col" class="fs-5"><%= band.songs[i].micNumber[0] %></th>
+                <th scope="col" class="fs-5"><%= band.songs[i].micNumber[1] %></th>
+                <th scope="col" class="fs-5"><%= band.songs[i].micNumber[2] %></th>
+                <th scope="col" class="fs-5"><%= band.songs[i].micNumber[3] %></th>
+                <th scope="col" class="fs-5"><%= band.songs[i].micNumber[4] %></th>
+                <th scope="col" class="fs-5"><%= band.songs[i].micNumber[5] %></th>
+            </tr>
+            <tr>
+                <th scope="row" class="fs-5">パート</th>
+                <td><%= band.songs[i].part[0] %></td>
+                <td><%= band.songs[i].part[1] %></td>
+                <td><%= band.songs[i].part[2] %></td>
+                <td><%= band.songs[i].part[3] %></td>
+                <td><%= band.songs[i].part[4] %></td>
+                <td><%= band.songs[i].part[5] %></td>
+            </tr>
+            <tr>
+                <th scope="row" class="fs-5">名前</th>
+                <td><%= band.songs[i].member[0] %></td>
+                <td><%= band.songs[i].member[1] %></td>
+                <td><%= band.songs[i].member[2] %></td>
+                <td><%= band.songs[i].member[3] %></td>
+                <td><%= band.songs[i].member[4] %></td>
+                <td><%= band.songs[i].member[5] %></td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="container text-start mt-1">
+    <div class="col-10 offset-1">
+        <div class="row">
+            <table class="table table-bordered paTable">
+                <tr>
+                    <th scope="row" class = "head" class = "paTable">曲前MC</th>
+                    <td><%= band.songs[i].isMc %></td>
+                </tr>
+                <tr>
+                    <th scope="row" class = "head" class = "paTable">メインの音量</th>
+                    <td><%= band.songs[i].mainSpeaker %></td>
+                </tr>
+                <tr>
+                    <th scope="row" class = "head" class = "paTable">返しの音量</th>
+                    <td><%= band.songs[i].returnSpeaker %></td>
+                </tr>
+                <tr>
+                    <th scope="row" class = "head"class = "paTable">曲のニュアンス</th>
+                    <td><%= band.songs[i].nuance %></td>
+                </tr>
+                <tr>
+                    <th scope="row" class = "head" class = "paTable">その他のリクエスト</th>
+                    <td><%= band.songs[i].otherRequests %></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

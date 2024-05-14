@@ -1,0 +1,62 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/live.css" />
+
+<div class="row">
+    <div class="col-sm-12 col-md-8 offset-md-2">
+        <h1 id="liveName"><%= live.name %>出演バンド一覧</h1>
+        <form action="/lives/<%=live._id%>/new">
+            <button class="btn btn-success">PA表を新規作成</button>
+        </form>
+        <% if(currentUser && currentUser.email === "admin@admin.com"){ %>
+          <div class="btn btn-success hiddenBtn">バンド順を変更</div>
+        <% } %>
+        <div class="container" id="list">
+          <div class="card">
+            <div class="card-header">出演順</div>
+            <table class="table table-striped table-hover">
+        
+              <thead>
+                <th scope="col" id = "order">出演順</th>
+                <th scope="col">バンド名</th>
+                <% if(currentUser && currentUser.email === "admin@admin.com"){ %>
+                <th scope="col">登場曲</th>
+                <th scope="col">アーティスト</th>
+                <th scope="col" id = "operation">操作</th>
+                <% } %>
+              </thead>
+              <tbody id="sortable">
+                <% live.bands.forEach((band, index) => {%>
+                <tr>
+                  <th scope="row">
+                    <span class="handle hidden"><i class="bi bi-chevron-bar-expand cards"></i></span>
+                    <span class="badge bg-secondary no"><%= index + 1 %></span>
+                  </th>
+                  <td><a href="/lives/<%= live._id %>/<%= band._id %>"><%= band.name %></a></td>
+                  <% if(currentUser.email === "admin@admin.com"){ %>
+                  <td><span class="ms-3">SE : <%= band.se %></span></td>
+                  <td><span class="ms-3">SE : <%= band.seArtist %></span></td>
+                  <td>
+                    <form action="/lives/<%= live._id %>/<%= band._id %>?_method=DELETE" method = "POST">
+                      <button class="btn btn-danger bt-sm">削除</button>
+                    </form>
+                    <form action="">
+                      <button class="btn btn-success bt-sm">編集</button>
+                    </form>
+                  </td>
+                  <% } %>
+                </tr>
+                <% }); %>
+              </tbody>
+            </table>
+        
+          </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script>
+          const liveId = "<%=live._id%>"
+        </script>
+        <script src="/javascript/live.js"></script>
+    </div>
+
+</div>

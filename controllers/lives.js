@@ -7,7 +7,7 @@ module.exports.index = async (req, res) => {
     res.render("lives/index", { lives });
 };
 
-module.exports.renderNewForm = async(req, res) => {
+module.exports.renderNewForm = (req, res) => {
     res.render("lives/new");
 };
 

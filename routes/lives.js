@@ -10,7 +10,7 @@ router.route("/")
     .post(catchAsync(lives.createLive));
 
 router.route("/new")
-    .get(isLoggedIn, hasAdminAuthority, catchAsync(lives.renderNewForm));
+    .get(isLoggedIn, hasAdminAuthority, lives.renderNewForm);
 
 router.route("/:liveId/new")
     .get(isLoggedIn, catchAsync(bands.renderNewForm));

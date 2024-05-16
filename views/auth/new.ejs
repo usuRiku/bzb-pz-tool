@@ -5,23 +5,29 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-6 offset-md-3">
-            <h3 id = "msg"></h3>
+            <h3 id = "msg" class="text-danger"></h3>
             <form action="\register" method = "POST" class = "center-block validation" novalidate>
                 <div class="input-group">
                     <span class="input-group-text">期</span>
                     <input type="number" id = "grade" name = "grade" class = "form-control" required>
-                    <span class="input-group-text">サークルネーム</span>
+                    <span class="input-group-text">サークル名</span>
                     <input type="text" id = "circleName" name = "circleName" class = "form-control" required>
                 </div>
                 <div>
                     <label for="email" class="col-form-label">メールアドレス</label>
                     <input type="email" id = "email" name = "email" class = "form-control" required>
                 </div>
-            
-                
+                <div>
+                    <label for="emailConform" class="col-form-label">メールアドレス確認用</label>
+                    <input type="email" id = "emailConform" name = "emailConform" class = "form-control" required>
+                </div>
                 <div>
                     <label for="password" class="col-form-label">パスワード</label>
                     <input type="password" id = "password" name = "password" class = "form-control" required>
+                </div>
+                <div>
+                    <label for="passwordConform" class="col-form-label">パスワード確認用</label>
+                    <input type="password" id = "passwordConform" name = "passwordConform" class = "form-control" required>
                 </div>
                 <button class = "btn btn-success my-3" type = "button" id = "submitButton">ユーザー新規登録</button>
                 <h3>すでにアカウントをお持ちの方はこちら</h3>
@@ -59,4 +65,4 @@
         </div>
     </div> -->
 </div>
-<script src = "/javascript/validateForms.js"></script>
+<script src = "/javascript/newUserForm.js"></script>

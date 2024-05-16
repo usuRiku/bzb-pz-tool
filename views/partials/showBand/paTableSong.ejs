@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="/stylesheets/paTable.css">
 <div class="row">
-    <div class="col-10 offset-1">
+    <div class="col-12 col-md-8 offset-md-2">
         <table class="table table-bordered">
             <tr>
                 <th scope="row" class="fs-5">マイク</th>
@@ -33,9 +33,13 @@
     </div>
 </div>
 <div class="container text-start mt-1">
-    <div class="col-10 offset-1">
-        <div class="row">
+    <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
             <table class="table table-bordered paTable">
+                <tr>
+                    <th scope="row" class = "head" class = "paTable">曲名</th>
+                    <td><%= band.songs[i].song %></td>
+                </tr>
                 <tr>
                     <th scope="row" class = "head" class = "paTable">曲前MC</th>
                     <td><%= band.songs[i].isMc %></td>

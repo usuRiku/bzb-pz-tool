@@ -8,5 +8,4 @@ deleteEl.forEach((el, index) => {
             alert("削除を中止しました");
         }
     })
-
 })

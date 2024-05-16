@@ -1,24 +1,40 @@
 <% layout("layouts/boilerplate") %>
-<h1><%= user.circleName %> のマイページ</h1>
-<table class="table table-striped table-hover">
-    <thead>
+<link rel="stylesheet" href="/stylesheets/mypage/index.css">
+<div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+        <h1><%= user.circleName %> のマイページ</h1>
         <h2>あなたが提出したPA表一覧</h2>
-    </thead>
-<% for(band of user.bands){ %>
-    <tr>
-        <td>
-            <a href="<%= `/lives/${band.live._id}/${band._id}/` %>"><%= band.name %></a>
-        </td>
-        <td>
-            <a href="/lives/<%= band.live._id %>/"><%= band.live.name %></a>
-        </td>
-        <td>
-            <a href="/lives/<%= band.live.id %>/<%= band._id %>/edit/" class = "btn btn-sm btn-success">PA表を編集する</a>
-            <form action="/lives/<%= band.live._id %>/<%= band._id %>?_method=DELETE" method = "POST">
-                <button class = "btn btn-sm btn-danger">PA表を削除する</button>
-            </form>
-        </td>
-    </tr>
-    <% } %>
-</table>
-<script src="/stylesheets/mypage/showLive.js"></script>
+        <table class="table table-striped table-hover">
+            <th id = "bandName">バンド名</th>
+            <th id = "liveName">ライブ名</th>
+            <th id = "operation">操作</th>
+        
+        <% for(band of user.bands){ %>
+            <tr>
+                <td>
+                    <a href="<%= `/lives/${band.live._id}/${band._id}/` %>"><%= band.name %></a>
+                </td>
+                <td>
+                    <a href="/lives/<%= band.live._id %>/"><%= band.live.name %></a>
+                </td>
+                <td>
+                    <a href="/lives/<%= band.live.id %>/<%= band._id %>/edit/" class = "btn btn-sm btn-success opButton">編集</a>
+                    <form action="/lives/<%= band.live._id %>/<%= band._id %>?_method=DELETE" method = "POST" class = "delete-forms  opButton">
+                        <button class = "btn btn-sm btn-danger deleteEl">削除</button>
+                    </form>
+                </td>
+            </tr>
+        <% } %>
+    </table>
+    <div class="card">
+        <div class="card-body text-center">
+            <% if(user.bands.length === 0){ %>
+                <div class="card-text">まだPA表が作成されていません</div>
+                <% } %>
+                <a href="/lives" class="btn btn-info ">PA表を作成する</a>
+                </div>
+                </div>
+    </div>
+</div>
+
+<script src="/javascript/mypage/showLive.js"></script>

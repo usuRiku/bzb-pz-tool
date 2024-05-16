@@ -56,8 +56,10 @@ module.exports.renderEditForm = async(req, res) => {
 
 module.exports.edit = async (req, res) => {
     let band = await Band.findByIdAndUpdate(req.params.bandId, req.body.band);
-    band.author = req.session.user._id;
     band.live = req.params.liveId;
+    for (let song of band.songs) {
+        await Song.findByIdAndDelete(song)
+    }
     band.songs.splice(0);
     for (let i = 0; i < 10; i++){
         if (req.body.band.song[i] === "") {
@@ -91,8 +93,9 @@ module.exports.showBand = async(req, res) => {
 
 module.exports.delete = async (req, res) => {
     const { liveId, bandId } = req.params;
-    await Live.findByIdAndUpdate(liveId, { $pull : { bands: bandId }});
-    const band = await Band.findByIdAndDelete(req.params.bandId);
+    const band = await Band.findById(bandId);
+    await User.findByIdAndUpdate(band.author, { $pull : { bands: bandId }});
+    await Band.findByIdAndDelete(bandId);
     req.flash("success", "PA表を削除しました");
     res.redirect(`/lives/${req.params.liveId}`);
 }

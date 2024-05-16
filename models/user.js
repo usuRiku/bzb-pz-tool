@@ -30,8 +30,8 @@ userSchema.static("isAuthenticated", function (req) {
 })
 
 userSchema.post("findOneAndDelete", async function (doc) {
+    console.log("ユーザーを削除しようとしている", doc.bands);
     if (doc) {
-        console.log("ユーザーを削除しようとしている", doc.bands);
         for (let band of doc.bands){
             await Band.findByIdAndDelete(band);
         }

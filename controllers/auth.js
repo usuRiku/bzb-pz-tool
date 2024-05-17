@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 
 module.exports.renderLoginForm = (req, res) => {

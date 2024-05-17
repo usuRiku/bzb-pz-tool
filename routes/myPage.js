@@ -6,6 +6,7 @@ const { catchAsync } = require("../utils/catchAsync");
 
 router.route("/:userId")
     .get(isLoggedIn, hasUserAuthority, catchAsync(myPages.index))
-    .delete(isLoggedIn, catchAsync(myPages.delete));
+    .delete(isLoggedIn, hasUserAuthority, catchAsync(myPages.delete))
+    .put(isLoggedIn, hasUserAuthority, catchAsync(myPages.edit));
 
 module.exports = router;

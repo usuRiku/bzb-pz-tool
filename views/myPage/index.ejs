@@ -1,15 +1,15 @@
 <% layout("layouts/boilerplate") %>
-<link rel="stylesheet" href="/stylesheets/mypage/index.css">
+<link rel="stylesheet" href="/stylesheets/mypage/index.css" />
 <div class="row">
     <div class="col-12 col-md-8 offset-md-2">
         <h1><%= user.circleName %> のマイページ</h1>
         <h2>あなたが提出したPA表一覧</h2>
         <table class="table table-striped table-hover">
-            <th id = "bandName">バンド名</th>
-            <th id = "liveName">ライブ名</th>
-            <th id = "operation">操作</th>
-        
-        <% for(band of user.bands){ %>
+            <th id="bandName">バンド名</th>
+            <th id="liveName">ライブ名</th>
+            <th id="operation">操作</th>
+
+            <% user.bands.forEach((band, i) => { %>
             <tr>
                 <td>
                     <a href="<%= `/lives/${band.live._id}/${band._id}/` %>"><%= band.name %></a>
@@ -18,23 +18,62 @@
                     <a href="/lives/<%= band.live._id %>/"><%= band.live.name %></a>
                 </td>
                 <td>
-                    <a href="/lives/<%= band.live.id %>/<%= band._id %>/edit/" class = "btn btn-sm btn-success opButton">編集</a>
-                    <form action="/lives/<%= band.live._id %>/<%= band._id %>?_method=DELETE" method = "POST" class = "delete-forms  opButton">
-                        <button class = "btn btn-sm btn-danger deleteEl">削除</button>
+                    <a href="/lives/<%= band.live.id %>/<%= band._id %>/edit/" class="btn btn-sm btn-success opButton">編集</a>
+                    <form action="/lives/<%= band.live._id %>/<%= band._id %>?_method=DELETE" method="POST" id = "<%= "paDeleteForm", i %>" class=" opButton">
+                        <button class="btn btn-sm btn-danger paDeleteEl">削除</button>
                     </form>
                 </td>
             </tr>
-        <% } %>
-    </table>
-    <div class="card">
-        <div class="card-body text-center">
-            <% if(user.bands.length === 0){ %>
-                <div class="card-text">まだPA表が作成されていません</div>
+            <% }); %>
+        </table>
+        
+        <div class="card mb-2">
+            <div class="card-body text-center">
+                <% if(user.bands.length === 0){ %>
+                <div class="card-text my-2">まだPA表が作成されていません</div>
                 <% } %>
-                <a href="/lives" class="btn btn-info ">PA表を作成する</a>
+                <a href="/lives" class="btn btn-info">PA表を作成する</a>
+            </div>
+        </div>
+        <div class="card mb-2">
+            <h5 class="card-title text-center my-2">ユーザー情報の変更</h5>
+            <h4 class="text-danger" id = "msg"></h4>
+            <form action="/mypage/<%=user._id%>?_method=PUT" method = "POST" class = "center-block validation mx-2" id = "UserEditForm" novalidate>
+                <div class="input-group" id = "UserEditForm">
+                    <span class="input-group-text">期</span>
+                    <input type="number" id = "grade" name = "grade" class = "form-control" value = "<%= user.grade %>" required>
+                    <span class="input-group-text">サークル名</span>
+                    <input type="text" id = "circleName" name = "circleName" class = "form-control" value = "<%= user.circleName %>" required>
                 </div>
-                </div>
-    </div>
-</div>
+                <div>
+                    <label class="col-form-label">現在のメールアドレス</label>
+                    <input type="email"  class = "form-control" value = "<%= user.email %>" disabled>
 
+                </div>
+                <div>
+                    <label for="email" class="col-form-label">新しいメールアドレス</label>
+                    <input type="email" id = "email" name = "email" class = "form-control" placeholder="変更したいメールアドレスを入力してください" required>
+
+                </div>
+                <div>
+                    <label for="emailConform" class="col-form-label">新しいメールアドレス確認用</label>
+                    <input type="email" id = "emailConform" name = "emailConform" class = "form-control" required>
+                </div>
+                <div>
+                    <label for="password" class="col-form-label">現在のパスワード</label>
+                    <input type="password" id = "password" name = "password" class = "form-control" required>
+                </div>
+                <button class = "btn btn-success my-3 mx-2" type = "button" id = "userEditButton">ユーザー情報を更新</button>
+            </form>
+        </div>
+        <div class="card mb-2">
+            <h5 class="card-title text-center my-2">ユーザーの削除</h5>
+            <div class="card-text mx-2">ユーザーを削除すると関連するPA表も削除されます</div>
+            <form action="/mypage/<%=user._id%>?_method=DELETE" method = "POST" id = "userDeleteForm">
+                <button class = "btn btn-danger my-3 mx-2" type = "button" id = "userDeleteButton">ユーザーの削除</button>
+            </form>
+        </div>
+    </div>
+
+</div>
 <script src="/javascript/mypage/showLive.js"></script>

@@ -7,7 +7,6 @@ const passwordConform = document.querySelector("#passwordConform");
 let alreadySubmit = false;
 let isConformMail = false;
 let isConformPassword = false;
-console.log(password.value)
 submitButton.addEventListener("click", (e) => {
     Array.from(forms).forEach(form => {
         if (!form.checkValidity()) {

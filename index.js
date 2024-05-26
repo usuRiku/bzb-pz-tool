@@ -8,8 +8,13 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const flash = require("connect-flash");
 const methodOverride = require('method-override');
+const XMLHttpRequest = require("xhr2");
 const Joi = require("joi");
 const MongoStore = require('connect-mongo');
+const Spotify = require('spotify-web-api-js');
+const s = new Spotify();
+s.setAccessToken("f7cecf47ccfd4495813fd6e37df2d911");
+
 const User = require("./models/user");
 
 const sessionSecret = process.env.SESSION_SECRET;
@@ -81,6 +86,14 @@ app.use("/lives", livesRoutes);
 app.use("/", authRoutes);
 app.use("/mypage", myPageRoutes);
 app.use("/admin", adminRoutes);
+
+app.use("/test", (req, res) => {
+    s.searchTracks('love', function (err, data) {
+        if (err) console.error(err);
+        else console.log('Search by "Love"', data);
+      });
+
+})
 
 
 app.all('*', (req, res, next) => {

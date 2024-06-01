@@ -54,6 +54,7 @@ async function search(word) {
 }
 searchSong.addEventListener('change', () => {
     spotifyApi.setAccessToken(access_token);
+    res.locals.spotifyAccessToken = access_token;
     console.log("setaccesstoken at 検索")
     result_div = document.querySelector("#searchResult");
     while (result_div.firstChild) {

@@ -61,6 +61,7 @@ module.exports.editPlaylist = async (req, res) => {
         redirectUri: spotifyCallback
     });
     spotifyApi.setAccessToken(req.session.specificAccessToken);
+    res.locals.spotifyAccessToken = req.session.specificAccessToken;
     spotifyApi.addTracksToPlaylist(playlistId, seIds)
         .then(function (data) {
             console.log('Added tracks to playlist!');

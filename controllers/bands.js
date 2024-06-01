@@ -4,6 +4,11 @@ const Song = require("../models/song");
 const User = require("../models/user");
 
 module.exports.createBand = async (req, res) => {
+    const live = await Live.findById(req.params.liveId);
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/lives`);
+    }
     const band = new Band(req.body.band);
     const oglive = await Live.findById(req.params.liveId);
     band.order = oglive.bands.length + 1;
@@ -30,7 +35,6 @@ module.exports.createBand = async (req, res) => {
         await song.save();
         await band.save();
     }
-    const live = await Live.findById(req.params.liveId);
     const user = await User.findById(req.session.user._id);
     user.bands.push(band)
     live.bands.push(band);
@@ -45,6 +49,10 @@ module.exports.createBand = async (req, res) => {
 module.exports.renderNewForm = async(req, res) => { 
     const { liveId } = req.params;
     const live = await Live.findById(liveId);
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/lives`);
+    }
     res.render("bands/new", { live });
 };
 

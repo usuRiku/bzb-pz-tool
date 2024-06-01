@@ -1,6 +1,5 @@
 const Live = require("../models/live");
 const Band = require("../models/band");
-const mongoose = require("mongoose");
 
 module.exports.index = async (req, res) => {
     const lives = await Live.find({});

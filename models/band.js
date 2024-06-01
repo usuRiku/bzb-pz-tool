@@ -5,6 +5,7 @@ const bandSchema = new mongoose.Schema({
     name: String,
     leader: String,
     se: String,
+    seUrl: String,
     seArtist: String,
     time: Number,
     songNumber: Number,

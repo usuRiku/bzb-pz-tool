@@ -22,4 +22,10 @@ router.route("/live/:liveId")
 router.route("/live/:liveId/:bandId")
     .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.showBand));
 
+router.route("/:liveId/playlist")
+    .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.renderPlaylist))
+    .put(isLoggedIn, hasAdminAuthority, catchAsync(admin.editPlaylist));
 module.exports = router;
+
+router.route("/:liveId/login/spotify")
+    .post(isLoggedIn, hasAdminAuthority, admin.loginSpotify);

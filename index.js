@@ -11,15 +11,13 @@ const methodOverride = require('method-override');
 const XMLHttpRequest = require("xhr2");
 const Joi = require("joi");
 const MongoStore = require('connect-mongo');
-const Spotify = require('spotify-web-api-js');
-const s = new Spotify();
-s.setAccessToken("f7cecf47ccfd4495813fd6e37df2d911");
-
-const User = require("./models/user");
 
 const sessionSecret = process.env.SESSION_SECRET;
 const PORT=process.env.PORT || 3000;
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/bzb-pa-tool";
+const spotifyId = process.env.SPOTIFY_CLIENT_ID
+const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
+const spotifyCallback = process.env.SPOTIFY_CALLBACK
 
 const homeRoutes = require("./routes/home");
 const livesRoutes = require("./routes/lives");
@@ -62,12 +60,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use((req, res, next) => {
+app.use(async(req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currentUser = req.session.user;
-    session.redirectUrl = req.originalUrl;
-    console.log(session.redirectUrl);
     next();
 });
 
@@ -87,14 +83,23 @@ app.use("/", authRoutes);
 app.use("/mypage", myPageRoutes);
 app.use("/admin", adminRoutes);
 
-app.use("/test", (req, res) => {
-    s.searchTracks('love', function (err, data) {
-        if (err) console.error(err);
-        else console.log('Search by "Love"', data);
-      });
+//spotify
+const authOptions = {
+  url: 'https://accounts.spotify.com/api/token',
+  headers: {
+    'Authorization': 'Basic ' + (new Buffer.from(spotifyId + ':' + spotifySecret).toString('base64'))
+  },
+  form: {
+    grant_type: 'client_credentials'
+  },
+  json: true
+};
 
-})
-
+app.post(authOptions, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      const token = body.access_token;
+    }
+  });
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('ページが見つかりませんでした', 404));

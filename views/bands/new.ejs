@@ -21,11 +21,29 @@
             </div>
         </div>
         <div>
+            <p class = "alert alert-info mt-3">SE曲名,SpotifyURLは下記検索から追加してください．もし，Spotifyで曲を見つけられなかったときは手動で曲名を入力してください．</p>
+        </div>
+        <div>
+            <label for=<%="searchSong"%> class = "col-form-label">SEを曲名で検索（Spotify）</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text searchSongIcon"><i class="bi bi-search"></i></span>
+                <input type="search" class="form-control searchSong" placeholder="SE曲名を入力" id = "searchSong"aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div id = "searchResult">
+            </div>
+        </div>
+        
+        <div>
             <label for="se" class="col-form-label">SE(登場曲)</label>
             <input type="text" id = "se" name="band[se]" class = "form-control" required>
             <div class="valid-feedback">
                 OK!
             </div>
+        </div>
+        
+        <div>
+            <label for="se" class = "col-form-label">Spotify URL</label>
+            <input type="text" name = "band[seUrl]" id = "seUrl" class = "form-control">
         </div>
         <div>
             <label for="seArtist" class="col-form-label">SEアーティスト</label>
@@ -66,7 +84,9 @@
         <button type="button" class="btn btn-success my-3" id="submitButton">PA表を新規作成</button>
     </form>
 </div>
+<script>
+    spotifyAccessToken = "<%=spotifyAccessToken%>" 
+</script>
+<script src = "/javascript/spotify-web-api-js/spotify-web-api.js"></script>
 <script src = "/javascript/newBand.js"></script>
 <script src="/javascript/validateForms.js"></script>
-<script>
-</script>

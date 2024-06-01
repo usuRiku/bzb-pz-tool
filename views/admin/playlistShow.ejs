@@ -1,0 +1,45 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/live.css" />
+
+<div class="row">
+    <h1 id="liveName"><%= live.name %>プレイリスト編集</h1>
+    <div class="container" id="list">
+        
+        <form action="/admin/<%=live._id%>/playlist?_method=PUT" method="post">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th scope="col" id="order">出演順</th>
+                    <th scope="col">バンド名</th>
+                    <th scope="col">登場曲</th>
+                    <th scope="col">アーティスト</th>
+                    <th scope="col">Spotify URL</th>
+                </thead>
+                <tbody>
+                    <% live.bands.forEach((band, index) => {%>
+                    <tr>
+                        <th scope="row">
+                            <span class="handle hidden"><i class="bi bi-chevron-bar-expand cards"></i></span>
+                            <span class="badge bg-secondary no"><%= index + 1 %></span>
+                        </th>
+                        <td><a href="/admin/live/<%= live._id %>/<%= band._id %>"><%= band.name %></a></td>
+                        <td><span class="ms-3"><%= band.se %></span></td>
+                        <td><span class="ms-3"><%= band.seArtist %></span></td>
+                        <td>
+                            <input type="text" name = "seUrl<%=index%>" value=<%=band.seUrl%>>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+            <div class="alert alert-warning">これまでプレイリストに保存されていたトラックは削除され，新たに上で登録したトラックが追加されます<br>Spotify URLが空欄のバンドのSEについては追加されません</div>
+            <button class = "btn btn-success">プレイリストを更新</button>
+        </form>
+            <form action="/admin/<%=live._id%>/login/spotify" method = "POST">
+                <button class = "btn btn-success">プレイリスト更新のためにSpotifyにログイン</button>
+            </form>
+    </div>
+    <script>
+        const liveId = "<%=live._id%>";
+    </script>
+
+</div>

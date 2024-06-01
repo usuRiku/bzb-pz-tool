@@ -1,0 +1,132 @@
+Date : 2024-06-01 11:40:12
+Directory : c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool
+Total : 76 files,  5368 codes, 1126 comments, 332 blanks, all 6826 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         33 |      2,166 |      1,055 |        260 |      3,481 |
+| JSON       |          2 |      1,939 |          0 |          2 |      1,941 |
+| HTML       |         30 |      1,070 |         68 |         38 |      1,176 |
+| CSS        |         11 |        193 |          3 |         32 |        228 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                         | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                            |         76 |      5,368 |      1,126 |        332 |      6,826 |
+| . (Files)                                                                                                    |          4 |      2,086 |          7 |         28 |      2,121 |
+| controllers                                                                                                  |          5 |        329 |          6 |         41 |        376 |
+| models                                                                                                       |          4 |        150 |          0 |         12 |        162 |
+| public                                                                                                       |         23 |      1,583 |      1,037 |        172 |      2,792 |
+| public\javascript                                                                                            |         12 |      1,390 |      1,034 |        140 |      2,564 |
+| public\javascript (Files)                                                                                    |          6 |        276 |         12 |         17 |        305 |
+| public\javascript\admin                                                                                      |          4 |         95 |          1 |          7 |        103 |
+| public\javascript\mypage                                                                                     |          1 |         64 |          0 |          2 |         66 |
+| public\javascript\spotify-web-api-js                                                                         |          1 |        955 |      1,021 |        114 |      2,090 |
+| public\stylesheets                                                                                           |         11 |        193 |          3 |         32 |        228 |
+| public\stylesheets (Files)                                                                                   |         10 |        187 |          3 |         32 |        222 |
+| public\stylesheets\mypage                                                                                    |          1 |          6 |          0 |          0 |          6 |
+| routes                                                                                                       |          5 |         82 |          8 |         29 |        119 |
+| seeds                                                                                                        |          1 |         27 |          0 |          4 |         31 |
+| utils                                                                                                        |          4 |         41 |          0 |          8 |         49 |
+| views                                                                                                        |         30 |      1,070 |         68 |         38 |      1,176 |
+| views\admin                                                                                                  |          7 |        237 |          0 |          8 |        245 |
+| views\auth                                                                                                   |          2 |         66 |         68 |          0 |        134 |
+| views\bands                                                                                                  |          3 |        170 |          0 |          5 |        175 |
+| views\errors                                                                                                 |          2 |          4 |          0 |          0 |          4 |
+| views\home                                                                                                   |          1 |         20 |          0 |          2 |         22 |
+| views\layouts                                                                                                |          1 |         28 |          0 |          1 |         29 |
+| views\lives                                                                                                  |          5 |        207 |          0 |         12 |        219 |
+| views\myPage                                                                                                 |          1 |         74 |          0 |          5 |         79 |
+| views\partials                                                                                               |          8 |        264 |          0 |          5 |        269 |
+| views\partials (Files)                                                                                       |          2 |         48 |          0 |          2 |         50 |
+| views\partials\editBandForm                                                                                  |          2 |         53 |          0 |          1 |         54 |
+| views\partials\newBandForm                                                                                   |          2 |         53 |          0 |          1 |         54 |
+| views\partials\showBand                                                                                      |          2 |        110 |          0 |          1 |        111 |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                     | language   | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\controllers\admin.js                                    | JavaScript |         70 |          0 |         10 |         80 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\controllers\auth.js                                     | JavaScript |         80 |          3 |         11 |         94 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\controllers\bands.js                                    | JavaScript |         95 |          0 |          6 |        101 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\controllers\lives.js                                    | JavaScript |         46 |          0 |          9 |         55 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\controllers\myPages.js                                  | JavaScript |         38 |          3 |          5 |         46 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\index.js                                                | JavaScript |        105 |          7 |         19 |        131 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\middleware.js                                           | JavaScript |         42 |          0 |          7 |         49 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\models\band.js                                          | JavaScript |         39 |          0 |          3 |         42 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\models\live.js                                          | JavaScript |         28 |          0 |          3 |         31 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\models\song.js                                          | JavaScript |         46 |          0 |          1 |         47 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\models\user.js                                          | JavaScript |         37 |          0 |          5 |         42 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\package-lock.json                                       | JSON       |      1,902 |          0 |          1 |      1,903 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\package.json                                            | JSON       |         37 |          0 |          1 |         38 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\admin\bandShow.js                     | JavaScript |         20 |          0 |          2 |         22 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\admin\liveManagement.js               | JavaScript |         11 |          0 |          1 |         12 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\admin\liveShow.js                     | JavaScript |         51 |          1 |          3 |         55 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\admin\userManagement.js               | JavaScript |         13 |          0 |          1 |         14 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\editBand.js                           | JavaScript |         63 |          1 |          5 |         69 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\live.js                               | JavaScript |         40 |          9 |          2 |         51 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\liveIndex.js                          | JavaScript |          5 |          0 |          2 |          7 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\mypage\showLive.js                    | JavaScript |         64 |          0 |          2 |         66 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\newBand.js                            | JavaScript |        103 |          2 |          8 |        113 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\newUserForm.js                        | JavaScript |         41 |          0 |          0 |         41 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\spotify-web-api-js\spotify-web-api.js | JavaScript |        955 |      1,021 |        114 |      2,090 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\javascript\validateForms.js                      | JavaScript |         24 |          0 |          0 |         24 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\adminIndex.css                       | CSS        |          8 |          0 |          1 |          9 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\boiler.css                           | CSS        |          9 |          0 |          2 |         11 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\editPaTable.css                      | CSS        |         12 |          0 |          3 |         15 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\google.css                           | CSS        |         89 |          0 |         10 |         99 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\line.css                             | CSS        |         11 |          3 |          3 |         17 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\live.css                             | CSS        |         28 |          0 |          7 |         35 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\liveIndex.css                        | CSS        |          0 |          0 |          1 |          1 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\mypage\index.css                     | CSS        |          6 |          0 |          0 |          6 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\newLive.css                          | CSS        |          3 |          0 |          0 |          3 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\newPaTable.css                       | CSS        |         24 |          0 |          5 |         29 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\public\stylesheets\paTable.css                          | CSS        |          3 |          0 |          0 |          3 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\routes\admin.js                                         | JavaScript |         23 |          0 |          8 |         31 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\routes\auth.js                                          | JavaScript |         15 |          8 |          8 |         31 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\routes\home.js                                          | JavaScript |          6 |          0 |          2 |          8 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\routes\lives.js                                         | JavaScript |         28 |          0 |          9 |         37 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\routes\myPage.js                                        | JavaScript |         10 |          0 |          2 |         12 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\seeds\index.js                                          | JavaScript |         27 |          0 |          4 |         31 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\utils\ExpressError.js                                   | JavaScript |          8 |          0 |          1 |          9 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\utils\catchAsync.js                                     | JavaScript |          5 |          0 |          0 |          5 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\utils\spotify_credentials.js                            | JavaScript |         27 |          0 |          7 |         34 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\utils\tempCodeRunnerFile.js                             | JavaScript |          1 |          0 |          0 |          1 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\admin\bandShow.ejs                                | HTML       |         20 |          0 |          0 |         20 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\admin\index.ejs                                   | HTML       |         44 |          0 |          1 |         45 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\admin\liveIndex.ejs                               | HTML       |         26 |          0 |          1 |         27 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\admin\liveManagement.ejs                          | HTML       |         30 |          0 |          0 |         30 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\admin\liveShow.ejs                                | HTML       |         52 |          0 |          2 |         54 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\admin\playlistShow.ejs                            | HTML       |         42 |          0 |          4 |         46 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\admin\userManagement.ejs                          | HTML       |         23 |          0 |          0 |         23 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\auth\login.ejs                                    | HTML       |         27 |         39 |          0 |         66 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\auth\new.ejs                                      | HTML       |         39 |         29 |          0 |         68 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\bands\edit.ejs                                    | HTML       |         73 |          0 |          1 |         74 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\bands\new.ejs                                     | HTML       |         90 |          0 |          3 |         93 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\bands\show.ejs                                    | HTML       |          7 |          0 |          1 |          8 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\errors\error.ejs                                  | HTML       |          2 |          0 |          0 |          2 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\errors\notFound.ejs                               | HTML       |          2 |          0 |          0 |          2 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\home\index.ejs                                    | HTML       |         20 |          0 |          2 |         22 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\layouts\boilerplate.ejs                           | HTML       |         28 |          0 |          1 |         29 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\lives\edit.ejs                                    | HTML       |         46 |          0 |          2 |         48 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\lives\index.ejs                                   | HTML       |         24 |          0 |          1 |         25 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\lives\new.ejs                                     | HTML       |         45 |          0 |          2 |         47 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\lives\show.ejs                                    | HTML       |         34 |          0 |          3 |         37 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\lives\show_admin.ejs                              | HTML       |         58 |          0 |          4 |         62 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\myPage\index.ejs                                  | HTML       |         74 |          0 |          5 |         79 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\partials\editBandForm\song.ejs                    | HTML       |         39 |          0 |          0 |         39 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\partials\editBandForm\songs.ejs                   | HTML       |         14 |          0 |          1 |         15 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\partials\flash.ejs                                | HTML       |         11 |          0 |          1 |         12 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\partials\navbar.ejs                               | HTML       |         37 |          0 |          1 |         38 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\partials\newBandForm\song.ejs                     | HTML       |         39 |          0 |          0 |         39 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\partials\newBandForm\songs.ejs                    | HTML       |         14 |          0 |          1 |         15 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\partials\showBand\paTable.ejs                     | HTML       |         44 |          0 |          1 |         45 |
+| c:\Users\susuk\Documents\program\24_04_27bzb-pa-tool\views\partials\showBand\paTableSong.ejs                 | HTML       |         66 |          0 |          0 |         66 |
+| Total                                                                                                        |            |      5,368 |      1,126 |        332 |      6,826 |
++--------------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

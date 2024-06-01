@@ -27,8 +27,10 @@
     "mongoose": "^8.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
+    "request": "^2.88.2",
     "sortablejs": "^1.15.2",
     "spotify-web-api-js": "^1.5.2",
+    "spotify-web-api-node": "^5.0.2",
     "xhr2": "^0.2.1",
     "xmlhttprequest": "^1.8.0"
   }

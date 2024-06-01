@@ -5,6 +5,7 @@ const liveSchema = new mongoose.Schema({
     date: Date,
     location: String,
     time: String,
+    playlistUrl: String,
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"

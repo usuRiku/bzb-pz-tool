@@ -1,5 +1,7 @@
 const User = require("../models/user");
 const bcrypt = require('bcryptjs');
+const spotifyId = process.env.SPOTIFY_CLIENT_ID
+const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
 
 module.exports.renderLoginForm = (req, res) => {
     res.render("auth/login");
@@ -13,7 +15,7 @@ module.exports.register = async (req, res) => {
     const { email, password } = req.body;
 
     // Check if the user already exists
-    const userExists = await User.findOne({email});
+    const userExists = await User.findOne({ email });
     if (userExists) {
         req.flash("error", "このメールアドレスは既に登録されています");
         res.redirect("/register");
@@ -64,4 +66,29 @@ module.exports.googleLogin = async (req, res) => {
 module.exports.logout = async (req, res) => {
     req.session.destroy();
     res.redirect('/');
-}
+};
+
+module.exports.redirectSpotify = async (req, res) => {
+    authorization_code = req.query.code;
+    authOptions = {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + (new Buffer.from(spotifyId + ':' + spotifySecret).toString('base64'))
+        },
+        body: new URLSearchParams({
+            code: authorization_code,
+            redirect_uri: "http://localhost:3000/login/spotify",
+            grant_type: 'authorization_code',
+        }),
+        json: true
+    }
+    
+    response = await fetch(`https://accounts.spotify.com/api/token`, authOptions);
+    resJson = await response.json();
+    access_token = resJson.access_token;
+    req.session.specificAccessToken = access_token;
+    req.session.spotifyUser = 1;
+    req.flash("success", "Spotifyでログインしました");
+    res.redirect(`/admin/${req.session.now_live}/playlist`);
+};

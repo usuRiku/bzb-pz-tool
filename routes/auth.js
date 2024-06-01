@@ -11,6 +11,9 @@ router.route("/login")
     .get(auth.renderLoginForm)
     .post(catchAsync(auth.login));
 
+router.route("/login/spotify")
+    .get(catchAsync(auth.redirectSpotify));
+
 // router.route("/line/login")
 //     .get(catchAsync(passport.authenticate('line')));
 

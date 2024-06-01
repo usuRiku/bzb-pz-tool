@@ -2,6 +2,7 @@ const User = require("../models/user");
 const bcrypt = require('bcryptjs');
 const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
+const spotifyCallback = process.env.SPOTIFY_CLIENT_CALLBACK
 
 module.exports.renderLoginForm = (req, res) => {
     res.render("auth/login");
@@ -78,7 +79,7 @@ module.exports.redirectSpotify = async (req, res) => {
         },
         body: new URLSearchParams({
             code: authorization_code,
-            redirect_uri: "http://localhost:3000/login/spotify",
+            redirect_uri: spotifyCallback,
             grant_type: 'authorization_code',
         }),
         json: true

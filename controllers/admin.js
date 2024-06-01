@@ -76,5 +76,5 @@ module.exports.editPlaylist = async (req, res) => {
 
 module.exports.loginSpotify = (req, res) => {
     req.session.now_live = req.params.liveId;
-    res.redirect(`https://accounts.spotify.com/authorize?client_id=${spotifyId}&redirect_uri=http://localhost:3000/login/spotify&response_type=code&scope=playlist-modify-private%20playlist-modify-public`);
+    res.redirect(`https://accounts.spotify.com/authorize?client_id=${spotifyId}&redirect_uri=${spotifyCallback}&response_type=code&scope=playlist-modify-private%20playlist-modify-public`);
 }

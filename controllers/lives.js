@@ -49,7 +49,7 @@ module.exports.delete = async (req, res) => {
         req.flash("error", "ライブが存在しません");
         return res.redirect(`/lives`);
     }
-    await Live.deleteOne(live);
+    await Live.findOneAndDelete(live);
     req.flash("success", "Liveを削除しました");
     res.redirect(`/lives`);
 };

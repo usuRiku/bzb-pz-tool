@@ -23,10 +23,9 @@ module.exports.delete = async (req, res) => {
     is_adminUser = true
     if (req.session.user.email !== "admin@admin.com") {
         is_adminUser = false;
-    } else {
         req.session.destroy();
     }
-    await User.deleteOne(user);
+    await User.findOneAndDelete(user);
     // req.flash("success", "ユーザーを削除しました");
     
     if (is_adminUser) {

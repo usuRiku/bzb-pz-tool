@@ -2,7 +2,7 @@ const User = require("../models/user");
 const bcrypt = require('bcryptjs');
 const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
-const spotifyCallback = process.env.SPOTIFY_CLIENT_CALLBACK
+const spotifyCallback = process.env.SPOTIFY_CALLBACK
 
 module.exports.renderLoginForm = (req, res) => {
     res.render("auth/login");

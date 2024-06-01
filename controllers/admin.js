@@ -4,7 +4,7 @@ const User = require("../models/user");
 const SpotifyWebApi = require('spotify-web-api-node');
 const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
-const spotifyCallback = process.env.SPOTIFY_CLIENT_CALLBACK
+const spotifyCallback = process.env.SPOTIFY_CALLBACK
 
 module.exports.index = (req, res) => {
     res.render("admin/index");

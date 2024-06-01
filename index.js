@@ -9,11 +9,13 @@ const session = require("express-session");
 const flash = require("connect-flash");
 const methodOverride = require('method-override');
 const XMLHttpRequest = require("xhr2");
+const SpotifyWebApi = require('spotify-web-api-node');
 const Joi = require("joi");
 const MongoStore = require('connect-mongo');
+const { getSpotifyAccessToken } = require("./utils/spotify_credentials.js");
 
 const sessionSecret = process.env.SESSION_SECRET;
-const PORT=process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/bzb-pa-tool";
 const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
@@ -38,7 +40,7 @@ const store = MongoStore.create({
 
 store.on("error", () => {
     console.log("セッションストアエラー", e);
-} )
+})
 
 const sessionConfig = {
     store,
@@ -60,7 +62,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(async(req, res, next) => {
+app.use(async (req, res, next) => {
+    //spotify
+    const spotifyApi = new SpotifyWebApi({
+        clientId: spotifyId,
+        clientSecret: spotifySecret,
+        redirectUri: spotifyCallback
+    });
+    access_token = await getSpotifyAccessToken();
+    spotifyApi.setAccessToken(access_token);
+    res.locals.spotifyAccessToken = access_token;
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currentUser = req.session.user;
@@ -85,21 +96,21 @@ app.use("/admin", adminRoutes);
 
 //spotify
 const authOptions = {
-  url: 'https://accounts.spotify.com/api/token',
-  headers: {
-    'Authorization': 'Basic ' + (new Buffer.from(spotifyId + ':' + spotifySecret).toString('base64'))
-  },
-  form: {
-    grant_type: 'client_credentials'
-  },
-  json: true
+    url: 'https://accounts.spotify.com/api/token',
+    headers: {
+        'Authorization': 'Basic ' + (new Buffer.from(spotifyId + ':' + spotifySecret).toString('base64'))
+    },
+    form: {
+        grant_type: 'client_credentials'
+    },
+    json: true
 };
 
-app.post(authOptions, function(error, response, body) {
+app.post(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      const token = body.access_token;
+        const token = body.access_token;
     }
-  });
+});
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('ページが見つかりませんでした', 404));

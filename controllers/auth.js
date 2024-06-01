@@ -19,7 +19,7 @@ module.exports.register = async (req, res) => {
     const userExists = await User.findOne({ email });
     if (userExists) {
         req.flash("error", "このメールアドレスは既に登録されています");
-        res.redirect("/register");
+        return res.redirect("/register");
     }
     // Hash the password
     const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));

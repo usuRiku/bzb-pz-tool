@@ -51,11 +51,20 @@ module.exports.renderNewForm = async(req, res) => {
 module.exports.renderEditForm = async(req, res) => {
     const { bandId } = req.params;
     const band = await Band.findById(bandId).populate("songs").populate("live");
+    if (!band) {
+        req.flash("error", "バンドが存在しません");
+        return res.redirect(`/lives/${req.params.liveId}`);
+    }
     res.render("bands/edit", { band });
 };
 
 module.exports.edit = async (req, res) => {
-    let band = await Band.findByIdAndUpdate(req.params.bandId, req.body.band);
+    let band = await Band.findById(req.params.bandId);
+    if (!band) {
+        req.flash("error", "バンドが存在しません");
+        return res.redirect(`/lives/${req.params.liveId}`);
+    }
+    await Band.updateOne(band, req.body.band);
     band.live = req.params.liveId;
     for (let song of band.songs) {
         await Song.findByIdAndDelete(song)
@@ -88,13 +97,20 @@ module.exports.edit = async (req, res) => {
 
 module.exports.showBand = async(req, res) => {
     const band = await Band.findById(req.params.bandId).populate("songs").populate("author");
+    if (!band) {
+        req.flash("error", "バンドが存在しません");
+        return res.redirect(`/lives/${req.params.liveId}`);
+    }
     res.render("bands/show", { band } );
 };
 
 module.exports.delete = async (req, res) => {
-    const { liveId, bandId } = req.params;
+    const { bandId } = req.params;
     const band = await Band.findById(bandId);
-    await User.findByIdAndUpdate(band.author, { $pull : { bands: bandId }});
+    if (!band) {
+        req.flash("error", "バンドが存在しません");
+        return res.redirect(`/lives/${req.params.liveId}`);
+    }
     await Band.findByIdAndDelete(bandId);
     req.flash("success", "PA表を削除しました");
     res.redirect(`/lives/${req.params.liveId}`);

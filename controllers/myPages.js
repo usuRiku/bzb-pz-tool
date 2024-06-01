@@ -7,20 +7,41 @@ module.exports.index = async (req, res) => {
             path: "live"
         }
     });
-    
+    if (!user) {
+        req.flash("error", "ユーザーが存在しません");
+        return res.redirect(`/lives`);
+    };
     res.render("myPage/index", { user });
 };
 
 module.exports.delete = async (req, res) => {
-    const user = await User.findByIdAndDelete(req.params.userId);
-    req.flash("success", "ユーザーを削除しました");
+    const user = await User.findById(req.params.userId);
+    if (!user) {
+        req.flash("error", "ユーザーが存在しません");
+        return res.redirect(`/lives`);
+    }
+    is_adminUser = true
+    if (req.session.user.email !== "admin@admin.com") {
+        is_adminUser = false;
+    } else {
+        req.session.destroy();
+    }
+    await User.deleteOne(user);
+    // req.flash("success", "ユーザーを削除しました");
+    
+    if (is_adminUser) {
+        return res.redirect("/admin/user-management")
+    }
     res.redirect(`/lives`);
 };
 
 module.exports.edit = async (req, res) => {
     const { grade, circleName, email, password } = req.body;
-    const accountUser = await User.findById(req.params.userId); 
-
+    const accountUser = await User.findById(req.params.userId);
+    if (!accountUser) {
+        req.flash("error", "ユーザーが存在しません");
+        return res.redirect(`/lives`);
+    }
     // Check if the user already exists
     const userExists = await User.findOne({email});
     if (userExists) {

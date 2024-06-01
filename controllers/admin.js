@@ -27,11 +27,19 @@ module.exports.renderLiveIndex = async (req, res) => {
 
 module.exports.showLive = async (req, res) => {
     const live = await Live.findById(req.params.liveId).populate("bands");
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/admin/live-management`);
+    }
     res.render("admin/liveShow", { live });
 };
 
 module.exports.showBand = async (req, res) => {
     const band = await Band.findById(req.params.bandId).populate().populate("songs").populate("author").populate("live");
+    if (!band) {
+        req.flash("error", "PA表が存在しません");
+        return res.redirect(`/admin/live/${req.params.liveId}`);
+    }
     const forwardBand = await Band.findOne({ live: req.params.liveId, order: band.order - 1 });
     const nextBand = await Band.findOne({ live: req.params.liveId, order: band.order + 1 });
     res.render("admin/bandShow", { band, forwardBand, nextBand });
@@ -39,11 +47,19 @@ module.exports.showBand = async (req, res) => {
 
 module.exports.renderPlaylist = async (req, res) => {
     const live = await Live.findById(req.params.liveId).populate("bands");
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/admin/live-management`);
+    }
     res.render("admin/playlistShow", { live })
 };
 
 module.exports.editPlaylist = async (req, res) => {
     const live = await Live.findById(req.params.liveId);
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/admin/live-management`);
+    }
     const trackPattern = new RegExp("(?<=track/).*");
     const playlistPattern = new RegExp("(?<=playlist/).*");
     seUrls = Object.entries(req.body);

@@ -1,6 +1,4 @@
 const mongoose = require("mongoose");
-const Song = require("./song");
-const Live = require("./live");
 const bandSchema = new mongoose.Schema({
     name: String,
     leader: String,
@@ -27,6 +25,9 @@ const bandSchema = new mongoose.Schema({
 });
 
 bandSchema.post("findOneAndDelete", async function (doc) {
+    const Song = require("./song");
+    const Live = require("./live");
+    const User = require("./user");
     console.log("バンドを削除しようとしている", doc.songs);
     if (doc) {
         await Song.deleteMany({
@@ -35,6 +36,8 @@ bandSchema.post("findOneAndDelete", async function (doc) {
             }
         });
         await Live.findByIdAndUpdate(doc.live, { $pull : { bands: doc._id }});
+        await User.findByIdAndUpdate(doc.author, { $pull : { bands: doc._id }});
+        console.log("doc:", doc._id);
     }
 });
 

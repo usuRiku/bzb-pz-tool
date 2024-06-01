@@ -39,6 +39,10 @@ module.exports.hasAdminAuthority = async (req, res, next) => {
 
 module.exports.hasUserAuthority = async (req, res, next) => {
     const user = await User.findById(req.params.userId);
+    if (!user) {
+        req.flash("error", "ユーザーが見つかりません");
+        return res.redirect("/lives");
+    }
     if (!(req.session.user.email === "admin@admin.com") && !user.equals(req.session.user._id)) {
         req.flash("error", `${req.session.user.circleName}にはそのアクションを行う権限がないため，アクセスできません`);
         return res.redirect("/lives");

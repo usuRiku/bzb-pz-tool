@@ -1,8 +1,3 @@
-const SpotifyWebApi = require('spotify-web-api-node');
-const spotifyId = process.env.SPOTIFY_CLIENT_ID
-const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
-const { getSpotifyAccessToken } = require("../utils/spotify_credentials.js");
-
 const songNumInput = document.getElementById("songNumber");
 let songNum = 1;
 document.querySelector("#song1").setAttribute("required", "");
@@ -40,12 +35,7 @@ for (let i = 1; i <= 10; i++) {
 
 //曲検索
 //spotify
-const spotifyApi = new SpotifyWebApi({
-    clientId: spotifyId,
-    clientSecret: spotifySecret,
-    redirectUri: spotifyCallback
-});
-access_token = await getSpotifyAccessToken();
+const spotifyApi = new SpotifyWebApi();
 const searchSong = document.querySelector(".searchSong");
 
 async function search(word) {
@@ -53,8 +43,7 @@ async function search(word) {
     return result;
 }
 searchSong.addEventListener('change', () => {
-    spotifyApi.setAccessToken(access_token);
-    res.locals.spotifyAccessToken = access_token;
+    spotifyApi.setAccessToken(spotifyAccessToken);
     console.log("setaccesstoken at 検索")
     result_div = document.querySelector("#searchResult");
     while (result_div.firstChild) {

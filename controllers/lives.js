@@ -14,6 +14,10 @@ module.exports.renderNewForm =  (req, res) => {
 module.exports.showLive = async (req, res) => {
     const { liveId } = req.params;
     const live = await Live.findById(liveId).populate("bands");
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/lives`);
+    }
     res.render("lives/show", { live });
 };
 
@@ -40,16 +44,31 @@ module.exports.exchangeBandOrder = async (req, res) => {
 
 module.exports.delete = async (req, res) => {
     const { liveId } = req.params;
-    const live = await Live.findByIdAndDelete(liveId);
+    const live = await Live.findById(liveId);
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/lives`);
+    }
+    await Live.deleteOne(live);
+    req.flash("success", "Liveを削除しました");
     res.redirect(`/lives`);
 };
 
 module.exports.renderEditForm = async (req, res) => {
     const live = await Live.findById(req.params.liveId);
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/lives`);
+    }
     res.render("lives/edit", {live});
 };
 
 module.exports.edit = async (req, res) => {
-    const live = await Live.findByIdAndUpdate(req.params.liveId, req.body.live);
+    const live = await Live.findById(req.params.liveId);
+    if (!live) {
+        req.flash("error", "ライブが存在しません");
+        return res.redirect(`/lives`);
+    }
+    await Live.updateOne(live, req.body.live);
 
 };

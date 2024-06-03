@@ -124,4 +124,10 @@ header a {
 img{
     margin-top: 30px;
     margin-bottom: 30px;
+    width: 60%;
+    align-content: center;
+}
+
+#signup h2{
+    margin-top: 40px;
 }

@@ -3,14 +3,13 @@ paDeleteEl.forEach((el, index) => {
     const deleteForm = document.getElementById("paDeleteForm" + index);
     el.addEventListener("click", (e) => {
         if (confirm("PA表を削除しますか")) {
-            deleteForm[index].submit();
+            deleteForm.submit();
         } else {
             alert("削除を中止しました");
         }
     })
 });
 
-const userEditForm = document.getElementById("userEditForm");
 const userDeleteForm = document.getElementById("userDeleteForm");
 const userEditButton = document.getElementById("userEditButton");
 const userDeleteButton = document.getElementById("userDeleteButton");

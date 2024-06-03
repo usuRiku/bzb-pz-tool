@@ -71,7 +71,6 @@ searchSong.addEventListener('change', () => {
                 thead.appendChild(header);
                 table.appendChild(tbody);
                 for (let j = 0; j < 5; j++) {
-
                     if (result.tracks.items.length === j + 2) {
                         break;
                     }

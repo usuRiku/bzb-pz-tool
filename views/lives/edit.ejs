@@ -3,7 +3,7 @@
 <div class="row col-12 col-md-6 offset-md-3">
     <h1>ライブ編集フォーム</h1>
     <h3 id = "msg"></h3>
-    <form action="/lives" method="POST" class = "validation" novalidate>
+    <form action="/lives/<%=live._id%>?_method=PUT" method="POST" class = "validation" novalidate>
         <div>
             <label for="name" class="col-form-label me-3">ライブ名</label>
             <input type="text" id="name" name="live[name]" class="form-control" value = <%=live.name%> required>
@@ -41,7 +41,7 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-success mt-3" id = "submitButton">ライブを編集</button>
+        <button class="btn btn-success mt-3" id = "submitButton">ライブを編集</button>
     </form>
 </div>
 <script src="/javascript/validateForms.js"></script>

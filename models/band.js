@@ -27,6 +27,7 @@ const bandSchema = new mongoose.Schema({
 bandSchema.post("findOneAndDelete", async function (doc) {
     const Song = require("./song");
     const Live = require("./live");
+    const Band = require("./band");
     const User = require("./user");
     console.log("バンドを削除しようとしている", doc.songs);
     if (doc) {
@@ -37,7 +38,11 @@ bandSchema.post("findOneAndDelete", async function (doc) {
         });
         await Live.findByIdAndUpdate(doc.live, { $pull : { bands: doc._id }});
         await User.findByIdAndUpdate(doc.author, { $pull : { bands: doc._id }});
-        console.log("doc:", doc._id);
+    }
+    const bands = await Band.find({ live: doc.live });
+    console.log(bands);
+    for (let i = 0; i < (bands).length; i++){
+        await Band.findByIdAndUpdate(bands[i]._id, { $set: { order: (i + 1) } });
     }
 });
 

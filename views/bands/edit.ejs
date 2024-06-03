@@ -21,6 +21,18 @@
             </div>
         </div>
         <div>
+            <p class = "alert alert-info mt-3">SE曲名,SpotifyURLは下記検索から追加してください．もし，Spotifyで曲を見つけられなかったときは手動で曲名を入力してください．</p>
+        </div>
+        <div>
+            <label for=<%="searchSong"%> class = "col-form-label">SEを曲名で検索（Spotify）</label>
+            <div class="input-group mb-3">
+                <span class="input-group-text searchSongIcon"><i class="bi bi-search"></i></span>
+                <input type="search" class="form-control searchSong" placeholder="SE曲名を入力" id = "searchSong"aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div id = "searchResult">
+            </div>
+        </div>
+        <div>
             <label for="se" class="col-form-label">SE(登場曲)</label>
             <input type="text" id = "se" name="band[se]" class = "form-control" value=<%=band.se%> required>
             <div class="valid-feedback">
@@ -68,6 +80,9 @@
 </div>
 <script src="/javascript/validateForms.js"></script>
 <script>
+    spotifyAccessToken = "<%=spotifyAccessToken%>" 
     const band = <%-JSON.stringify(band)%>
+
 </script>
+<script src = "/javascript/spotify-web-api-js/spotify-web-api.js"></script>
 <script src = "/javascript/editBand.js"></script>

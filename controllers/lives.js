@@ -69,5 +69,5 @@ module.exports.edit = async (req, res) => {
         return res.redirect(`/lives`);
     }
     await Live.updateOne(live, req.body.live);
-
+    res.redirect(`/lives`);
 };

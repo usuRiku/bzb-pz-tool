@@ -35,11 +35,10 @@
             </table>
         </div>
     </div>
-    <% for(let i = 0; i < 5; i++){ %>
+    <% for(let i = 0; i < band.songs.length; i++){ %>
         <div class = "my-5">
             <h2><%= i + 1 %>曲目</h2>
             <%- include("./paTableSong", {i}) %>
         </div>
-        <% if(i === band.songs.length - 1) break %>
     <% } %>
 </div>

@@ -15,10 +15,7 @@ module.exports.createBand = async (req, res) => {
     await band.save();
     band.author = req.session.user._id;
     band.live = req.params.liveId;
-    for (let i = 0; i < 10; i++){
-        if (req.body.band.song[i] === "") {
-            break;
-        }
+    for (let i = 0; i < req.body.band.songNumber; i++){
         const songObject = {
             song: req.body.band.song[i],
             isMc: req.body.band.isMc[i],

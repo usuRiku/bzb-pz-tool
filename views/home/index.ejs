@@ -1,136 +1,180 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BZB PAツール</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/home/index.css">
-</head>
-<body>
-    <header>
-        <div class="container text-center">
-            <h1>BZB PAツールへようこそ！！</h1>
-            <p>BZB PAツールは、ライブにおけるSEの収集、PA表の提出、確認などをWebで完結できるサービスです。</p>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>BZB PAツール</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="/stylesheets/home/index.css" />
+    </head>
+    <body>
+        <header>
+            <div class="container text-center">
+                <h1>BZB PAツールへようこそ！！</h1>
+                <p>BZB PAツールは、ライブにおけるSEの収集、PA表の提出、確認などをWebで完結できるサービスです。</p>
 
-            <div class="row mt-5">
-                <div class="col-md-3 offset-md-3 mb-2 text-center">
-                    <a href="#features" class="btn btn-lg btn-info">アプリについて詳しく知る</a>
-                </div>
-                <div class="col-md-3 text-center">
-                    <a href="/register" class="btn btn-lg btn-success" role="button">ユーザー登録をして始める</a>
-                </div>
-            </div>
-        </div>
-    </header>
-    <section id="features" class="justify-content-center nav-fill">
-        <h2>このサービスで出来ること</h2>
-        <div class="container">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
-                        バンドリーダーの方
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">
-                        ライブ主催者
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">
-                        ライブ閲覧者
-                    </button>
-                </li>
-            </ul>
-
-            <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                    <div class="feature">
-                        <h3>webでPA表の提出</h3>
-                        <p>ライブごとにwebからPA表を提出できます</p>
+                <div class="row mt-5">
+                    <div class="col-md-3 offset-md-3 mb-2 text-center">
+                        <a href="#features" class="btn btn-lg btn-info">アプリについて詳しく知る</a>
                     </div>
-                    <div class="feature">
-                        <h3>webでSEの提出</h3>
-                        <p>SE（登場曲）も同一サイト内で提出できます</p>
-                    </div>
-                    <div class="feature">
-                        <h3>PA表，SEの編集</h3>
-                        <p>提出したPA表，SEはいつでも編集，削除することができます</p>
-                    </div>
-                    <div class="usage">
-                        <h3>使い方</h3>
-                        <p>下記の手順に従ってPA表を提出してください：</p>
-                        <ol>
-                            <li>ユーザー登録</li>
-                            <li>ライブの選択</li>
-                            <li>PA表，SEを入力</li>
-                            <li>PA表とSEを提出</li>
-                        </ol>
-                        <div class="process">
-                            <h4>1.ユーザー登録</h4>
-                            <p>まず<a href="https://bzb-pa-tool-9561c590bbc7.herokuapp.com/register">こちら</a>から会員登録を行ってください。<br>
-                                すでに会員登録済みの方は<a href="https://bzb-pa-tool-9561c590bbc7.herokuapp.com/login">ログインフォーム</a>からログインしてください。
-                            </p>
-                        </div>
-                        <div class="process">
-                            <h4>2.ライブの選択</h4>
-                            <p>ログインができたらナビバーの「ライブ一覧」からPA表を提出したいライブを選択して、ライブ名をクリックしてください。
-                                <img src="/photos/step2.jpg" alt="ステップ2" class="img-fluid">
-                                すると、そのライブに対してPA表を提出したバンド一覧をみることができます。
-                                <img src="/photos/step2-2.jpg" alt="ステップ2" class="img-fluid">
-                            </p>
-                        </div>
-                        <div class="process">
-                            <h4>3.PA表，SEを入力</h4>
-                            <p>バンド一覧のページから「PA表を新規作成」をクリックします。すると、PA表の作成フォームが表示されます。</p>
-                            <img src="/photos/step3-1.jpg" alt="ステップ2" class="img-fluid">
-
-                        </div>
-                        <div class="process">
-                            <h4>4.PA表とSEを提出</h4>
-                        </div>
-                        <img src="step1.jpg" alt="ステップ1" class="img-fluid">
-                        <img src="step3.jpg" alt="ステップ3" class="img-fluid">
-                        <img src="step4.jpg" alt="ステップ4" class="img-fluid">
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-                    <div class="feature">
-                        <h3>ライブの作成</h3>
-                        <p>ライブを簡単に作成できます。</p>
-                    </div>
-                    <div class="feature">
-                        <h3>PA表の並べ替え</h3>
-                        <p>PA表をドラッグ&ドロップで簡単に並べ替えできます。</p>
-                    </div>
-                    <div class="feature">
-                        <h3>SEプレイリストの自動作成</h3>
-                        <p>提出されたSEを基に自動でプレイリストを作成します。</p>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
-                    <div class="feature">
-                        <h3>ライブの日時，開催場所の確認</h3>
-                        <p>ライブの詳細情報を確認できます。</p>
-                    </div>
-                    <div class="feature">
-                        <h3>出演バンド，バンド順の確認</h3>
-                        <p>出演バンドとその順番を確認できます。</p>
+                    <div class="col-md-3 text-center">
+                        <a href="/register" class="btn btn-lg btn-success" role="button">ユーザー登録をして始める</a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </header>
+        <section id="features" class="justify-content-center nav-fill">
+            <h2>このサービスで出来ること</h2>
+            <div class="container">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                            バンドリーダーの方
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link"
+                            id="pills-profile-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-profile"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-profile"
+                            aria-selected="false"
+                        >
+                            ライブ主催者
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button
+                            class="nav-link"
+                            id="pills-contact-tab"
+                            data-bs-toggle="pill"
+                            data-bs-target="#pills-contact"
+                            type="button"
+                            role="tab"
+                            aria-controls="pills-contact"
+                            aria-selected="false"
+                        >
+                            ライブ閲覧者
+                        </button>
+                    </li>
+                </ul>
 
-    <section id="signup" class="text-center">
-        <h2>登録して始める</h2>
-        <button type="submit" class="btn btn-primary btn-lg">新規ユーザー登録</button>
-    </section>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
+                        <div class="feature">
+                            <h3>webでPA表の提出</h3>
+                            <p>ライブごとにwebからPA表を提出できます</p>
+                        </div>
+                        <div class="feature">
+                            <h3>webでSEの提出</h3>
+                            <p>SE（登場曲）も同一サイト内で提出できます</p>
+                        </div>
+                        <div class="feature">
+                            <h3>PA表，SEの編集</h3>
+                            <p>提出したPA表，SEはいつでも編集，削除することができます</p>
+                        </div>
+                        <div class="usage">
+                            <h3>使い方</h3>
+                            <p>下記の手順に従ってPA表を提出してください：</p>
+                            <ol>
+                                <li>ユーザー登録</li>
+                                <li>ライブの選択</li>
+                                <li>PA表，SEを入力</li>
+                                <li>PA表とSEを提出</li>
+                            </ol>
+                            <div class="process">
+                                <h4>1.ユーザー登録</h4>
+                                <p>
+                                    まず<a href="https://bzb-pa-tool-9561c590bbc7.herokuapp.com/register">こちら</a>から会員登録を行ってください。<br />
+                                    すでに会員登録済みの方は<a href="https://bzb-pa-tool-9561c590bbc7.herokuapp.com/login">ログインフォーム</a>からログインしてください。
+                                </p>
+                            </div>
+                            <div class="process">
+                                <h4>2.ライブの選択</h4>
+                                <p>
+                                    ログインができたらナビバーの「ライブ一覧」からPA表を提出したいライブを選択して、ライブ名をクリックしてください。
+                                    <img src="/photos/step2.jpg" alt="ステップ2" class="img-fluid" />
+                                    すると、そのライブに対してPA表を提出したバンド一覧をみることができます。
+                                    <img src="/photos/step2-2.jpg" alt="ステップ2" class="img-fluid" />
+                                </p>
+                            </div>
+                            <div class="process">
+                                <h4>3.PA表，SEを入力</h4>
+                                <p>バンド一覧のページから「PA表を新規作成」をクリックします。すると、PA表の作成フォームが表示されます。</p>
+                                <img src="/photos/step3-1.jpg" alt="ステップ3" class="img-fluid" />
+                                <h5>記入事項</h5>
+                                <p>&#9312;：バンド名を入力してください。</p>
+                                <p>&#9313;：バンドリーダーを入力してください。</p>
+                                <p>&#9314;：ここではSEの検索ができます。曲を検索し、追加ボタンを押すと&#9315;&#9316;&#9317;が自動で補完されます。</p>
+                                <div class="alert alert-warning">"タイムアウトしました　ページを再読み込みしてください"と表示された場合は、ページをリロードしてください。</div>
+                                <p>&#9315;：&#9314;から自動補完されます。もし、&#9314;で曲が見つからなければ、手動で入力してください。</p>
+                                <p>
+                                    &#9316;：&#9314;から自動補完されます。もし、&#9314;で曲が見つからなければ、<a href="https://open.spotify.com/search">Spotify</a
+                                    >にて曲を検索し、曲のリンクをコピーしてください。（Spotifyを利用するには無料登録が必要です。）
+                                    <img src="/photos/step3-2.jpg" alt="ステップ3" class="img-fluid" />
+                                    <br />
+                                    リンクは<span>https://open.spotify.com/intl-ja/track/...</span>という形式になります。<br />それでも曲が見つからない、もしくはそもそもない場合は空欄かYouTubeなどのリンクを貼ってください。
+                                </p>
+                                <p>&#9317;：&#9314;から自動補完されます。もし、&#9314;で曲が見つからなければ、手動で入力してください。</p>
+                                <p>&#9318;：演奏時間を入力してください。</p>
+                                <p>&#9319;：演奏曲数を入力してください。曲数の分だけ&#9319;以下の項目が表示されます。</p>
+                                <p>最後にセットリストに必要事項を記入してください。演奏曲名は入力必須ですが、それ以外はなくても大丈夫です。</p>
+                            </div>
+                            <div class="process">
+                                <h4>4.PA表とSEを提出</h4>
+                                <p>必要事項の記入が終わったら、ページ一番下のPA表を新規作成をクリックしてください。もし記入漏れがあればフォームが赤くなりますので、そちらに記入してください。</p>
+                                <img src="/photos/step4.jpg" alt="ステップ4" class="img-fluid" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
+                        <div class="feature">
+                            <h3>ライブの作成</h3>
+                            <p>ライブを簡単に作成できます。</p>
+                        </div>
+                        <div class="feature">
+                            <h3>PA表の並べ替え</h3>
+                            <p>PA表をドラッグ&ドロップで簡単に並べ替えできます。</p>
+                        </div>
+                        <div class="feature">
+                            <h3>SEプレイリストの自動作成</h3>
+                            <p>提出されたSEを基に自動でプレイリストを作成します。</p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+                        <div class="feature">
+                            <h3>ライブの日時，開催場所の確認</h3>
+                            <p>ライブの詳細情報を確認できます。</p>
+                        </div>
+                        <div class="feature">
+                            <h3>出演バンド，バンド順の確認</h3>
+                            <p>出演バンドとその順番を確認できます。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2024 BZB PA TOOL</p>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-</body>
+        <section id="signup" class="text-center">
+            <h2>登録して始める</h2>
+            <button type="submit" class="btn btn-primary btn-lg">新規ユーザー登録</button>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 BZB PA TOOL</p>
+        </footer>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"
+        ></script>
+    </body>
 </html>

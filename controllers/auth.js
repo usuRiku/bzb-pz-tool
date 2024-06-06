@@ -29,7 +29,7 @@ module.exports.register = async (req, res) => {
     // Store the user
     const registeredUser = new User(req.body);
     registeredUser.password = hashedPassword;
-    registeredUser.save();
+    await registeredUser.save();
     req.session.user = registeredUser;
     req.flash("success", `${req.session.user.circleName}さん ようこそ！`);
     res.redirect("/lives");
@@ -50,7 +50,7 @@ module.exports.login = async (req, res) => {
     } else {
         req.flash("error", "メールアドレスまたはパスワードが間違っています");
         return res.redirect("/login");
-    }
+        }
 };
 
 module.exports.resetPassword = async (req, res) => {
@@ -81,8 +81,9 @@ module.exports.resetPassword = async (req, res) => {
     await user.save();
     req.session.passwordResetToken = undefined;
     req.session.passwordResetExpires = undefined;
+    req.session.user = user;
     req.flash("success", "パスワードを変更しました！");
-    res.redirect("/login");
+    res.redirect(`/mypage/${user._id}`);
 };
 
 module.exports.lineLogin = async (req, res) => {

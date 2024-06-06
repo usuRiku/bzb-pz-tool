@@ -58,7 +58,7 @@ module.exports.sendPasswordResetMail = async (req, res) => {
     }, mailCallback);
 };
 
-module.exports.renderPasswordResetForm = async(req, res) => {
+module.exports.renderPasswordResetForm = async (req, res) => {
     const token = req.query.token;
     let resetUrl = "";
     if (process.env.NODE_ENV != "production") {
@@ -66,5 +66,9 @@ module.exports.renderPasswordResetForm = async(req, res) => {
     } else {
         resetUrl = `https://www.bzb-pa-tool.com/mails/resetPassword?token=${token}`;
     }
-    res.render("auth/resetPassword", {resetUrl});
-}
+    res.render("auth/resetPassword", { resetUrl });
+};
+
+module.exports.renderPasswordMailForm = (req, res) => {
+    res.render("auth/passwordMailForm");
+};

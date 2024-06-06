@@ -24,11 +24,8 @@ userDeleteButton.addEventListener("click", (e) => {
 });
 
 const forms = document.querySelectorAll('.validation');
-const emailConform = document.querySelector("#emailConform");
-const email = document.querySelector("#email");
 const password = document.querySelector("#password");
 let alreadySubmit = false;
-let isConformMail = false;
 userEditButton.addEventListener("click", (e) => {
     Array.from(forms).forEach(form => {
         if (!form.checkValidity()) {
@@ -40,18 +37,7 @@ userEditButton.addEventListener("click", (e) => {
             });
             document.querySelector("#msg").innerHTML = "必須項目が入力されていません";
         } else {
-            if (!(email.value === emailConform.value)) {
-                window.scroll({
-                    top: 0,
-                    behavior: "smooth",
-                });
-                document.querySelector("#msg").innerHTML = "メールアドレスが一致していません";
-                isConformMail = true;
-            }
-            else {
-                isConformMail = false;
-            }
-            if (!alreadySubmit && !isConformMail) {
+            if (!alreadySubmit) {
                 if (confirm("ユーザー情報を更新しますか")) {
                     form.submit();
                     alreadySubmit = true;

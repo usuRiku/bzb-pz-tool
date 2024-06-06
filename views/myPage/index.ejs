@@ -67,9 +67,17 @@
             </form>
         </div>
         <div class="card mb-2">
+            <h5 class="card-title text-center my-2">パスワードの変更</h5>
+            <div class="card-text mx-2">ボタンをクリックすると下記メールアドレス宛てにパスワード変更案内が届きますので、案内に従い手続きを進めてください</div>
+            <form action="/mails/resetPassword/<%=user._id%>" method = "POST" id = "passwordResetForm" class="mx-2">
+                <input type="email" class="form-control" name = "email" value = <%=user.email%> readonly>
+                <button class = "btn btn-danger my-3 mx-2"id = "passwordResetButton">パスワード変更メールを送信</button>
+            </form>
+        </div>
+        <div class="card mb-2">
             <h5 class="card-title text-center my-2">ユーザーの削除</h5>
             <div class="card-text mx-2">ユーザーを削除すると関連するPA表も削除されます</div>
-            <form action="/mypage/<%=user._id%>?_method=DELETE" method = "POST" id = "userDeleteForm">
+            <form action="/mypage/<%=user._id%>?_method=DELETE" method = "POST" id = "userDeleteForm" class="mx-2">
                 <button class = "btn btn-danger my-3 mx-2" type = "button" id = "userDeleteButton">ユーザーの削除</button>
             </form>
         </div>

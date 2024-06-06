@@ -8,9 +8,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const flash = require("connect-flash");
 const methodOverride = require('method-override');
-const XMLHttpRequest = require("xhr2");
 const SpotifyWebApi = require('spotify-web-api-node');
-const mail = require("nodemailer");
 const MongoStore = require('connect-mongo');
 const { getSpotifyAccessToken } = require("./utils/spotify_credentials.js");
 
@@ -20,14 +18,13 @@ const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/bzb-pa-tool";
 const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
 const spotifyCallback = process.env.SPOTIFY_CALLBACK
-const zohoUser = process.env.ZOHO_USER
-const zohoPass = process.env.ZOHO_PASSWORD
 
 const homeRoutes = require("./routes/home");
 const livesRoutes = require("./routes/lives");
 const authRoutes = require("./routes/auth");
 const myPageRoutes = require("./routes/myPage");
 const adminRoutes = require("./routes/admin");
+const mailsRoutes = require("./routes/mails");
 const ExpressError = require("./utils/ExpressError");
 const app = express();
 
@@ -96,6 +93,7 @@ app.use("/lives", livesRoutes);
 app.use("/", authRoutes);
 app.use("/mypage", myPageRoutes);
 app.use("/admin", adminRoutes);
+app.use("/mails", mailsRoutes);
 
 //spotify
 const authOptions = {
@@ -113,33 +111,6 @@ app.post(authOptions, function (error, response, body) {
     if (!error && response.statusCode === 200) {
         const token = body.access_token;
     }
-});
-
-//mail
-const mailParam = {
-    host: "smtp.zoho.jp",
-    port: 465,
-    auth: {
-        user: zohoUser,
-        pass: zohoPass
-    }
-};
-
-var mailCallback = (err, result) => {
-    if (err) {
-        console.log("メール送信エラー: " + err);
-    } else {
-        console.log("メール送信完了!: " + result);
-    };
-};
-app.get("/mail", async(req, res) => {
-    const smtp = mail.createTransport(mailParam);
-    smtp.sendMail({
-        from: zohoUser,
-        to: "susukio.r1030@gmail.com",
-        subject: "メール送信テスト",
-        html:"<a href = 'https://www.bzb-pa-tool.com'>こちら</a>"
-    }, mailCallback);
 });
 
 app.all('*', (req, res, next) => {

@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require('bcryptjs');
+const jwt = require("jsonwebtoken");
 const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
 const spotifyCallback = process.env.SPOTIFY_CALLBACK
@@ -50,6 +51,38 @@ module.exports.login = async (req, res) => {
         req.flash("error", "メールアドレスまたはパスワードが間違っています");
         return res.redirect("/login");
     }
+};
+
+module.exports.resetPassword = async (req, res) => {
+    const { password } = req.body;
+    const token = req.query.token;
+    let decodedToken = "";
+    try {
+        decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+    } catch (e) {
+        console.log(e);
+        req.flash("error", "トークンの期限が切れています");
+        return res.redirect("/");
+    }
+    const user = await User.findOne({
+        _id: decodedToken.id,
+    });
+    let is_valueToken = false;
+    if (req.session.passwordResetToken === token && req.session.passwordResetExpires >= Date.now()) {
+        is_valueToken = true
+    }
+    if (!user || !is_valueToken) {
+        req.flash("error", "トークンが無効か、期限が切れています");
+        return res.redirect("/");
+    }
+    const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
+    const hashedPassword = await bcrypt.hash(password, salt);
+    user.password = hashedPassword;
+    await user.save();
+    req.session.passwordResetToken = undefined;
+    req.session.passwordResetExpires = undefined;
+    req.flash("success", "パスワードを変更しました！");
+    res.redirect("/login");
 };
 
 module.exports.lineLogin = async (req, res) => {

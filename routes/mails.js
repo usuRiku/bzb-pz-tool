@@ -1,10 +1,14 @@
 const express = require("express");
 const router = express.Router();
 const mails = require("../controllers/mails/mails");
+const auth = require("../controllers/auth");
 const { isLoggedIn, hasUserAuthority} = require("../middleware");
 const { catchAsync } = require("../utils/catchAsync");
 
-router.route("/resetPassword/:userId")
-    .post(isLoggedIn, hasUserAuthority, catchAsync(mails.sendPasswordResetMail));
+router.route("/forgotPassword")
+    .post(catchAsync(mails.sendPasswordResetMail))
+    .get(catchAsync(mails.renderPasswordResetForm));
 
+router.route("/resetPassword")
+    .post(catchAsync(auth.resetPassword));
 module.exports = router;

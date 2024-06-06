@@ -69,7 +69,7 @@
         <div class="card mb-2">
             <h5 class="card-title text-center my-2">パスワードの変更</h5>
             <div class="card-text mx-2">ボタンをクリックすると下記メールアドレス宛てにパスワード変更案内が届きますので、案内に従い手続きを進めてください</div>
-            <form action="/mails/resetPassword/<%=user._id%>" method = "POST" id = "passwordResetForm" class="mx-2">
+            <form action="/mails/forgotPassword" method = "POST" id = "passwordResetForm" class="mx-2 mt-2">
                 <input type="email" class="form-control" name = "email" value = <%=user.email%> readonly>
                 <button class = "btn btn-danger my-3 mx-2"id = "passwordResetButton">パスワード変更メールを送信</button>
             </form>

@@ -26,7 +26,7 @@ module.exports.delete = async (req, res) => {
         req.session.destroy();
     }
     await User.findOneAndDelete(user);
-    // req.flash("success", "ユーザーを削除しました");
+    req.flash("success", "ユーザーを削除しました");
     
     if (is_adminUser) {
         return res.redirect("/admin/user-management")

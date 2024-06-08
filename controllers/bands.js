@@ -140,5 +140,5 @@ module.exports.delete = async (req, res) => {
     }
     await Band.findByIdAndDelete(bandId);
     req.flash("success", "PA表を削除しました");
-    res.redirect(`/lives/${req.params.liveId}`);
+    res.redirect(`/admin/live/${req.params.liveId}`);
 }

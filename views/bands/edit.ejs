@@ -80,8 +80,9 @@
 </div>
 <script src="/javascript/validateForms.js"></script>
 <script>
-    spotifyAccessToken = "<%=spotifyAccessToken%>" 
-    const band = <%-JSON.stringify(band)%>
+    spotifyAccessToken = "<%=spotifyAccessToken%>"; 
+    const band = <%-JSON.stringify(band)%>;
+    const bands = <%-JSON.stringify(user.bands)%>;
 </script>
 <script src = "/javascript/spotify-web-api-js/spotify-web-api.js"></script>
 <script src = "/javascript/editBand.js"></script>

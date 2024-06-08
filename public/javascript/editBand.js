@@ -1,17 +1,17 @@
-for (let i = 1; i <= 10; i++){
-    document.querySelector("#micNumber"+i+"-"+6).value = "6"
-    document.querySelector("#micNumber"+i+"-"+5).value = "5"
-    document.querySelector("#micNumber"+i+"-"+4).value = "4"
-    document.querySelector("#micNumber"+i+"-"+3).value = "3"
-    document.querySelector("#micNumber"+i+"-"+2).value = "2"
-    document.querySelector("#micNumber"+i+"-"+1).value = "1"
-    
-    document.querySelector("#part"+i+"-"+6).value = "サード"
-    document.querySelector("#part"+i+"-"+5).value = "セカンド"
-    document.querySelector("#part"+i+"-"+4).value = "トップ"
-    document.querySelector("#part"+i+"-"+3).value = "リード"
-    document.querySelector("#part"+i+"-"+2).value = "ベース"
-    document.querySelector("#part"+i+"-"+1).value = "ボイパ"
+for (let i = 1; i <= 10; i++) {
+    document.querySelector("#micNumber" + i + "-" + 6).value = "6"
+    document.querySelector("#micNumber" + i + "-" + 5).value = "5"
+    document.querySelector("#micNumber" + i + "-" + 4).value = "4"
+    document.querySelector("#micNumber" + i + "-" + 3).value = "3"
+    document.querySelector("#micNumber" + i + "-" + 2).value = "2"
+    document.querySelector("#micNumber" + i + "-" + 1).value = "1"
+
+    document.querySelector("#part" + i + "-" + 6).value = "サード"
+    document.querySelector("#part" + i + "-" + 5).value = "セカンド"
+    document.querySelector("#part" + i + "-" + 4).value = "トップ"
+    document.querySelector("#part" + i + "-" + 3).value = "リード"
+    document.querySelector("#part" + i + "-" + 2).value = "ベース"
+    document.querySelector("#part" + i + "-" + 1).value = "ボイパ"
 }
 //デフォルト値設定(songのみ)
 for (let i = 1; i <= 10; i++) {
@@ -32,13 +32,18 @@ for (let i = 1; i <= 10; i++) {
         document.querySelector("#part" + i + "-" + 3).value = band.songs[i - 1].part[3];
         document.querySelector("#part" + i + "-" + 2).value = band.songs[i - 1].part[4];
         document.querySelector("#part" + i + "-" + 1).value = band.songs[i - 1].part[5];
-        
+
         document.querySelector("#member" + i + "-" + 6).value = band.songs[i - 1].member[0];
         document.querySelector("#member" + i + "-" + 5).value = band.songs[i - 1].member[1];
         document.querySelector("#member" + i + "-" + 4).value = band.songs[i - 1].member[2];
         document.querySelector("#member" + i + "-" + 3).value = band.songs[i - 1].member[3];
         document.querySelector("#member" + i + "-" + 2).value = band.songs[i - 1].member[4];
         document.querySelector("#member" + i + "-" + 1).value = band.songs[i - 1].member[5];
+
+        document.querySelector("#mainSpeaker" + i).value = band.songs[i - 1].mainSpeaker;
+        document.querySelector("#returnSpeaker" + i).value = band.songs[i - 1].returnSpeaker;
+        document.querySelector("#nuance" + i).value = band.songs[i - 1].nuance;
+        document.querySelector("#otherRequests" + i).value = band.songs[i - 1].otherRequests;
         if (band.songNumber === i) {
             document.getElementById("songNum" + i).setAttribute("selected", "");
         }
@@ -49,7 +54,7 @@ for (let i = 1; i <= 10; i++) {
 
 const songNumInput = document.getElementById("songNumber");
 let songNum = band.songNumber;
-for (let i = 1; i <= songNum;i++){
+for (let i = 1; i <= songNum; i++) {
     document.querySelector("#song" + songNum).setAttribute("required", "");
     document.querySelector("#accordion" + i).classList.toggle('hidden');
 }
@@ -111,7 +116,7 @@ searchSong.addEventListener('change', () => {
                     }
                     const tr = document.createElement('tr');
                     const item = result.tracks.items[j];
-                    buttonId = "addButton" +(j + 1);
+                    buttonId = "addButton" + (j + 1);
                     songUrl = 'https://open.spotify.com/intl-ja/track/' + item.id
                     tr.innerHTML = "<td><button class = 'btn btn-success btn-sm ' type = 'button' id = '" + buttonId + "'>追加</button></td><td><a href = " + songUrl + " target = '_blank'>" + item.name + "</a></td>" + "<td>" + item.artists[0].name + "</td>";
                     tbody.appendChild(tr);
@@ -135,3 +140,41 @@ searchSong.addEventListener('change', () => {
             });
     }
 })
+
+//pa表自動補完機能
+for (let i = 1; i <= 10; i++) {
+    bands.forEach((band, j) => {
+        band.songs.forEach((song, k) => {
+            const addButton = document.getElementById(`addButton${i}-${j + 1}-${k + 1}`);
+            addButton.addEventListener("click", () => {
+                document.querySelector("#song" + i).value = song.song;
+                document.querySelector("#isMc" + i).value = song.isMc;
+                document.querySelector("#micNumber" + i + "-" + 6).value = song.micNumber[0];
+                document.querySelector("#micNumber" + i + "-" + 5).value = song.micNumber[1];
+                document.querySelector("#micNumber" + i + "-" + 4).value = song.micNumber[2];
+                document.querySelector("#micNumber" + i + "-" + 3).value = song.micNumber[3];
+                document.querySelector("#micNumber" + i + "-" + 2).value = song.micNumber[4];
+                document.querySelector("#micNumber" + i + "-" + 1).value = song.micNumber[5];
+
+                document.querySelector("#part" + i + "-" + 6).value = song.part[0];
+                document.querySelector("#part" + i + "-" + 5).value = song.part[1];
+                document.querySelector("#part" + i + "-" + 4).value = song.part[2];
+                document.querySelector("#part" + i + "-" + 3).value = song.part[3];
+                document.querySelector("#part" + i + "-" + 2).value = song.part[4];
+                document.querySelector("#part" + i + "-" + 1).value = song.part[5];
+
+                document.querySelector("#member" + i + "-" + 6).value = song.member[0];
+                document.querySelector("#member" + i + "-" + 5).value = song.member[1];
+                document.querySelector("#member" + i + "-" + 4).value = song.member[2];
+                document.querySelector("#member" + i + "-" + 3).value = song.member[3];
+                document.querySelector("#member" + i + "-" + 2).value = song.member[4];
+                document.querySelector("#member" + i + "-" + 1).value = song.member[5];
+
+                document.querySelector("#mainSpeaker" + i).value = song.mainSpeaker;
+                document.querySelector("#returnSpeaker" + i).value = song.returnSpeaker;
+                document.querySelector("#nuance" + i).value = song.nuance;
+                document.querySelector("#otherRequests" + i).value = song.otherRequests;
+            })
+        })
+    })
+}

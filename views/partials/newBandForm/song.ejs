@@ -5,6 +5,9 @@
 </p>
 <div class="collapse" id="collapseExample">
     <div class="card card-body scroll">
+        <% if(user.bands.length === 0){ %>
+            まだ作成されたPA表がありません
+        <% }else{ %>
         <table class="table table-striped table-hover my-2">
             <tbody>
                 <th scope="col" class = "tableHead">操作</th>
@@ -23,6 +26,7 @@
                 <% }) %>
             </tbody>
         </table>
+        <% } %>
     </div>
 </div>
 <div>

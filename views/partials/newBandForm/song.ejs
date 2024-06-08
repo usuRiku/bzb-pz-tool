@@ -14,7 +14,7 @@
                 <% user.bands.forEach((band, j) => {%>
                     <% band.songs.forEach((song, k) => {%>
                     <tr>
-                        <td class="text-nowrap"><button class="btn btn-success btn-sm" type="button" id = <%=`addButton${i}-${j + 1}-${k + 1}`%>>追加</button></td>
+                        <td class="text-nowrap"><button class="btn btn-success btn-sm" type="button" id = <%=`addButton${i}-${j + 1}-${k + 1}`%>>補完</button></td>
                         <td class="text-nowrap"><%= song.song %></td>
                         <td class="text-nowrap"><%= band.live.name %></td>
                         <td class="text-nowrap"><%= band.name %></td>

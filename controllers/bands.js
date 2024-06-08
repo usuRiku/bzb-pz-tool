@@ -46,11 +46,22 @@ module.exports.createBand = async (req, res) => {
 module.exports.renderNewForm = async(req, res) => { 
     const { liveId } = req.params;
     const live = await Live.findById(liveId);
+    const user = await User.findById(req.session.user._id).populate({
+        path: "bands",
+        populate: {
+            path: "songs"
+        }
+    }).populate({
+        path: "bands",
+        populate: {
+            path: "live"
+        }
+    });
     if (!live) {
         req.flash("error", "ライブが存在しません");
         return res.redirect(`/lives`);
     }
-    res.render("bands/new", { live });
+    res.render("bands/new", { live, user });
 };
 
 module.exports.renderEditForm = async(req, res) => {

@@ -51,7 +51,6 @@ module.exports.edit = async (req, res) => {
     await user.save();
     const editedUser = await User.findById(user._id);
     req.session.user = editedUser;
-    console.log(user);
     req.flash("success", `ユーザー情報を更新しました`);
     res.redirect(`/mypage/${accountUser._id}`);
 };

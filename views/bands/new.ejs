@@ -85,7 +85,9 @@
     </form>
 </div>
 <script>
-    spotifyAccessToken = "<%=spotifyAccessToken%>" 
+    spotifyAccessToken = "<%=spotifyAccessToken%>"
+    const bands = <%-JSON.stringify(user.bands)%>
+
 </script>
 <script src = "/javascript/spotify-web-api-js/spotify-web-api.js"></script>
 <script src = "/javascript/newBand.js"></script>

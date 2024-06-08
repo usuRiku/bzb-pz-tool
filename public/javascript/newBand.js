@@ -76,7 +76,7 @@ searchSong.addEventListener('change', () => {
                     }
                     const tr = document.createElement('tr');
                     const item = result.tracks.items[j];
-                    buttonId = "addButton" +(j + 1);
+                    buttonId = "addButton" + (j + 1);
                     songUrl = 'https://open.spotify.com/intl-ja/track/' + item.id
                     tr.innerHTML = "<td><button class = 'btn btn-success btn-sm ' type = 'button' id = '" + buttonId + "'>追加</button></td><td><a href = " + songUrl + " target = '_blank'>" + item.name + "</a></td>" + "<td>" + item.artists[0].name + "</td>";
                     tbody.appendChild(tr);
@@ -99,4 +99,42 @@ searchSong.addEventListener('change', () => {
                 result_div.appendChild(error);
             });
     }
-})
+});
+
+//pa表自動補完機能
+for (let i = 1; i <= 10; i++) {
+    bands.forEach((band, j) => {
+        band.songs.forEach((song, k) => {
+            const addButton = document.getElementById(`addButton${i}-${j + 1}-${k + 1}`);
+            addButton.addEventListener("click", () => {
+                document.querySelector("#song" + i).value = song.song;
+                document.querySelector("#isMc" + i).value = song.isMc;
+                document.querySelector("#micNumber" + i + "-" + 6).value = song.micNumber[0];
+                document.querySelector("#micNumber" + i + "-" + 5).value = song.micNumber[1];
+                document.querySelector("#micNumber" + i + "-" + 4).value = song.micNumber[2];
+                document.querySelector("#micNumber" + i + "-" + 3).value = song.micNumber[3];
+                document.querySelector("#micNumber" + i + "-" + 2).value = song.micNumber[4];
+                document.querySelector("#micNumber" + i + "-" + 1).value = song.micNumber[5];
+
+                document.querySelector("#part" + i + "-" + 6).value = song.part[0];
+                document.querySelector("#part" + i + "-" + 5).value = song.part[1];
+                document.querySelector("#part" + i + "-" + 4).value = song.part[2];
+                document.querySelector("#part" + i + "-" + 3).value = song.part[3];
+                document.querySelector("#part" + i + "-" + 2).value = song.part[4];
+                document.querySelector("#part" + i + "-" + 1).value = song.part[5];
+
+                document.querySelector("#member" + i + "-" + 6).value = song.member[0];
+                document.querySelector("#member" + i + "-" + 5).value = song.member[1];
+                document.querySelector("#member" + i + "-" + 4).value = song.member[2];
+                document.querySelector("#member" + i + "-" + 3).value = song.member[3];
+                document.querySelector("#member" + i + "-" + 2).value = song.member[4];
+                document.querySelector("#member" + i + "-" + 1).value = song.member[5];
+                
+                document.querySelector("#mainSpeaker" + i).value = song.mainSpeaker;
+                document.querySelector("#returnSpeaker" + i).value = song.returnSpeaker;
+                document.querySelector("#nuance" + i).value = song.nuance;
+                document.querySelector("#otherRequests" + i).value = song.otherRequests;
+            })
+        })
+    })
+}

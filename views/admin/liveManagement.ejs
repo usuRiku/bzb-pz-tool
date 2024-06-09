@@ -13,7 +13,8 @@
                 <% for(let live of lives) {%>
                     <tr>
                     <td><a href="/admin/live/<%= live._id %>/"><%= live.name %></a></td>
-                    <% const dateString = `${live.date.getFullYear()}年${live.date.getMonth() + 1}月${live.date.getDate()}日` %>
+                    <% const days = ["日", "月", "火", "水", "木", "金", "土"] %>
+                    <% const dateString = `${live.date.getFullYear()}年${live.date.getMonth() + 1}月${live.date.getDate()}日 (${days[live.date.getDay()]})` %>
                     <td><%= dateString %></td>
                     <td><%= live.location %></td>
                     <td><%= live.time %></td>

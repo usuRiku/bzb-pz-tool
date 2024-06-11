@@ -2,7 +2,7 @@ const Live = require("../models/live");
 const Band = require("../models/band");
 
 module.exports.index = async (req, res) => {
-    const lives = await Live.find({});
+    const lives = await Live.find({}).sort({ date: -1 });
     res.render("lives/index", { lives });
 };
 

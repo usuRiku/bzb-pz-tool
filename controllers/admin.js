@@ -11,7 +11,7 @@ module.exports.index = (req, res) => {
 };
 
 module.exports.renderLiveManagement = async (req, res) => {
-    const lives = await Live.find({});
+    const lives = await Live.find({}).sort({ date: -1 });
     res.render("admin/liveManagement", { lives });
 }
 

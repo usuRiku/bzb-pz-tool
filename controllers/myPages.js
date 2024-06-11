@@ -11,6 +11,7 @@ module.exports.index = async (req, res) => {
         req.flash("error", "ユーザーが存在しません");
         return res.redirect(`/lives`);
     };
+    user.bands = user.bands.reverse();
     res.render("myPage/index", { user });
 };
 

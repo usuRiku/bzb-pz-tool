@@ -140,5 +140,8 @@ module.exports.delete = async (req, res) => {
     }
     await Band.findByIdAndDelete(bandId);
     req.flash("success", "PA表を削除しました");
-    res.redirect(`/admin/live/${req.params.liveId}`);
+    if (req.session.user.email === "admin@admin.com") {
+        return res.redirect(`/admin/live/${req.params.liveId}`);
+    }
+    res.redirect(`/mypage/${req.session.user._id}`);
 }

@@ -1,0 +1,28 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/liveIndex.css" />
+<div class="row">
+    <div class="col-12 col-md-8 offset-md-2">
+        <h1>PA表を表示するライブを選択してください<br>(照明班用)
+        </h1>
+        <table class="table table-striped table-hover my-2">
+            <th scope="col">ライブ名</th>
+            <th scope="col">開催日</th>
+            <th scope="col">場所</th>
+            <th scope="col">開始時間</th>
+            <tbody>
+                <% for(let live of lives) {%>
+                    <tr>
+                    <td><a href="/light/lives/<%= live._id %>/"><%= live.name %></a></td>
+                    <% const days = ["日", "月", "火", "水", "木", "金", "土"] %>
+                    <% const dateString = `${live.date.getFullYear()}年${live.date.getMonth() + 1}月${live.date.getDate()}日 (${days[live.date.getDay()]})` %>
+                    <td><%= dateString %></td>
+                    <td><%= live.location %></td>
+                    <td><%= live.time %></td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery.min.js"></script>
+<script src="/javascript/liveIndex.js"></script>

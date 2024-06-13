@@ -1,0 +1,47 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/live.css" />
+
+<div class="row">
+    <div class="col-sm-12 col-md-8 offset-md-2">
+        <h1 id="liveName"><%= live.name %>出演バンド一覧(照明班用)</h1>
+        <div class="container mb-3" id="list">
+            <p class="alert alert-info">バンド名をクリックすると、PA表を閲覧できます</p>
+            <div class="card">
+                <table class="table table-hover">
+                    <thead>
+                        <th scope="col" id="order">出演順</th>
+                        <th scope="col">バンド名</th>
+                        <th scope="col">曲名</th>
+                        <th scope="col">MCの有無</th>
+                    </thead>
+                    <tbody id="sortable">
+                        <% live.bands.forEach((band, index) => {%>
+                        <tr class="table-active">
+                            <th scope="row">
+                                <span class="badge bg-secondary no"><%= index + 1 %></span>
+                            </th>
+                            <td><a href="/admin/live/<%= live._id %>/<%= band._id %>"><%= band.name %></a></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <% band.songs.forEach((song, i) => { %>
+                        <tr>
+                            <td></td>
+                            <th scope = "column"><%= i + 1 %>曲目</th>
+                            <td><%= song.song %></td>
+                            <td><%=song.isMc%></td>
+                        </tr>
+                        <% }) %>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+        <script>
+            const liveId = "<%=live._id%>";
+        </script>
+        <script src="/javascript/admin/liveShow.js"></script>
+    </div>
+</div>

@@ -24,6 +24,7 @@ const livesRoutes = require("./routes/lives");
 const authRoutes = require("./routes/auth");
 const myPageRoutes = require("./routes/myPage");
 const adminRoutes = require("./routes/admin");
+const lightRoutes = require("./routes/light");
 const mailsRoutes = require("./routes/mails");
 const ExpressError = require("./utils/ExpressError");
 const app = express();
@@ -93,6 +94,7 @@ app.use("/lives", livesRoutes);
 app.use("/", authRoutes);
 app.use("/mypage", myPageRoutes);
 app.use("/admin", adminRoutes);
+app.use("/light", lightRoutes);
 app.use("/mails", mailsRoutes);
 
 //spotify

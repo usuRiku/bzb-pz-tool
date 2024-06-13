@@ -21,7 +21,7 @@ module.exports.renderUserManagement = async (req, res) => {
 }
 
 module.exports.renderLiveIndex = async (req, res) => {
-    const lives = await Live.find({});
+    const lives = await Live.find({}).sort({ date: -1 });
     res.render("admin/liveIndex", { lives });
 };
 

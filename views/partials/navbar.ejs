@@ -1,37 +1,39 @@
 <nav class="fixed-top navbar navbar-expand-sm navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">bzb-pa-tool</a>
-        <div class="collapse navbar-collapse"  id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link" href="/">使い方</a>
-            <a class="nav-link" href="/lives">ライブ一覧</a>
-          </div>
-          <div class="navbar-nav ms-auto">
-            <% if(!currentUser){ %>
-              <a class="nav-link" href="/login">ログイン</a>
-              <a class="nav-link" href="/register">ユーザー新規登録</a>
-              <% }else{ %> <% if(!(currentUser.email === "admin@admin.com" )){ %>
-                <a class="nav-link" href="/mypage/<%= currentUser._id %>"><%= currentUser.circleName %>マイページ</a>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">使い方</a>
+                <a class="nav-link" href="/lives">ライブ一覧</a>
+            </div>
+            <div class="navbar-nav ms-auto">
+                <% if(!currentUser){ %>
+                <a class="nav-link" href="/login">ログイン</a>
+                <a class="nav-link" href="/register">ユーザー新規登録</a>
+                <% }else{ %> <% if(currentUser.email === "admin@admin.com" ){ %>
+                <a class="nav-link" href="/admin">管理者ページ</a>
+                <% }else if(currentUser.email === "light@light.com"){ %>
+                <a class="nav-link" href="/light">照明班専用ページ</a>
                 <% }else{ %>
-                  <a class="nav-link" href="/admin">管理者ページ</a>
-                  <% } %>
-                  <a class="nav-link" href="/logout">ログアウト</a>
-                  <% } %>
-                </div>
-              </div>
-              <% if(currentUser){ %>
-              <div class = "text-light"><b><%= currentUser.circleName%>でログイン中</b></div>
-              <% } %>
-              <button
-                  class="navbar-toggler"
-                  type="button"
-                  data-bs-toggle="collapse"
-                  data-bs-target="#navbarNavAltMarkup"
-                  aria-controls="navbarNavAltMarkup"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-              >
-                  <span class="navbar-toggler-icon"></span>
-              </button>
+                <a class="nav-link" href="/mypage/<%= currentUser._id %>"><%= currentUser.circleName %>マイページ</a>
+                <% } %>
+                <a class="nav-link" href="/logout">ログアウト</a>
+                <% } %>
+            </div>
+        </div>
+        <% if(currentUser){ %>
+        <div class="text-light"><b><%= currentUser.circleName%>でログイン中</b></div>
+        <% } %>
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 </nav>

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const admin = require("../controllers/admin");
-const { isLoggedIn, hasAdminAuthority } = require("../middleware");
+const { isLoggedIn, hasAdminAuthority, hasLightAuthority } = require("../middleware");
 const { catchAsync } = require("../utils/catchAsync");
 
 router.route("/")
@@ -20,7 +20,7 @@ router.route("/live/:liveId")
     .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.showLive));
 
 router.route("/live/:liveId/:bandId")
-    .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.showBand));
+    .get(isLoggedIn, hasLightAuthority, catchAsync(admin.showBand));
 
 router.route("/:liveId/playlist")
     .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.renderPlaylist))

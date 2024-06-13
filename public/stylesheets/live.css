@@ -33,3 +33,6 @@
 form{
     display: inline;
 }
+#order{
+    width: 2rem;
+}

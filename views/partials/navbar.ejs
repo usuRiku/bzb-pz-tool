@@ -10,13 +10,13 @@
                 <% if(!currentUser){ %>
                 <a class="nav-link" href="/login">ログイン</a>
                 <a class="nav-link" href="/register">ユーザー新規登録</a>
-                <% }else{ %> <% if(currentUser.email === "admin@admin.com" ){ %>
-                <a class="nav-link" href="/admin">管理者ページ</a>
-                <% }else if(currentUser.email === "light@light.com"){ %>
+                <% }else{ %> 
+                  <% if(currentUser.email === "admin@admin.com" ){ %>
+                    <a class="nav-link" href="/admin">管理者ページ</a>
+                  <% }else if(currentUser.email === "light@light.com"){ %>
                 <a class="nav-link" href="/light">照明班専用ページ</a>
-                <% }else{ %>
-                <a class="nav-link" href="/mypage/<%= currentUser._id %>"><%= currentUser.circleName %>マイページ</a>
                 <% } %>
+                <a class="nav-link" href="/mypage/<%= currentUser._id %>"><%= currentUser.circleName %>マイページ</a>
                 <a class="nav-link" href="/logout">ログアウト</a>
                 <% } %>
             </div>

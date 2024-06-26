@@ -10,19 +10,19 @@
                 <% if(!currentUser){ %>
                 <a class="nav-link" href="/login">ログイン</a>
                 <a class="nav-link" href="/register">ユーザー新規登録</a>
-                <% }else{ %> 
-                  <% if(currentUser.email === "admin@admin.com" ){ %>
-                    <a class="nav-link" href="/admin">管理者ページ</a>
-                  <% }else if(currentUser.email === "light@light.com"){ %>
-                <a class="nav-link" href="/light">照明班専用ページ</a>
-                <% } %>
-                <a class="nav-link" href="/mypage/<%= currentUser._id %>"><%= currentUser.circleName %>マイページ</a>
-                <a class="nav-link" href="/logout">ログアウト</a>
+                <% }else{ %>
+                    <a class="nav-link" href="/logout">ログアウト</a>
                 <% } %>
             </div>
         </div>
         <% if(currentUser){ %>
-        <div class="text-light"><b><%= currentUser.circleName%>でログイン中</b></div>
+            <% if(currentUser.email === "admin@admin.com" ){ %>
+                <a class="text-light ms-auto me-2" href="/admin">管理者ページ</a>
+            <% }else if(currentUser.email === "light@light.com"){ %>
+                <a class="text-light ms-auto me-2" href="/light">照明班専用ページ</a>
+            <% }else{ %>
+                <a class="text-light ms-auto me-2" href="/mypage/<%= currentUser._id %>"><%= currentUser.circleName %>マイページ</a>
+            <% } %>
         <% } %>
         <button
             class="navbar-toggler"

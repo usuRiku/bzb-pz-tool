@@ -40,10 +40,8 @@ for (let i = 1; i <= 10; i++) {
         document.querySelector("#member" + i + "-" + 2).value = band.songs[i - 1].member[4];
         document.querySelector("#member" + i + "-" + 1).value = band.songs[i - 1].member[5];
 
-        document.querySelector("#mainSpeaker" + i).value = band.songs[i - 1].mainSpeaker;
-        document.querySelector("#returnSpeaker" + i).value = band.songs[i - 1].returnSpeaker;
         document.querySelector("#nuance" + i).value = band.songs[i - 1].nuance;
-        document.querySelector("#otherRequests" + i).value = band.songs[i - 1].otherRequests;
+        document.querySelector("#requests" + i).value = band.songs[i - 1].requests;
         if (band.songNumber === i) {
             document.getElementById("songNum" + i).setAttribute("selected", "");
         }
@@ -170,10 +168,8 @@ for (let i = 1; i <= 10; i++) {
                 document.querySelector("#member" + i + "-" + 2).value = song.member[4];
                 document.querySelector("#member" + i + "-" + 1).value = song.member[5];
 
-                document.querySelector("#mainSpeaker" + i).value = song.mainSpeaker;
-                document.querySelector("#returnSpeaker" + i).value = song.returnSpeaker;
                 document.querySelector("#nuance" + i).value = song.nuance;
-                document.querySelector("#otherRequests" + i).value = song.otherRequests;
+                document.querySelector("#requests" + i).value = song.requests;
             })
         })
     })

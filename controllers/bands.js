@@ -19,13 +19,11 @@ module.exports.createBand = async (req, res) => {
         const songObject = {
             song: req.body.band.song[i],
             isMc: req.body.band.isMc[i],
-            mainSpeaker: req.body.band.mainSpeaker[i],
             micNumber: req.body.band.micNumber[i],
             part: req.body.band.part[i],
             member: req.body.band.member[i],
-            returnSpeaker: req.body.band.returnSpeaker[i],
             nuance: req.body.band.nuance[i],
-            otherRequests: req.body.band.otherRequests[i],
+            requests: req.body.band.requests[i],
         }
         const song = new Song(songObject);
         band.songs.push(song);
@@ -104,13 +102,11 @@ module.exports.edit = async (req, res) => {
         const songObject = {
             song: req.body.band.song[i],
             isMc: req.body.band.isMc[i],
-            mainSpeaker: req.body.band.mainSpeaker[i],
             micNumber: req.body.band.micNumber[i],
             part: req.body.band.part[i],
             member: req.body.band.member[i],
-            returnSpeaker: req.body.band.returnSpeaker[i],
             nuance: req.body.band.nuance[i],
-            otherRequests: req.body.band.otherRequests[i],
+            requests: req.body.band.requests[i],
         }
         const song = new Song(songObject);
         band.songs.push(song);

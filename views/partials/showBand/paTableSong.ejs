@@ -45,20 +45,12 @@
                     <td><%= band.songs[i].isMc %></td>
                 </tr>
                 <tr>
-                    <th scope="row" class = "head" class = "paTable">メインの音量</th>
-                    <td><%= band.songs[i].mainSpeaker %></td>
-                </tr>
-                <tr>
-                    <th scope="row" class = "head" class = "paTable">返しの音量</th>
-                    <td><%= band.songs[i].returnSpeaker %></td>
-                </tr>
-                <tr>
                     <th scope="row" class = "head"class = "paTable">曲のニュアンス</th>
                     <td><%= band.songs[i].nuance %></td>
                 </tr>
                 <tr>
-                    <th scope="row" class = "head" class = "paTable">その他のリクエスト</th>
-                    <td><%= band.songs[i].otherRequests %></td>
+                    <th scope="row" class = "head" class = "paTable">リクエスト</th>
+                    <td><textarea class="form-control" rows="5" readonly><%- band.songs[i].requests %></textarea></td>
                 </tr>
             </table>
         </div>

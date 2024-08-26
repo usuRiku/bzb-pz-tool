@@ -75,6 +75,7 @@ app.use(async (req, res, next) => {
     res.locals.spotifyAccessToken = access_token;
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    console.log(req.session.user);
     res.locals.currentUser = req.session.user;
     next();
 });

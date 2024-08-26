@@ -53,18 +53,10 @@
     <%  }%>
 </div>
 <div>
-    <label for = <%="band[mainSpeaker" + i + "]"%> class = "col-form-label">メインスピーカの要望</label>
-    <textarea name = "band[mainSpeaker]" id = <%="mainSpeaker" + i%> class = "form-control"></textarea>
-</div>
-<div>
-    <label for = <%="band[returnSpeaker" + i + "]"%> class = "col-form-label">返しスピーカの要望</label>
-    <textarea name = "band[returnSpeaker]" id = <%="returnSpeaker" + i%> class = "form-control"></textarea>
-</div>
-<div>
     <label for = <%="band[nuance" + i + "]"%> class = "col-form-label">曲のニュアンス</label>
     <textarea name = "band[nuance]" id = <%="nuance" + i%> class = "form-control"></textarea>
 </div>
 <div>
-    <label for = <%="band[otherRequests" + i + "]"%> class = "col-form-label">その他の要望</label>
-    <textarea name = "band[otherRequests]" id = <%="otherRequests" + i%> class = "form-control"></textarea>
+    <label for = <%="band[requests" + i + "]"%> class = "col-form-label">リクエスト</label>
+    <textarea name = "band[requests]" id = <%="requests" + i%> class = "form-control" rows="5"><%=  %></textarea>
 </div>

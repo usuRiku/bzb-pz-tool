@@ -41,6 +41,9 @@ const songSchema = new mongoose.Schema({
     otherRequests: {
         type: String,
         default: "特になし"
+    },
+    requests: { //新しい要望欄　ここにすべて格納する
+        type: String
     }
 });
 

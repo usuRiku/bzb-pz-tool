@@ -129,11 +129,9 @@ for (let i = 1; i <= 10; i++) {
                 document.querySelector("#member" + i + "-" + 3).value = song.member[3];
                 document.querySelector("#member" + i + "-" + 2).value = song.member[4];
                 document.querySelector("#member" + i + "-" + 1).value = song.member[5];
-                
-                document.querySelector("#mainSpeaker" + i).value = song.mainSpeaker;
-                document.querySelector("#returnSpeaker" + i).value = song.returnSpeaker;
+            
                 document.querySelector("#nuance" + i).value = song.nuance;
-                document.querySelector("#otherRequests" + i).value = song.otherRequests;
+                document.querySelector("#requests" + i).value = song.requests;
             })
         })
     })

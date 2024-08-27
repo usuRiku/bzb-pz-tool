@@ -24,6 +24,7 @@ module.exports.createBand = async (req, res) => {
             member: req.body.band.member[i],
             nuance: req.body.band.nuance[i],
             requests: req.body.band.requests[i],
+            tempo: req.body.band.tempo[i]
         }
         const song = new Song(songObject);
         band.songs.push(song);
@@ -107,6 +108,7 @@ module.exports.edit = async (req, res) => {
             member: req.body.band.member[i],
             nuance: req.body.band.nuance[i],
             requests: req.body.band.requests[i],
+            tempo: req.body.band.tempo[i],
         }
         const song = new Song(songObject);
         band.songs.push(song);

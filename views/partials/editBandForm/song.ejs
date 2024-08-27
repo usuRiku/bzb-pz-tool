@@ -52,11 +52,22 @@
         </div>
     <%  }%>
 </div>
-<div>
-    <label for = <%="band[nuance" + i + "]"%> class = "col-form-label">曲のニュアンス</label>
+<div class="form-groupe mb-3">
+    
+    <label for = <%="band[nuance]"%> class = "col-form-label">曲のニュアンス</label>
+    <select name = "band[tempo]" id = <%="tempo" + i%> class="form-control mb-2 ">
+        <option value="" selected disabled>選択してください</option>
+        <option value="1" class = <%= "tempo" + i%> id = "up">アップテンポ</option>
+        <option value="2" class = <%= "tempo" + i%> id = "mid">ミディアムテンポ</option>
+        <option value="3" class = <%= "tempo" + i%> id="slow">スローテンポ</option>
+    </select>
+    <div class="alert alert-info mb-1">その他出したい雰囲気やイメージがあればご記入ください</div>
     <textarea name = "band[nuance]" id = <%="nuance" + i%> class = "form-control"></textarea>
 </div>
 <div>
     <label for = <%="band[requests" + i + "]"%> class = "col-form-label">リクエスト</label>
-    <textarea name = "band[requests]" id = <%="requests" + i%> class = "form-control" rows="5"><%=  %></textarea>
+    <div class="alert alert-info mb-1">マイク音量や、エフェクト、その他の要望についてご記入ください
+    </div>
+    <textarea name = "band[requests]" id = <%="requests" + i%> class = "form-control" rows="5"></textarea>
+</div>
 </div>

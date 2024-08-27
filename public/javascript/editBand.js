@@ -40,6 +40,14 @@ for (let i = 1; i <= 10; i++) {
         document.querySelector("#member" + i + "-" + 2).value = band.songs[i - 1].member[4];
         document.querySelector("#member" + i + "-" + 1).value = band.songs[i - 1].member[5];
 
+        const options = document.querySelectorAll(".tempo" + i);
+        for (let j = 0; j < 3; j++){
+            if (options[j].value == band.songs[i - 1].tempo){
+                console.log(band.songs[i - 1].tempo)
+                options[j].removeAttribute("selected");
+                options[j].setAttribute("selected", "");
+            }
+        }
         document.querySelector("#nuance" + i).value = band.songs[i - 1].nuance;
         document.querySelector("#requests" + i).value = band.songs[i - 1].requests;
         if (band.songNumber === i) {
@@ -54,6 +62,7 @@ const songNumInput = document.getElementById("songNumber");
 let songNum = band.songNumber;
 for (let i = 1; i <= songNum; i++) {
     document.querySelector("#song" + songNum).setAttribute("required", "");
+    document.querySelector("#tempo" + songNum).setAttribute("required", "");
     document.querySelector("#accordion" + i).classList.toggle('hidden');
 }
 songNumInput.addEventListener("change", function (e) {
@@ -62,12 +71,14 @@ songNumInput.addEventListener("change", function (e) {
         const id = "#accordion" + i;
         document.querySelector(id).classList.add('hidden');
         document.querySelector("#song" + i).removeAttribute("required");
+        document.querySelector("#tempo" + i).removeAttribute("required");
     }
     for (let i = 1; i <= songNum; i++) {
         const id = "#accordion" + i;
         console.log(id);
         document.querySelector(id).classList.toggle('hidden');
         document.querySelector("#song" + i).setAttribute("required", "");
+        document.querySelector("#tempo" + i).setAttribute("required", "");
     }
 });
 
@@ -167,6 +178,12 @@ for (let i = 1; i <= 10; i++) {
                 document.querySelector("#member" + i + "-" + 3).value = song.member[3];
                 document.querySelector("#member" + i + "-" + 2).value = song.member[4];
                 document.querySelector("#member" + i + "-" + 1).value = song.member[5];
+                if (song.tempo) {
+                    document.querySelectorAll(".tempo" + i)[0].removeAttribute("selected");
+                    document.querySelectorAll(".tempo" + i)[1].removeAttribute("selected");
+                    document.querySelectorAll(".tempo" + i)[2].removeAttribute("selected");
+                    document.querySelectorAll(".tempo" + i)[song.tempo].setAttribute("selected", "");
+                } 
 
                 document.querySelector("#nuance" + i).value = song.nuance;
                 document.querySelector("#requests" + i).value = song.requests;

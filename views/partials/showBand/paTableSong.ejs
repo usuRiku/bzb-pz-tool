@@ -45,6 +45,20 @@
                     <td><%= band.songs[i].isMc %></td>
                 </tr>
                 <tr>
+                    <th scope="row" class = "head"class = "paTable">テンポ</th>
+                    <% if( band.songs[i].tempo === undefined) { %>
+                        <td>選択無し</td>
+                    <% } else if(band.songs[i].tempo === 1)  { %>
+                        <td>アップテンポ</td>
+                    <% } else if (band.songs[i].tempo === 2)  { %>
+                        <td>ミディアムテンポ</td>
+                    <% } else if (band.songs[i].tempo === 3)  { %>
+                        <td>スローテンポ</td>
+                    <% } %>
+                     
+                     
+                </tr>
+                <tr>
                     <th scope="row" class = "head"class = "paTable">曲のニュアンス</th>
                     <td><%= band.songs[i].nuance %></td>
                 </tr>

@@ -44,6 +44,9 @@ const songSchema = new mongoose.Schema({
     },
     requests: { //新しい要望欄　ここにすべて格納する
         type: String
+    },
+    tempo: {
+        type: Number
     }
 });
 

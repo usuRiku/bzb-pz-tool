@@ -55,13 +55,13 @@ module.exports.renderPlaylist = async (req, res) => {
 };
 
 module.exports.editPlaylist = async (req, res) => {
-    const live = await Live.findById(req.params.liveId);
+    const live = await Live.findById(req.params.liveId).populate("bands");
     if (!live) {
         req.flash("error", "ライブが存在しません");
         return res.redirect(`/admin/live-management`);
     }
-    const trackPattern = new RegExp("(?<=track/).*");
-    const playlistPattern = new RegExp("(?<=playlist/).*");
+    const trackPattern = new RegExp("(?<=track/)[a-zA-Z0-9]{22}");
+    const playlistPattern = new RegExp("(?<=playlist/)[a-zA-Z0-9]{22}");
     seUrls = Object.entries(req.body);
     seIds = []
     for (let i = 0; i < seUrls.length; i++) {
@@ -76,19 +76,57 @@ module.exports.editPlaylist = async (req, res) => {
         clientSecret: spotifySecret,
         redirectUri: spotifyCallback
     });
+    let playlist_songs_num;
+    let array = [];
     spotifyApi.setAccessToken(req.session.specificAccessToken);
     res.locals.spotifyAccessToken = req.session.specificAccessToken;
-    spotifyApi.addTracksToPlaylist(playlistId, seIds)
+
+    //プレイリスト情報を変更
+    for (let i = 0; i < live.bands.length; i++){
+        const band = await Band.findById(live.bands[i]._id);
+        band.seUrl = seUrls[i][1];
+        await band.save();
+    }
+    //プレイリストを取得
+    spotifyApi.getPlaylist(playlistId)
         .then(function (data) {
-            console.log('Added tracks to playlist!');
-            req.flash("success", "プレイリストを更新しました");
-            res.redirect(`/admin/${req.params.liveId}/playlist`);
+            playlist_songs_num = data.body.tracks.items.length
+            console.log('got playlist information', playlist_songs_num);
+            for (let i = 0; i < playlist_songs_num; i++) {
+                array.push(i);
+            }
+            //前のプレイリストデータを削除
+
+            spotifyApi.removeTracksFromPlaylistByPosition(playlistId, array)
+                .then(function (data) {
+                    console.log('Tracks removed from playlist!');
+                    //最新のプレイリスト情報を追加
+                    spotifyApi.addTracksToPlaylist(playlistId, seIds)
+                        .then(function (data) {
+                            console.log('Added tracks to playlist!');
+                            req.flash("success", "プレイリストを更新しました");
+                            res.redirect(`/admin/${req.params.liveId}/playlist`);
+                        }, function (err) {
+                            console.log('Something went wrong!', err);
+                            req.flash("error", "プレイリストの更新に失敗しました．spotifyログイン情報がプレイリスト所有者のものか確認してください．");
+                            res.redirect(`/admin/${req.params.liveId}/playlist`);
+                        });
+                }, function (err) {
+                    //最新のプレイリスト情報を追加
+                    spotifyApi.addTracksToPlaylist(playlistId, seIds)
+                        .then(function (data) {
+                            console.log('Added tracks to playlist!');
+                            req.flash("success", "プレイリストを更新しました");
+                            res.redirect(`/admin/${req.params.liveId}/playlist`);
+                        }, function (err) {
+                            console.log('Something went wrong!', err);
+                            req.flash("error", "プレイリストの更新に失敗しました．spotifyログイン情報がプレイリスト所有者のものか確認してください．");
+                            res.redirect(`/admin/${req.params.liveId}/playlist`);
+                        });
+                });
         }, function (err) {
             console.log('Something went wrong!', err);
-            req.flash("error", "プレイリストの更新に失敗しました．spotifyログイン情報がプレイリスト所有者のものか確認してください．");
-            res.redirect(`/admin/${req.params.liveId}/playlist`);
         });
-
 };
 
 module.exports.loginSpotify = (req, res) => {

@@ -37,7 +37,6 @@ module.exports.createBand = async (req, res) => {
     await band.save();
     await live.save();
     await user.save();
-    console.log(user);
     req.flash("success", "PA表を作成しました");
     res.redirect(`/lives/${live._id}/${band._id}`);
 };

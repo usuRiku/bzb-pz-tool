@@ -93,7 +93,12 @@ module.exports.editPlaylist = async (req, res) => {
             playlist_songs_num = data.body.tracks.items.length
             console.log('got playlist information', playlist_songs_num);
             for (let i = 0; i < playlist_songs_num; i++) {
-                array.push(i);
+                console.log(data.body.tracks.items[i])
+                if (data.body.tracks.items[i].is_local === true) {
+                    continue
+                } else {
+                    array.push(i);
+                }   
             }
             //前のプレイリストデータを削除
 

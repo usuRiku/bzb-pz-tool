@@ -5,7 +5,8 @@ const sortable1 = Sortable.create(el, {
     forceAutoScrollFallback:true,
     scroll: true,
     scrollSensitivity: 200,
-    scrollSpeed: 100,
+    forceFallback: true,
+    scrollSpeed: 30,
     handle: ".handle"
 });
 

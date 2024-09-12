@@ -37,7 +37,8 @@ const sortable1 = Sortable.create(el, {
 $(function () {
     $(".hiddenBtn").click(function () {
         console.log("click");
-        $(".handle").toggleClass("hidden");
+        $(".handle ").toggleClass("hidden");
+        $(".handleTh ").toggleClass("hidden");
     });
 });
 

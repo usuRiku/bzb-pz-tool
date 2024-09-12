@@ -4,9 +4,17 @@
 
 .handle{
     cursor: move;
-    display:inline;
+    text-align: center;
+    margin-top: auto;
 }
 
+td {
+    vertical-align: middle; /* td内の要素を縦方向の中央に揃える */
+}
+
+i {
+    display: inline-block; /* 必要に応じてブロック表示 */
+}
 .bi-chevron-bar-expand .cards{
     display: flex;
     flex-direction: row;

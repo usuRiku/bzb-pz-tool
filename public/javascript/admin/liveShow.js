@@ -32,9 +32,11 @@ saveButton.addEventListener("click", async () => {
         },
         body: JSON.stringify(bands.order)
     }).then((response) => {
-        console.log(response.json());
+        console.log("変更成功")
+        alert("順番の変更を保存しました");
     }).catch((error) => {
         console.log("変更失敗");
+        alert("順番の変更に失敗しました");
     });
 
 });

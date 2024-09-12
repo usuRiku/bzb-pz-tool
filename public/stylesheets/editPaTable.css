@@ -27,3 +27,12 @@
 .searchResultTable2{
     width: 30%;
 }
+
+.scroll{
+    overflow-y: scroll;
+    height: 10rem;
+}
+
+.tableHead{
+    font-size: 0.8rem;
+}

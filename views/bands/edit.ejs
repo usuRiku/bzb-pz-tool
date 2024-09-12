@@ -3,19 +3,19 @@
 <div class="row col-12 col-lg-6 offset-lg-3">
     <h1><%=band.live.name%><br>
         PA表編集フォーム</h1>
-    <h5 id = "msg"></h3>
+    <h5 id = "msg"></h5>
     <% url = `/lives/${band.live._id}/${band._id}` %>
     <form action="<%= url %>?_method=PUT" method="POST" class = "validation" novalidate>
         <div>
             <label for="name" class="col-form-label me-3">バンド名</label>
-            <input type="text" id="name" name="band[name]" class="form-control" value=<%=band.name%> required>
+            <input type="text" id="name" name="band[name]" class="form-control" value="<%=band.name%>" required>
             <div class="valid-feedback">
                 OK!
             </div>
         </div>
         <div>
             <label for="leader" class="col-form-label">バンドリーダー</label>
-            <input type="leader" id = "leader" name="band[leader]" class = "form-control mb-3" value=<%=band.leader%> required>
+            <input type="leader" id = "leader" name="band[leader]" class = "form-control mb-3" value="<%=band.leader%>" required>
             <div class="valid-feedback">
                 OK!
             </div>
@@ -34,18 +34,18 @@
         </div>
         <div>
             <label for="se" class="col-form-label">SE(登場曲)</label>
-            <input type="text" id = "se" name="band[se]" class = "form-control" value=<%=band.se%> required>
+            <input type="text" id = "se" name="band[se]" class = "form-control" value="<%=band.se%>" required>
             <div class="valid-feedback">
                 OK!
             </div>
         </div>
         <div>
             <label for="se" class = "col-form-label">Spotify URL</label>
-            <input type="text" name = "band[seUrl]" id = "seUrl" class = "form-control" value=<%=band.seUrl%>>
+            <input type="text" name = "band[seUrl]" id = "seUrl" class = "form-control" value="<%=band.seUrl%>">
         </div>
         <div>
             <label for="seArtist" class="col-form-label">SEアーティスト</label>
-            <input type="text" id = "seArtist" name="band[seArtist]" class = "form-control" value=<%=band.seArtist%> required>
+            <input type="text" id = "seArtist" name="band[seArtist]" class = "form-control" value="<%=band.seArtist%>" required>
             <div class="valid-feedback">
                 OK!
             </div>

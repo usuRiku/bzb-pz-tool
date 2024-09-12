@@ -27,12 +27,10 @@ module.exports.createLive = async (req, res) => {
     res.redirect("/lives");
 };
 
-module.exports.exchangeBandOrder = async (req, res) => {
-    console.log("順番変更しました");
+module.exports.exchangeBandOrder = async (req, res, next) => {
     const { liveId } = req.params;
     const live = await Live.findById(liveId).populate("bands");
     live.bands = req.body;
-    console.log(live.bands[0]);
     for (let i = 1; i <= live.bands.length; i++){
         const band = await Band.findById(live.bands[i-1]._id);
         band.order = i;
@@ -40,6 +38,9 @@ module.exports.exchangeBandOrder = async (req, res) => {
     }
     await live.save();
     console.log(live.bands);
+    console.log("順番変更しました");
+    res.header('Content-Type', 'application/json; charset=utf-8')
+    res.send({ "live": live });
 };
 
 module.exports.delete = async (req, res) => {

@@ -2,35 +2,41 @@ const el = document.getElementById("sortable");
 const tableRow = document.querySelector("#sortable > tr");
 const sortable1 = Sortable.create(el, {
     animation: 150,
-    handle: ".handle",
-    onSort: async function (e) {
-        const url = `/lives/${liveId}/`;
-        const items = el.querySelectorAll('tr');
-        let order = [];
-        bands = {
-            order: []
-        }
-        for (let i = 0; i < items.length; i++) {
-            items[i].querySelector('.no').innerHTML = i + 1;
+    handle: ".handle"
+});
+
+const saveButton = document.querySelector("#saveButton");
+saveButton.addEventListener("click", async () => {
+    console.log("保存中...");
+    const url = `/lives/${liveId}/`;
+    const items = el.querySelectorAll('tr');
+    bands = {
+        order: []
+    }
+    let j = 1;
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i].querySelector('.no');
+        if (item !== null) {
+            item.innerHTML = j;
+            j += 1;
             const a = items[i].querySelector("a").href;
             const reg = new RegExp("(?<=(.*" + liveId + "\/)).*");
             const bandId = a.match(reg)[0];
             bands.order.push(bandId);
         }
-        await fetch(url, {
-            method: "PATCH",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bands.order)
-        })
-            .then((response) => {
-                console.log("パッチ送信");
-            })
-            .catch((error) => {
-                console.log("パッチ送信失敗");
-            });
-    },
+    }
+    await fetch(url, {
+        method: "PATCH",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(bands.order)
+    }).then((response) => {
+        console.log(response.json());
+    }).catch((error) => {
+        console.log("変更失敗");
+    });
+
 });
 
 //ハンドル非表示
@@ -39,6 +45,8 @@ $(function () {
         console.log("click");
         $(".handle ").toggleClass("hidden");
         $(".handleTh ").toggleClass("hidden");
+        $(".saveMenu ").toggleClass("hidden");
+
     });
 });
 

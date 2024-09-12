@@ -7,11 +7,17 @@
         <form action="/lives/<%=live._id%>/new">
             <button class="mb-2 btn btn-success">PA表を新規作成</button>
         </form>
-        <button class="mb-2 btn btn-success hiddenBtn">バンド順を変更</button>
+        <button class="mb-2 btn btn-primary hiddenBtn">バンド順を変更</button>
         <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_break">休憩を追加</button>
 
         <a class="mb-2 btn btn-success" href="/admin/<%=live._id%>/playlist">SEプレイリストを更新</a>
         <div class="container mb-3" id="list">
+            <div class="card saveMenu hidden mb-3">
+                <div class="m-3 d-flex justify-content-center">
+                    <button type="button" class="btn btn-info btn-lg col-5 mx-2" id="saveButton">変更を保存</button>
+                    <button class="btn btn-danger btn-lg col-5 mx-2 hiddenBtn">キャンセル</button>
+                </div>
+            </div>
             <div class="card">
                 <table class="table table-striped table-hover">
                     <thead>
@@ -27,9 +33,8 @@
                         <% breaks.forEach((oneBreak) => {%>
                             <% if(oneBreak.order === index){ %>
                                 <tr class = "breakRow table-info">
-                                    <th scope="row">
-                                       
-                                    </th>
+                                    <td></td>
+                                    <td class="handleTh hidden"></td>
                                     <td><%= oneBreak.name %></td>
                                     <td><%= oneBreak.time %>分</td>
                                     <td></td>
@@ -63,9 +68,8 @@
                         <% breaks.forEach((oneBreak) => {%>
                             <% if(oneBreak.order >= live.bands.length){ %>
                                 <tr class="breakRow table-info">
-                                    <th scope="row">
-                                       
-                                    </th>
+                                    <td></td>
+                                    <td class="handleTh hidden"></td>
                                     <td><%= oneBreak.name %></td>
                                     <td><%= oneBreak.time %>分</td>
                                     <td></td>

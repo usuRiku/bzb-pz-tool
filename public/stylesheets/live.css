@@ -41,6 +41,13 @@ i {
 form{
     display: inline;
 }
+
 #order{
     width: 2rem;
+}
+
+.saveMenu{
+    position: sticky;
+    top: 70px;
+    z-index: 999;
 }

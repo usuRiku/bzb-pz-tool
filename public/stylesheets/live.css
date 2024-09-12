@@ -8,7 +8,11 @@
     margin-top: auto;
 }
 
-td {
+.handleTh{
+    width: 15%;
+}
+
+.handle {
     vertical-align: middle; /* td内の要素を縦方向の中央に揃える */
 }
 
@@ -50,4 +54,13 @@ form{
     position: sticky;
     top: 70px;
     z-index: 999;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+ }
+
+tr{
+    text-align: left;
 }

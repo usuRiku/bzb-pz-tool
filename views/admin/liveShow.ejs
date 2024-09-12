@@ -53,14 +53,14 @@
                                 <span class="badge bg-secondary no"><%= index + 1 %></span>
                             </td>
                             <td><a href="/admin/live/<%= live._id %>/<%= band._id %>"><%= band.name %></a></td>
-                            <td><span class="ms-3"><%= band.se %></span></td>
-                            <td><span class="ms-3"><%= band.seArtist %></span></td>
+                            <td><span class=""><%= band.se %></span></td>
+                            <td><span class=""><%= band.seArtist %></span></td>
                             <td>
                                 <form action="/lives/<%= live._id %>/<%= band._id %>?_method=DELETE" method="POST" class="delete-forms">
-                                    <button type="button" class="btn btn-danger bt-sm deleteEl">削除</button>
+                                    <button type="button" class="btn btn-danger bt-sm deleteEl mb-1">削除</button>
                                 </form>
                                 <form action="/lives/<%= live._id %>/<%= band._id %>/edit">
-                                    <button class="btn btn-success bt-sm">編集</button>
+                                    <button class="btn btn-success bt-sm mb-1">編集</button>
                                 </form>
                             </td>
                         </tr>
@@ -75,9 +75,9 @@
                                     <td></td>
                                     <td>
                                         <form action=<%=`/admin/deleteBreak/${live._id}/${oneBreak._id}?_method=DELETE`%> method="POST" class="break-delete-forms">
-                                            <button type="button" class="btn btn-danger bt-sm breakDeleteEl">削除</button>
+                                            <button type="button" class="btn btn-danger bt-sm breakDeleteEl mb-1">削除</button>
                                         </form>
-                                        <button type="button" class="btn btn-primary bt-sm" data-bs-toggle="modal" data-bs-target="#edit_break<%=oneBreak._id%>">編集</button>
+                                        <button type="button" class="btn btn-primary bt-sm mb-1" data-bs-toggle="modal" data-bs-target="#edit_break<%=oneBreak._id%>">編集</button>
                                     </td>
                                 </tr>
                             <% } %>

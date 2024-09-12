@@ -2,6 +2,10 @@ const el = document.getElementById("sortable");
 const tableRow = document.querySelector("#sortable > tr");
 const sortable1 = Sortable.create(el, {
     animation: 150,
+    forceAutoScrollFallback:true,
+    scroll: true,
+    scrollSensitivity: 200,
+    scrollSpeed: 100,
     handle: ".handle"
 });
 

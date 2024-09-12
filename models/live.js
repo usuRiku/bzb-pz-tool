@@ -15,7 +15,14 @@ const liveSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "Band"
         }
+    ],
+    breaks:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Break"
+        }
     ]
+    
 });
 
 liveSchema.post("findOneAndDelete", async function (doc) {

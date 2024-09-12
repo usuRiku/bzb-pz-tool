@@ -24,7 +24,6 @@ const seedDB = async () => {
         let otherRequests = "その他：\n" + songs[i].otherRequests + "\n";
         let newRequest = mainSpeaker + returnSpeaker + otherRequests;
         songs[i].requests = newRequest;
-        console.log(songs[i]);
         await songs[i].save();
     }
 }

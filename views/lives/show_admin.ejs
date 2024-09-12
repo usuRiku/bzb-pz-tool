@@ -11,6 +11,10 @@
           <div class="btn btn-success hiddenBtn">バンド順を変更</div>
         <% } %>
         <div class="container" id="list">
+        <% if(currentUser && currentUser.email === "admin@admin.com"){ %>
+          <div class="btn btn-success hiddenBtn">休憩を追加</div>
+        <% } %>
+        <div class="container" id="list">
           <div class="card">
             <table class="table table-striped table-hover">
         

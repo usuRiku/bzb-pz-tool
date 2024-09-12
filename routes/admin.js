@@ -25,7 +25,17 @@ router.route("/live/:liveId/:bandId")
 router.route("/:liveId/playlist")
     .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.renderPlaylist))
     .put(isLoggedIn, hasAdminAuthority, catchAsync(admin.editPlaylist));
-module.exports = router;
+
+router.route("/createBreak/:liveId")
+    .post(isLoggedIn, hasAdminAuthority, catchAsync(admin.createBreak))
+
+router.route("/editBreak/:liveId/:breakId")
+    .put(isLoggedIn, hasAdminAuthority, catchAsync(admin.editBreak))
+
+router.route("/deleteBreak/:liveId/:breakId")
+    .delete(isLoggedIn, hasAdminAuthority, catchAsync(admin.deleteBreak));
 
 router.route("/:liveId/login/spotify")
     .post(isLoggedIn, hasAdminAuthority, admin.loginSpotify);
+
+module.exports = router;

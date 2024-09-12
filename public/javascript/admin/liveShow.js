@@ -24,17 +24,17 @@ const sortable1 = Sortable.create(el, {
             },
             body: JSON.stringify(bands.order)
         })
-        .then((response) => {
-            console.log("パッチ送信");
-        })
-        .catch((error) => {
-            console.log("パッチ送信失敗");
-        });
+            .then((response) => {
+                console.log("パッチ送信");
+            })
+            .catch((error) => {
+                console.log("パッチ送信失敗");
+            });
     },
 });
 
 //ハンドル非表示
-$(function() {
+$(function () {
     $(".hiddenBtn").click(function () {
         console.log("click");
         $(".handle").toggleClass("hidden");
@@ -52,4 +52,71 @@ deleteEl.forEach((el, index) => {
         }
     })
 
-})
+});
+
+const breakDeleteEl = document.querySelectorAll(".breakDeleteEl");
+const breakDeleteForm = document.querySelectorAll(".break-delete-forms");
+breakDeleteEl.forEach((el, index) => {
+    el.addEventListener("click", (e) => {
+        console.log(breakDeleteForm[index])
+        if (confirm(`休憩(${breaks[index].name})を削除しますか`)) {
+            breakDeleteForm[index].submit();
+        } else {
+            alert("削除を中止しました");
+        }
+    })
+
+});
+
+
+const addButton = document.getElementById("addBreakButton");
+const addForms = document.querySelectorAll('#addBreakForm');
+let alreadySubmit = false;
+addButton.addEventListener("click", (e) => {
+    Array.from(addForms).forEach(form => {
+        if (!form.checkValidity()) {
+            e.preventDefault()
+            e.stopPropagation()
+            window.scroll({
+                top: 0,
+                behavior: "smooth",
+            });
+            document.querySelector("#msg").innerHTML = "必須項目が入力されていません";
+        } else {
+            if (!alreadySubmit) {
+                form.submit();
+            } else {
+                console.log("すでに送信されています!");
+            }
+            alreadySubmit = true;
+        }
+        form.classList.add('was-validated')
+    }, false)
+});
+
+breaks.forEach((oneBreak, index) => {
+    const editButton = document.querySelector("#editBreakButton" + index);
+    const editForms = document.querySelectorAll('#editBreakForm' + index);
+    let editAlreadySubmit = false;
+    editButton.addEventListener("click", (e) => {
+        Array.from(editForms).forEach(form => {
+            if (!form.checkValidity()) {
+                e.preventDefault()
+                e.stopPropagation()
+                window.scroll({
+                    top: 0,
+                    behavior: "smooth",
+                });
+                document.querySelector("#msg").innerHTML = "必須項目が入力されていません";
+            } else {
+                if (!editAlreadySubmit) {
+                    form.submit();
+                } else {
+                    console.log("すでに送信されています!");
+                }
+                editAlreadySubmit = true;
+            }
+            form.classList.add('was-validated')
+        }, false)
+    });
+});

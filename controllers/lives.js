@@ -22,6 +22,7 @@ module.exports.showLive = async (req, res) => {
 
 module.exports.createLive = async (req, res) => {
     const live = new Live(req.body.live);
+    live.breaks = [];
     await live.save();
     res.redirect("/lives");
 };

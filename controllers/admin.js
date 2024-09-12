@@ -1,6 +1,7 @@
 const Live = require("../models/live");
 const Band = require("../models/band");
 const User = require("../models/user");
+const Break = require("../models/break");
 const SpotifyWebApi = require('spotify-web-api-node');
 const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
@@ -26,12 +27,12 @@ module.exports.renderLiveIndex = async (req, res) => {
 };
 
 module.exports.showLive = async (req, res) => {
-    const live = await Live.findById(req.params.liveId).populate("bands");
+    const live = await Live.findById(req.params.liveId).populate("bands").populate("breaks");
     if (!live) {
         req.flash("error", "ライブが存在しません");
         return res.redirect(`/admin/live-management`);
     }
-    res.render("admin/liveShow", { live });
+    res.render("admin/liveShow", { live, breaks:live.breaks});
 };
 
 module.exports.showBand = async (req, res) => {
@@ -137,4 +138,53 @@ module.exports.editPlaylist = async (req, res) => {
 module.exports.loginSpotify = (req, res) => {
     req.session.now_live = req.params.liveId;
     res.redirect(`https://accounts.spotify.com/authorize?client_id=${spotifyId}&redirect_uri=${spotifyCallback}&response_type=code&scope=playlist-modify-private%20playlist-modify-public`);
+}
+
+module.exports.createBreak = async (req, res) => {
+    const live = await Live.findById(req.params.liveId).populate("breaks");
+    const newBreak = new Break({
+        name: req.body.break_name,
+        time: req.body.break_time,
+        order: req.body.break_order,
+        live: req.params.liveId
+    });
+    await newBreak.save();
+    live.breaks.push(newBreak);
+    live.breaks.sort((a, b) => a.order - b.order);
+    await live.save();
+    req.flash("success", "休憩を作成しました");
+    res.redirect(`/admin/live/${req.params.liveId}`);
+}
+
+module.exports.editBreak = async (req, res) => {
+    const edit_break = await Break.findByIdAndUpdate(req.params.breakId, { $set : {
+        name: req.body.break_name,
+        time: req.body.break_time,
+        order: req.body.break_order
+    }
+    });
+    if (!edit_break) {
+        req.flash("error", "休憩が存在しません");
+        res.redirect(`/admin/live/${req.params.liveId}`);
+    }
+    await edit_break.save();
+    const live = await Live.findById(req.params.liveId).populate("breaks");
+    live.breaks.sort((a, b) => a.order - b.order);
+    await live.save();
+    req.flash("success", "休憩を編集しました");
+    res.redirect(`/admin/live/${req.params.liveId}`);
+}
+
+module.exports.deleteBreak = async (req, res) => {
+    console.log("fdsa")
+    const { breakId } = req.params;
+    const oneBreak = await Break.findById(breakId);
+    if (!oneBreak) {
+        req.flash("error", "休憩が存在しません");
+        return res.redirect(`/lives/${req.params.liveId}`);
+    }
+    await Break.findByIdAndDelete(breakId);
+    req.flash("success", "休憩を削除しました");
+    const live = await Live.findById(req.params.liveId);
+    res.redirect(`/admin/live/${req.params.liveId}`);
 }

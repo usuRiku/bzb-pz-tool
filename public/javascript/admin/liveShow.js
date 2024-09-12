@@ -4,9 +4,9 @@ const sortable1 = Sortable.create(el, {
     animation: 150,
     forceAutoScrollFallback:true,
     scroll: true,
-    scrollSensitivity: 200,
+    scrollSensitivity: 50,
     forceFallback: true,
-    scrollSpeed: 400,
+    scrollSpeed: 300,
     handle: ".handle"
 });
 

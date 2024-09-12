@@ -6,7 +6,7 @@ const sortable1 = Sortable.create(el, {
     scroll: true,
     scrollSensitivity: 200,
     forceFallback: true,
-    scrollSpeed: 200,
+    scrollSpeed: 300,
     handle: ".handle"
 });
 

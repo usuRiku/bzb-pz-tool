@@ -194,6 +194,6 @@ module.exports.shiftIndex = async (req, res) => {
         populate: {
             path: "songs"
         }
-    })
+    }).populate("breaks");
     res.render("admin/shiftIndex", {live});
 }

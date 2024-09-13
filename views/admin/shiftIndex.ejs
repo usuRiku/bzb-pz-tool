@@ -18,18 +18,8 @@
                 </thead>
                 <tbody>
                     <% live.bands.forEach((band, index) => { %>
-                        <tr>
-                            <td><%= band.order %></td>
-                            <td><%= band.name %></td>
-                            <td><%= band.songs[0].member[0] %></td>
-                            <td><%= band.songs[0].member[1] %></td>
-                            <td><%= band.songs[0].member[2] %></td>
-                            <td><%= band.songs[0].member[3] %></td>
-                            <td><%= band.songs[0].member[4] %></td>
-                            <td><%= band.songs[0].member[5] %></td>
-                        </tr>
                         <% live.breaks.forEach(oneBreak => { %>
-                            <% if(oneBreak.order === index + 1){ %>
+                            <% if(oneBreak.order === index){ %>
                                 <tr class="table-info">
                                     <td></td>
                                     <td><%= oneBreak.name %></td>
@@ -42,6 +32,16 @@
                                 </tr>
                             <% } %>
                         <% }); %>
+                        <tr>
+                            <td><%= band.order %></td>
+                            <td><%= band.name %></td>
+                            <td><%= band.songs[0].member[0] %></td>
+                            <td><%= band.songs[0].member[1] %></td>
+                            <td><%= band.songs[0].member[2] %></td>
+                            <td><%= band.songs[0].member[3] %></td>
+                            <td><%= band.songs[0].member[4] %></td>
+                            <td><%= band.songs[0].member[5] %></td>
+                        </tr>
                     <%}); %>
                     <% live.breaks.forEach(oneBreak => { %>
                         <% if(oneBreak.order >= live.bands.length){ %>

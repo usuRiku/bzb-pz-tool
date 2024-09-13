@@ -9,16 +9,17 @@
 }
 
 .handleTh{
-    width: 15%;
+    width: 15%
 }
 
-.handle {
+.handle{
     vertical-align: middle; /* td内の要素を縦方向の中央に揃える */
 }
 
-i {
+i{
     display: inline-block; /* 必要に応じてブロック表示 */
 }
+
 .bi-chevron-bar-expand .cards{
     display: flex;
     flex-direction: row;

@@ -2,7 +2,7 @@ const el = document.getElementById("sortable");
 const tableRow = document.querySelector("#sortable > tr");
 const sortable1 = Sortable.create(el, {
     animation: 150,
-    forceAutoScrollFallback:true,
+    forceAutoScrollFallback: true,
     scroll: true,
     scrollSensitivity: 50,
     forceFallback: true,
@@ -53,6 +53,7 @@ $(function () {
         $(".handle ").toggleClass("hidden");
         $(".handleTh ").toggleClass("hidden");
         $(".saveMenu ").toggleClass("hidden");
+        $(".orderForm ").toggleClass("hidden");
 
     });
 });
@@ -81,8 +82,17 @@ breakDeleteEl.forEach((el, index) => {
             alert("削除を中止しました");
         }
     })
-
 });
+
+
+const exchangeCancelBUtton = document.querySelector("#exchangeCancelButton");
+const exchangeCancelForm = document.querySelector("#exchangeCancelForm");
+
+exchangeCancelButton.addEventListener("click", async(e) => {
+    if (confirm(`変更をキャンセルしますか`)) {
+        exchangeCancelForm.submit();
+    }
+})
 
 
 const addButton = document.getElementById("addBreakButton");

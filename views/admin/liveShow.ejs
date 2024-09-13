@@ -10,12 +10,15 @@
         <button class="mb-2 btn btn-primary hiddenBtn">バンド順を変更</button>
         <button type="button" class="mb-2 btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_break">休憩を追加</button>
 
-        <a class="mb-2 btn btn-success" href="/admin/<%=live._id%>/playlist">SEプレイリストを更新</a>
+        <a class="mb-2 btn btn-success" href="/admin/<%=live._id%>/playlist">プレイリストを更新</a>
+        <a class="mb-2 btn btn-success" href="/admin/<%=live._id%>/shift/index">シフト作製補助</a>
         <div class="container mb-3" id="list">
             <div class="card saveMenu hidden mb-3">
                 <div class="m-3 d-flex justify-content-center">
                     <button type="button" class="btn btn-info btn-lg col-5 mx-2" id="saveButton">変更を保存</button>
-                    <button class="btn btn-danger btn-lg col-5 mx-2 hiddenBtn">キャンセル</button>
+                    <form action=<%=`/admin/live/${live._id}`%> class="col-5 mx-2" id="exchangeCancelForm">
+                        <button class="btn btn-danger btn-lg" id="exchangeCancelButton" type="button">キャンセル</button>
+                    </form>
                 </div>
             </div>
             <div class="card">

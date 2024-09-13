@@ -38,4 +38,7 @@ router.route("/deleteBreak/:liveId/:breakId")
 router.route("/:liveId/login/spotify")
     .post(isLoggedIn, hasAdminAuthority, admin.loginSpotify);
 
+router.route("/:liveId/shift/index")
+    .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.shiftIndex) );
+
 module.exports = router;

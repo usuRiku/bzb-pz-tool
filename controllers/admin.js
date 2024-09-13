@@ -176,7 +176,6 @@ module.exports.editBreak = async (req, res) => {
 }
 
 module.exports.deleteBreak = async (req, res) => {
-    console.log("fdsa")
     const { breakId } = req.params;
     const oneBreak = await Break.findById(breakId);
     if (!oneBreak) {
@@ -187,4 +186,14 @@ module.exports.deleteBreak = async (req, res) => {
     req.flash("success", "休憩を削除しました");
     const live = await Live.findById(req.params.liveId);
     res.redirect(`/admin/live/${req.params.liveId}`);
+}
+
+module.exports.shiftIndex = async (req, res) => {
+    const live = await Live.findById(req.params.liveId).populate({
+        path: "bands",
+        populate: {
+            path: "songs"
+        }
+    })
+    res.render("admin/shiftIndex", {live});
 }

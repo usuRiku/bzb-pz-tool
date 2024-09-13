@@ -29,7 +29,7 @@
                             <td><%= band.songs[0].member[5] %></td>
                         </tr>
                         <% live.breaks.forEach(oneBreak => { %>
-                            <% if(oneBreak.order === index){ %>
+                            <% if(oneBreak.order === index + 1){ %>
                                 <tr class="table-info">
                                     <td></td>
                                     <td><%= oneBreak.name %></td>

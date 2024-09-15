@@ -21,7 +21,7 @@ const User = require("../models/user");
 const bcrypt = require('bcryptjs');
 
 const seedDB = async () => {
-    const user = await User.findOne({ email: "yamatoure1216@gmail.com" });
+    const user = await User.findOne({ email: process.argv[2] });
     console.log(user);
     if (!user) {
         console.log("ユーザーが存在しません");
@@ -29,6 +29,7 @@ const seedDB = async () => {
         const salt = await bcrypt.genSalt(parseInt(process.env.SALT_ROUNDS));
         const hashedPassword = await bcrypt.hash("temp_pass", salt);
         user.password = hashedPassword;
+        await user.save();
         console.log("変更完了", user)
     }
 }

@@ -4,6 +4,7 @@
 <div class="row">
     <div class="mb-2 col-sm-12 col-md-8 offset-md-2">
         <h1 id="liveName"><%= live.name %>出演バンド一覧</h1>
+        <button class="my-2 btn btn-success" id = "bandNameCopyButton">バンド名をコピー</button>
         <div class="card p-1">
             <table class="table table-striped table-hover">
                 <thead>
@@ -16,7 +17,7 @@
                     <th scope="col">5</th>
                     <th scope="col">6</th>
                 </thead>
-                <tbody>
+                <tbody id = "bandTableBody">
                     <% live.bands.forEach((band, index) => { %>
                         <% live.breaks.forEach(oneBreak => { %>
                             <% if(oneBreak.order === index){ %>
@@ -32,9 +33,9 @@
                                 </tr>
                             <% } %>
                         <% }); %>
-                        <tr>
+                        <tr class = "bandInfo">
                             <td><%= band.order %></td>
-                            <td><%= band.name %></td>
+                            <td class = "bandName"><%= band.name %></td>
                             <td><%= band.songs[0].member[0] %></td>
                             <td><%= band.songs[0].member[1] %></td>
                             <td><%= band.songs[0].member[2] %></td>
@@ -63,4 +64,4 @@
     </div>
 </div>
 
-<script src="/javascript/admin/liveShow.js"></script>
+<script src="/javascript/admin/shift.js"></script>

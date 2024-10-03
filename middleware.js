@@ -9,6 +9,14 @@ module.exports.isLoggedIn = ((req, res, next) => {
     next();
 });
 
+module.exports.hasCreateBandAuthority = async (req, res, next) => {
+    if (req.session.user.email === "light@light.com") {
+        req.flash("error", "照明班アカウントではPA表を作成できません.別アカウントでログインしなおしてください.")
+        return res.redirect(`/lives/${req.params.liveId}`);
+    }
+    next();
+}
+
 module.exports.hasEditBandAuthority = async (req, res, next) => {
     const band = await Band.findById(req.params.bandId).populate("songs").populate("author");
     try {

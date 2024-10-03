@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const lives = require("../controllers/lives");
 const bands = require("../controllers/bands");
-const { isLoggedIn, hasEditBandAuthority, hasAdminAuthority } = require("../middleware");
+const { isLoggedIn, hasEditBandAuthority, hasAdminAuthority , hasCreateBandAuthority} = require("../middleware");
 const { catchAsync } = require("../utils/catchAsync");
 
 router.route("/")
@@ -13,14 +13,14 @@ router.route("/new")
     .get(isLoggedIn, hasAdminAuthority, lives.renderNewForm);
 
 router.route("/:liveId/new")
-    .get(isLoggedIn, catchAsync(bands.renderNewForm));
+    .get(isLoggedIn, hasCreateBandAuthority, catchAsync(bands.renderNewForm));
 
 router.route("/:liveId/:bandId/edit")
     .get(isLoggedIn, hasEditBandAuthority, catchAsync(bands.renderEditForm));
     
 router.route("/:liveId")
     .get(catchAsync(lives.showLive))
-    .post(isLoggedIn, catchAsync(bands.createBand))
+    .post(isLoggedIn, hasCreateBandAuthority, catchAsync(bands.createBand))
     .patch(isLoggedIn, hasAdminAuthority, catchAsync(lives.exchangeBandOrder))
     .delete(isLoggedIn, hasAdminAuthority, catchAsync(lives.delete))
     .put(isLoggedIn, hasAdminAuthority, catchAsync(lives.edit));

@@ -32,11 +32,13 @@ const change_author = async () => {
     } else {
         newAuthor.bands.push(band._id);
         band.author = newAuthor;
-        oldAuthor.bands = oldAuthor.bands.filter((bandId) => bandId === band._id);
-
-        await newAuthor.save();
-        await band.save();
-        await oldAuthor.save();
+        console.log(oldAuthor.bands[0].equals(band._id))
+        console.log(oldAuthor.bands[0], band._id)
+        oldAuthor.bands = oldAuthor.bands.filter((bandId) => !bandId.equals(band._id));
+        
+        // await newAuthor.save();
+        // await band.save();
+        // await oldAuthor.save();
 
         console.log("変更完了");
         console.log("バンド", band);

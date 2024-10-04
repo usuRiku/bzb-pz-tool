@@ -40,8 +40,37 @@
                 OK!
             </div>
         </div>
+        <label for="" class="col-form-label">ライブのステータス</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="live[statues]" id="liveStatues1" value=1>
+            <label class=form-check-label for=liveStatues1>
+              <b>収拾段階</b>(新規PA表の作成、編集ができます)
+            </label>
+          </div>
+          <div class=form-check>
+            <input class="form-check-input" type="radio" name="live[statues]" id="liveStatues2" value=2>
+            <label class="form-check-label" for="liveStatues2">
+              <b>ライブ準備完了</b>(新規PA表の作成、編集にはadminへの承認が必要になります)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="live[statues]" id="liveStatues3" value=3>
+            <label class="form-check-label" for="liveStatues3">
+              <b>ライブ中</b>(adminアカウントで見ているPA表のバンドが、ライブ一覧でハイライトされます)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="live[statues]" id="liveStatues4" value=4>
+            <label class="form-check-label" for="liveStatues4">
+              <b>ライブ終了</b>(アーカイブされ、新たなPA表の作成はできなくなります)
+            </label>
+          </div>
 
-        <button class="btn btn-success mt-3" id = "submitButton">ライブを編集</button>
+        <button class="btn btn-success my-3" id = "submitButton">ライブを編集</button>
     </form>
 </div>
 <script src="/javascript/validateForms.js"></script>
+<script>
+    const statues = "<%=live.statues%>";
+</script>
+<script src="/javascript/liveEdit.js"></script>

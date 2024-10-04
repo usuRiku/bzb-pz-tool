@@ -12,17 +12,31 @@ module.exports.renderNewForm =  (req, res) => {
 
 module.exports.showLive = async (req, res) => {
     const { liveId } = req.params;
-    const live = await Live.findById(liveId).populate("bands");
+    const live = await Live.findById(liveId).populate({
+        path: "bands",
+        populate: {
+            path: "songs"
+        }
+    }).populate("breaks");
     if (!live) {
         req.flash("error", "ライブが存在しません");
         return res.redirect(`/lives`);
     }
-    res.render("lives/show", { live });
+    if (live.statues === 1) {
+        res.render("lives/show", { live });
+    } else if (live.statues === 2) {
+        res.render("lives/show_ready_to_go", {live});
+    } else if (live.statues === 3) {
+        res.render("lives/currently_live", {live});
+    } else if (live.statues === 4) {
+        res.render("lives/archive", {live});
+    }
 };
 
 module.exports.createLive = async (req, res) => {
     const live = new Live(req.body.live);
     live.breaks = [];
+    live.statues = 1
     await live.save();
     res.redirect("/lives");
 };

@@ -69,6 +69,10 @@ module.exports.renderPasswordResetForm = async (req, res) => {
     res.render("auth/resetPassword", { resetUrl });
 };
 
+module.exports.SendPaTableSubmissionNotificationMail = async (req, res) => {
+    
+}
+
 module.exports.renderPasswordMailForm = (req, res) => {
     res.render("auth/passwordMailForm");
 };

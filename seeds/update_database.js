@@ -17,14 +17,12 @@ const Band = require("../models/band");
 const Song = require("../models/song");
 
 const seedDB = async () => {
-    let songs = await Song.find({});
-    for (let i = 0; i < songs.length; i++){
-        let mainSpeaker ="メインスピーカ：\n" + songs[i].mainSpeaker + "\n\n";
-        let returnSpeaker ="返しスピーカ：\n" + songs[i].returnSpeaker + "\n\n";
-        let otherRequests = "その他：\n" + songs[i].otherRequests + "\n";
-        let newRequest = mainSpeaker + returnSpeaker + otherRequests;
-        songs[i].requests = newRequest;
-        await songs[i].save();
+    let lives = await Live.find({});
+    for (let i = 0; i < lives.length; i++){
+        lives[i].statues = 4
+        await lives[i].save();
+        console.log(lives[i].statues);
     }
+    console.log("変更完了")
 }
-seedDB()
+seedDB();

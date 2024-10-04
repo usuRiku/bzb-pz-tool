@@ -1,0 +1,58 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/stylesheets/live.css" />
+
+<div class="row">
+    <div class="col-sm-12 col-md-8 offset-md-2">
+    <div class="alert alert-info">現在ライブ中です。PA表の提出、編集は、管理者が許可するまで反映されません。また、現在演奏中のバンドがハイライトされます。</div>
+        <h1 id="liveName"><%= live.name %>出演バンド一覧</h1>
+
+        <form action="/lives/<%=live._id%>/new">
+            <button class="btn btn-success">PA表を新規作成（管理者へリクエストを送る）</button>
+        </form>
+        <div class="container" id="list">
+          <div class="card">
+            <table class="table table-striped table-hover">
+              <thead>
+                <th scope="col" id = "order">順</th>
+                <th scope="col">バンド名</th>
+                <th scope="col">休憩時間</th>
+              </thead>
+              <tbody>
+                <% live.bands.forEach((band, index) => {%>
+                  <% live.breaks.forEach(oneBreak => { %>
+                    <% if(oneBreak.order === index){ %>
+                        <tr class="table-info">
+                            <td></td>
+                            <td><%= oneBreak.name %></td>
+                            <td><%= oneBreak.time + "分" %></td>
+                        </tr>
+                    <% } %>
+                  <% }); %>
+                <tr>
+                  <th scope="row">
+                    <span class="handle hidden"><i class="bi bi-chevron-bar-expand cards"></i></span>
+                    <span class="badge bg-secondary no"><%= index + 1 %></span>
+                  </th>
+                  <td><%= band.name %></td>
+                  <td></td>
+                </tr>
+                <% }); %>
+                <% live.breaks.forEach(oneBreak => { %>
+                  <% if(oneBreak.order >= live.bands.length){ %>
+                      <tr class="table-info">
+                          <td></td>
+                          <td><%= oneBreak.name %></td>
+                          <td><%= oneBreak.time + "分" %></td>
+                      </tr>
+                  <% } %>
+              <% }); %>
+              </tbody>
+            </table>
+        
+          </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
+        <script src="https://code.jquery.com/jquery.min.js"></script>
+    </div>
+
+</div>

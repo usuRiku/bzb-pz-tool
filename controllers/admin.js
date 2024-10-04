@@ -197,3 +197,15 @@ module.exports.shiftIndex = async (req, res) => {
     }).populate("breaks");
     res.render("admin/shiftIndex", {live});
 }
+
+module.exports.shiftCopyBandName = async (req, res) => {
+    const live = await Live.findById(req.params.liveId).populate("bands");
+    let copyText = ""
+    for (let i = 0; i < live.bands.length; i++){
+        copyText += live.bands[i].name;
+        copyText += "\n";
+    }
+    navigator.clipboard.writeText(copyText);
+    req.flash("success", "クリップボードにコピーしました");
+    redirect(`/admin/${req.params.liveId}/shift/index`);
+}

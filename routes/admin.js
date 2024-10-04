@@ -39,6 +39,9 @@ router.route("/:liveId/login/spotify")
     .post(isLoggedIn, hasAdminAuthority, admin.loginSpotify);
 
 router.route("/:liveId/shift/index")
-    .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.shiftIndex) );
+    .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.shiftIndex));
+    
+router.route("/:liveId/shift/copyBandName")
+    .get(isLoggedIn, hasAdminAuthority, catchAsync(admin.shiftCopyBandName));
 
 module.exports = router;

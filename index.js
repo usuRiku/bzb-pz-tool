@@ -11,6 +11,7 @@ const methodOverride = require('method-override');
 const SpotifyWebApi = require('spotify-web-api-node');
 const MongoStore = require('connect-mongo');
 const { getSpotifyAccessToken } = require("./utils/spotify_credentials.js");
+const { sseMiddleware } = require('express-sse-middleware');
 
 const sessionSecret = process.env.SESSION_SECRET;
 const PORT = process.env.PORT || 3000;
@@ -63,6 +64,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(sseMiddleware);
 app.use(async (req, res, next) => {
     //spotify
     const spotifyApi = new SpotifyWebApi({

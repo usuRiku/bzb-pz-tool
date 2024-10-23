@@ -100,6 +100,6 @@ module.exports.renderSearchResult = async (req, res) => {
     const katakana = await kuroshiro.convert(search_string, { to: "katakana" });
     console.log(katakana);
     
-    const lives = await Live.find({ $or : [{ katakanaName: { $regex: katakana } } ,{ name: { $regex: search_string } } ]});
+    const lives = await Live.find({ $or : [{ katakanaName: { $regex: katakana } } ,{ name: { $regex: search_string } } ]}).sort({ date: -1 });
     res.render("lives/search/result", { lives, search_string });
 }

@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Band = require("./band");
 const liveSchema = new mongoose.Schema({
     name: String,
+    katakanaName : String,
     date: Date,
     location: String,
     time: String,

@@ -2,7 +2,7 @@
 <% layout("layouts/boilerplate") %>
 <div class="row">
     <div class="col-12 col-md-8 offset-md-2">
-        <h1>ライブ一覧</h1>
+        <h1>ライブ一覧 - 検索結果"<%= search_string %>"</h1>
         <form action = "/lives/search" class="col-md-6 d-flex col-12" role="search">
             <input class="form-control me-2" type="search" name= "q" placeholder="ライブ名で検索" aria-label="Search">
             <button class="btn btn-outline-success col-2" type="submit">検索</button>

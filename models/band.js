@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bandSchema = new mongoose.Schema({
     name: String,
+    hiraganaName: String,
     leader: String,
     se: String,
     seUrl: String,

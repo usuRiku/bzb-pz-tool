@@ -9,6 +9,9 @@ router.route("/")
     .get(catchAsync(lives.index))
     .post(catchAsync(lives.createLive));
 
+router.route("/search")
+    .get(lives.renderSearchResult)
+
 router.route("/new")
     .get(isLoggedIn, hasAdminAuthority, lives.renderNewForm);
 

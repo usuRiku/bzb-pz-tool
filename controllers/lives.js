@@ -1,5 +1,7 @@
 const Live = require("../models/live");
 const Band = require("../models/band");
+const Kuroshiro = require("kuroshiro").default;
+const KuromojiAnalyzer = require("kuroshiro-analyzer-kuromoji");
 
 module.exports.index = async (req, res) => {
     const lives = await Live.find({}).sort({ date: -1 });
@@ -35,6 +37,9 @@ module.exports.showLive = async (req, res) => {
 
 module.exports.createLive = async (req, res) => {
     const live = new Live(req.body.live);
+    const kuroshiro = new Kuroshiro();
+    await kuroshiro.init(new KuromojiAnalyzer());
+    live.hiraganaName = await kuroshiro.convert(live.name, { to: "hiragana" });
     live.breaks = [];
     live.statues = 1
     await live.save();
@@ -87,3 +92,14 @@ module.exports.edit = async (req, res) => {
     await Live.updateOne(live, req.body.live);
     res.redirect(`/lives`);
 };
+
+module.exports.renderSearchResult = async (req, res) => {
+    const search_string = req.query.q;
+    const kuroshiro = new Kuroshiro();
+    await kuroshiro.init(new KuromojiAnalyzer());
+    const katakana = await kuroshiro.convert(search_string, { to: "katakana" });
+    console.log(katakana);
+    
+    const lives = await Live.find({ $or : [{ katakanaName: { $regex: katakana } } ,{ name: { $regex: search_string } } ]});
+    res.render("lives/search/result", { lives, search_string });
+}

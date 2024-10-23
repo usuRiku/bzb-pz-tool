@@ -2,6 +2,8 @@ const Band = require("../models/band");
 const Live = require("../models/live");
 const Song = require("../models/song");
 const User = require("../models/user");
+const Kuroshiro = require("kuroshiro").default;
+const KuromojiAnalyzer = require("kuroshiro-analyzer-kuromoji");
 
 module.exports.createBand = async (req, res) => {
     const live = await Live.findById(req.params.liveId);
@@ -10,6 +12,10 @@ module.exports.createBand = async (req, res) => {
         return res.redirect(`/lives`);
     }
     const band = new Band(req.body.band);
+    const kuroshiro = new Kuroshiro();
+    await kuroshiro.init(new KuromojiAnalyzer());
+    band.hiraganaName = await kuroshiro.convert(band.name, { to: "hiragana" });
+    console.log(band.hiraganaName);
     const oglive = await Live.findById(req.params.liveId);
     band.order = oglive.bands.length + 1;
     await band.save();

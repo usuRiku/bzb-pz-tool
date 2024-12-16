@@ -2,6 +2,8 @@ const Live = require("../models/live");
 const Band = require("../models/band");
 const Kuroshiro = require("kuroshiro").default;
 const KuromojiAnalyzer = require("kuroshiro-analyzer-kuromoji");
+const natural = require('natural');
+const metaphone = natural.Metaphone;
 
 module.exports.index = async (req, res) => {
     const lives = await Live.find({}).sort({ date: -1 });
@@ -94,12 +96,40 @@ module.exports.edit = async (req, res) => {
 };
 
 module.exports.renderSearchResult = async (req, res) => {
-    const search_string = req.query.q;
+    const livename = req.query.livename;
+    const location = req.query.location;
+    const year = req.query.year;
+    const date_start = req.query.date_start;
+    const date_end = req.query.date_end;
+
     const kuroshiro = new Kuroshiro();
     await kuroshiro.init(new KuromojiAnalyzer());
-    const katakana = await kuroshiro.convert(search_string, { to: "katakana" });
-    console.log(katakana);
+    const katakana = await kuroshiro.convert(livename, { to: "katakana" });
     
-    const lives = await Live.find({ $or : [{ katakanaName: { $regex: katakana } } ,{ name: { $regex: search_string } } ]}).sort({ date: -1 });
-    res.render("lives/search/result", { lives, search_string });
+    let lives = await Live.find({
+        $and: [
+        {
+            $or: [
+                { katakanaName: { $regex: katakana } },
+                { name: { $regex: new RegExp(livename, "i") } }
+            ]
+        }, 
+        {
+            $or: [
+                { location: { $regex: location } }
+            ]
+        },
+        {
+            $or: [
+                {
+                    date: {
+                        $gt: new Date(`${year}-01-01T00:00:00+09:00`), 
+                        $lt: new Date(`${year}-12-31T23:59:59+09:00`)
+                    }
+                }
+            ]    
+        }
+        ]
+    }).sort({ date: -1 });
+    res.render("lives/search/result", { lives, livename });
 }

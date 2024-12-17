@@ -14,11 +14,11 @@ async function getToken() {
         'Authorization': 'Basic ' + (Buffer.from(spotifyId + ':' + spotifySecret).toString('base64')),
       },
     });
+    return await response.json();
   }catch(error){
     return false
   }
 
-  return await response.json();
 }
 
 async function getTrackInfo(access_token) {

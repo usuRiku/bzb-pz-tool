@@ -15,8 +15,7 @@ const { sseMiddleware } = require('express-sse-middleware');
 
 const sessionSecret = process.env.SESSION_SECRET;
 const PORT = process.env.PORT || 3000;
-// const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/bzb-pa-tool";
-const dbUrl = "mongodb://susukior1030:zSQ1kuGwZFw60N6H@ac-9st3ra6-shard-00-00.th6mh4o.mongodb.net:27017,ac-9st3ra6-shard-00-01.th6mh4o.mongodb.net:27017,ac-9st3ra6-shard-00-02.th6mh4o.mongodb.net:27017/?ssl=true&replicaSet=atlas-ht812o-shard-0&authSource=admin&retryWrites=true&w=majority&appName=bzb-pa-tool";
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/bzb-pa-tool";
 const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
 const spotifyCallback = process.env.SPOTIFY_CALLBACK
@@ -68,14 +67,14 @@ app.use(express.json());
 app.use(sseMiddleware);
 app.use(async (req, res, next) => {
     //spotify
-    // const spotifyApi = new SpotifyWebApi({
-    //     clientId: spotifyId,
-    //     clientSecret: spotifySecret,
-    //     redirectUri: spotifyCallback
-    // });
-    // access_token = await getSpotifyAccessToken();
-    // spotifyApi.setAccessToken(access_token);
-    // res.locals.spotifyAccessToken = access_token;
+    const spotifyApi = new SpotifyWebApi({
+        clientId: spotifyId,
+        clientSecret: spotifySecret,
+        redirectUri: spotifyCallback
+    });
+    access_token = await getSpotifyAccessToken();
+    spotifyApi.setAccessToken(access_token);
+    res.locals.spotifyAccessToken = access_token;
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currentUser = req.session.user;

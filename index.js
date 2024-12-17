@@ -73,7 +73,9 @@ app.use(async (req, res, next) => {
         redirectUri: spotifyCallback
     });
     access_token = await getSpotifyAccessToken();
-    spotifyApi.setAccessToken(access_token);
+    if(access_token != false){
+        spotifyApi.setAccessToken(access_token);
+    }
     res.locals.spotifyAccessToken = access_token;
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");

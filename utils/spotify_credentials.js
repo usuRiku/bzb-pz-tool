@@ -3,16 +3,20 @@ const spotifyId = process.env.SPOTIFY_CLIENT_ID
 const spotifySecret = process.env.SPOTIFY_CLIENT_SECRET
 
 async function getToken() {
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    body: new URLSearchParams({
-      'grant_type': 'client_credentials',
-    }),
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Basic ' + (Buffer.from(spotifyId + ':' + spotifySecret).toString('base64')),
-    },
-  });
+  try {
+    const response = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      body: new URLSearchParams({
+        'grant_type': 'client_credentials',
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + (Buffer.from(spotifyId + ':' + spotifySecret).toString('base64')),
+      },
+    });
+  }catch(error){
+    return false
+  }
 
   return await response.json();
 }
@@ -28,6 +32,10 @@ async function getTrackInfo(access_token) {
 
 module.exports.getSpotifyAccessToken = async function() {
   token = await getToken()
+  if(token == false){
+    token = {access_token : false}
+  }
+
   return token.access_token
 }
 

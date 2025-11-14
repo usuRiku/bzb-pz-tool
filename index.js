@@ -113,12 +113,6 @@ const authOptions = {
     json: true
 };
 
-app.post(authOptions, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-        const token = body.access_token;
-    }
-});
-
 app.all('*', (req, res, next) => {
     next(new ExpressError('ページが見つかりませんでした', 404));
 });

@@ -4,6 +4,8 @@ const Kuroshiro = require("kuroshiro").default;
 const KuromojiAnalyzer = require("kuroshiro-analyzer-kuromoji");
 const natural = require('natural');
 const metaphone = natural.Metaphone;
+const DEFAULT_MIC_NUMBERS = ['6','5','4','3','2','1'];
+const DEFAULT_MIC_PARTS = ['サード','セカンド','トップ','リード','ベース','ボイパ'];
 
 module.exports.index = async (req, res) => {
     const lives = await Live.find({}).sort({ date: -1 });
@@ -38,13 +40,22 @@ module.exports.showLive = async (req, res) => {
 };
 
 module.exports.createLive = async (req, res) => {
+    console.log('createLive req.body.live =', req.body.live);
     const live = new Live(req.body.live);
     const kuroshiro = new Kuroshiro();
     await kuroshiro.init(new KuromojiAnalyzer());
     live.hiraganaName = await kuroshiro.convert(live.name, { to: "hiragana" });
     live.breaks = [];
     live.statues = 1
+    // Ensure micNumber / micPart defaults are present when not provided or empty
+    if (!live.micNumber || !Array.isArray(live.micNumber) || live.micNumber.filter(v => v && String(v).trim() !== '').length === 0) {
+        live.micNumber = DEFAULT_MIC_NUMBERS.slice();
+    }
+    if (!live.micPart || !Array.isArray(live.micPart) || live.micPart.filter(v => v && String(v).trim() !== '').length === 0) {
+        live.micPart = DEFAULT_MIC_PARTS.slice();
+    }
     await live.save();
+    console.log('saved Live:', live._id, 'micNumber=', live.micNumber, 'micPart=', live.micPart);
     res.redirect("/lives");
 };
 
@@ -90,6 +101,15 @@ module.exports.edit = async (req, res) => {
     if (!live) {
         req.flash("error", "ライブが存在しません");
         return res.redirect(`/lives`);
+    }
+    // If form omitted micNumber/micPart or sent empty values, fill defaults before update
+    if (!req.body.live) req.body.live = {};
+    console.log('edit req.body.live =', req.body.live);
+    if (!req.body.live.micNumber || !Array.isArray(req.body.live.micNumber) || req.body.live.micNumber.filter(v => v && String(v).trim() !== '').length === 0) {
+        req.body.live.micNumber = DEFAULT_MIC_NUMBERS.slice();
+    }
+    if (!req.body.live.micPart || !Array.isArray(req.body.live.micPart) || req.body.live.micPart.filter(v => v && String(v).trim() !== '').length === 0) {
+        req.body.live.micPart = DEFAULT_MIC_PARTS.slice();
     }
     await Live.updateOne(live, req.body.live);
     res.redirect(`/lives`);

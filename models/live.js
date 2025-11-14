@@ -23,7 +23,15 @@ const liveSchema = new mongoose.Schema({
             ref: "Break"
         }
     ],
-    statues : Number
+    statues : Number,
+    micNumber: {
+        type: [String],
+        default: ['6','5','4','3','2','1']
+    },
+    micPart: {
+        type: [String],
+        default: ['サード','セカンド','トップ','リード','ベース','ボイパ']
+    }
     
 });
 

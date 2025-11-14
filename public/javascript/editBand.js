@@ -1,60 +1,124 @@
+const DEFAULT_MIC_NUMBERS = ['6','5','4','3','2','1'];
+const DEFAULT_MIC_PARTS = ['サード','セカンド','トップ','リード','ベース','ボイパ'];
+
+// Fill each song block: if band has a song at position i, use its values;
+// otherwise use live defaults (if available) or the script defaults.
 for (let i = 1; i <= 10; i++) {
-    document.querySelector("#micNumber" + i + "-" + 6).value = "6"
-    document.querySelector("#micNumber" + i + "-" + 5).value = "5"
-    document.querySelector("#micNumber" + i + "-" + 4).value = "4"
-    document.querySelector("#micNumber" + i + "-" + 3).value = "3"
-    document.querySelector("#micNumber" + i + "-" + 2).value = "2"
-    document.querySelector("#micNumber" + i + "-" + 1).value = "1"
+    const songData = band.songs && band.songs[i - 1];
+    const liveNumbers = band.live && Array.isArray(band.live.micNumber) && band.live.micNumber.length === 6 ? band.live.micNumber : DEFAULT_MIC_NUMBERS;
+    const liveParts = band.live && Array.isArray(band.live.micPart) && band.live.micPart.length === 6 ? band.live.micPart : DEFAULT_MIC_PARTS;
 
-    document.querySelector("#part" + i + "-" + 6).value = "サード"
-    document.querySelector("#part" + i + "-" + 5).value = "セカンド"
-    document.querySelector("#part" + i + "-" + 4).value = "トップ"
-    document.querySelector("#part" + i + "-" + 3).value = "リード"
-    document.querySelector("#part" + i + "-" + 2).value = "ベース"
-    document.querySelector("#part" + i + "-" + 1).value = "ボイパ"
-}
-//デフォルト値設定(songのみ)
-for (let i = 1; i <= 10; i++) {
-    try {
-        document.getElementById("song" + i).value = band.songs[i - 1].song
-        document.getElementById("isMc" + i).value = band.songs[i - 1].isMc
-
-        document.querySelector("#micNumber" + i + "-" + 6).value = band.songs[i - 1].micNumber[0];
-        document.querySelector("#micNumber" + i + "-" + 5).value = band.songs[i - 1].micNumber[1];
-        document.querySelector("#micNumber" + i + "-" + 4).value = band.songs[i - 1].micNumber[2];
-        document.querySelector("#micNumber" + i + "-" + 3).value = band.songs[i - 1].micNumber[3];
-        document.querySelector("#micNumber" + i + "-" + 2).value = band.songs[i - 1].micNumber[4];
-        document.querySelector("#micNumber" + i + "-" + 1).value = band.songs[i - 1].micNumber[5];
-
-        document.querySelector("#part" + i + "-" + 6).value = band.songs[i - 1].part[0];
-        document.querySelector("#part" + i + "-" + 5).value = band.songs[i - 1].part[1];
-        document.querySelector("#part" + i + "-" + 4).value = band.songs[i - 1].part[2];
-        document.querySelector("#part" + i + "-" + 3).value = band.songs[i - 1].part[3];
-        document.querySelector("#part" + i + "-" + 2).value = band.songs[i - 1].part[4];
-        document.querySelector("#part" + i + "-" + 1).value = band.songs[i - 1].part[5];
-
-        document.querySelector("#member" + i + "-" + 6).value = band.songs[i - 1].member[0];
-        document.querySelector("#member" + i + "-" + 5).value = band.songs[i - 1].member[1];
-        document.querySelector("#member" + i + "-" + 4).value = band.songs[i - 1].member[2];
-        document.querySelector("#member" + i + "-" + 3).value = band.songs[i - 1].member[3];
-        document.querySelector("#member" + i + "-" + 2).value = band.songs[i - 1].member[4];
-        document.querySelector("#member" + i + "-" + 1).value = band.songs[i - 1].member[5];
-
+    if (songData) {
+        // populate from saved song
+        document.getElementById("song" + i).value = songData.song || '';
+        document.getElementById("isMc" + i).value = songData.isMc || '';
+        for (let k = 0; k < 6; k++) {
+            const j = 6 - k; // j = 6..1 maps to songData arrays 0..5
+            const micVal = songData.micNumber && songData.micNumber[k] ? songData.micNumber[k] : '';
+            const partVal = songData.part && songData.part[k] ? songData.part[k] : '';
+            const memberVal = songData.member && songData.member[k] ? songData.member[k] : '';
+            const micEl = document.querySelector("#micNumber" + i + "-" + j);
+            const partEl = document.querySelector("#part" + i + "-" + j);
+            const memberEl = document.querySelector("#member" + i + "-" + j);
+            if (micEl) micEl.value = micVal;
+            if (partEl) partEl.value = partVal;
+            if (memberEl) memberEl.value = memberVal;
+        }
         const options = document.querySelectorAll(".tempo" + i);
-        for (let j = 0; j < 3; j++){
-            if (options[j].value == band.songs[i - 1].tempo){
-                console.log(band.songs[i - 1].tempo)
+        for (let j = 0; j < options.length; j++){
+            if (options[j].value == songData.tempo){
                 options[j].removeAttribute("selected");
                 options[j].setAttribute("selected", "");
             }
         }
-        document.querySelector("#nuance" + i).value = band.songs[i - 1].nuance;
-        document.querySelector("#requests" + i).value = band.songs[i - 1].requests;
+        document.querySelector("#nuance" + i).value = songData.nuance || '';
+        document.querySelector("#requests" + i).value = songData.requests || '';
         if (band.songNumber === i) {
-            document.getElementById("songNum" + i).setAttribute("selected", "");
+            const el = document.getElementById("songNum" + i);
+            if (el) el.setAttribute("selected", "");
         }
-    } catch {
-        break;
+    } else {
+        // No saved song: populate mic/part inputs from live defaults
+        for (let k = 0; k < 6; k++) {
+            const j = 6 - k; // j = 6..1
+            const micEl = document.querySelector("#micNumber" + i + "-" + j);
+            const partEl = document.querySelector("#part" + i + "-" + j);
+            if (micEl) micEl.value = liveNumbers[k] || '';
+            if (partEl) partEl.value = liveParts[k] || '';
+        }
+    }
+}
+
+// Utility to get values arrays for a song i (top->bottom order)
+function getSongValues(i) {
+    const nums = [];
+    const parts = [];
+    const members = [];
+    for (let j = 6; j >= 1; j--) {
+        const n = document.querySelector("#micNumber" + i + "-" + j);
+        const p = document.querySelector("#part" + i + "-" + j);
+        const m = document.querySelector("#member" + i + "-" + j);
+        nums.push(n ? n.value : '');
+        parts.push(p ? p.value : '');
+        members.push(m ? m.value : '');
+    }
+    return { nums, parts, members };
+}
+
+function setSongValues(i, nums, parts, members) {
+    for (let j = 6; j >= 1; j--) {
+        const pos = 7 - j;
+        const n = document.querySelector("#micNumber" + i + "-" + j);
+        const p = document.querySelector("#part" + i + "-" + j);
+        const m = document.querySelector("#member" + i + "-" + j);
+        if (n) n.value = nums[pos-1] !== undefined ? nums[pos-1] : '';
+        if (p) p.value = parts[pos-1] !== undefined ? parts[pos-1] : '';
+        if (m) m.value = members[pos-1] !== undefined ? members[pos-1] : '';
+    }
+}
+
+// Capture initial values per song so we can reset to live defaults
+const initialSongValues = {};
+for (let i = 1; i <= 10; i++) {
+    initialSongValues[i] = getSongValues(i);
+}
+
+// Attach control handlers for each song block (reverse/reset)
+for (let i = 1; i <= 10; i++) {
+    const revNumBtn = document.getElementById(`reverseNumbers-${i}`);
+    const revPartsBtn = document.getElementById(`reversePartsMembers-${i}`);
+    const revRowsBtn = document.getElementById(`reverseRows-${i}`);
+
+    if (revNumBtn) {
+        revNumBtn.addEventListener('click', () => {
+            const { nums, parts, members } = getSongValues(i);
+            nums.reverse();
+            setSongValues(i, nums, parts, members);
+        });
+    }
+    if (revPartsBtn) {
+        revPartsBtn.addEventListener('click', () => {
+            const { nums, parts, members } = getSongValues(i);
+            parts.reverse();
+            members.reverse();
+            setSongValues(i, nums, parts, members);
+        });
+    }
+    if (revRowsBtn) {
+        revRowsBtn.addEventListener('click', () => {
+            const { nums, parts, members } = getSongValues(i);
+            nums.reverse(); parts.reverse(); members.reverse();
+            setSongValues(i, nums, parts, members);
+        });
+    }
+    const resetBtn = document.getElementById(`resetInitial-${i}`);
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            const init = initialSongValues[i] || { nums: [], parts: [], members: [] };
+            const current = getSongValues(i);
+            const currentMembers = current.members || [];
+            setSongValues(i, init.nums, init.parts, currentMembers);
+        });
     }
 }
 

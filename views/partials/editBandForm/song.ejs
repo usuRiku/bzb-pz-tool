@@ -39,18 +39,44 @@
 </div>
 <div>
     <label for=<%="band[micNumber" + i + "-1" +"]"%> class = "col-form-label">マイクの番号</label>
-    <div class="input-group">
-        <span class="input-group-text">マイク番号</span>
-        <span class="input-group-text">パート</span>
-        <span class="input-group-text">名前</span>
+    <div class="alert alert-info mb-1">初期表示された順番が基本の並び順です。</div>
+    <div class="d-flex gap-2 mb-2">
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="reverseNumbers-<%=i%>">マイク番号を反転</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="reversePartsMembers-<%=i%>">パートと名前を反転</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="reverseRows-<%=i%>">行を反転</button>
+        <button type="button" class="btn btn-sm btn-outline-primary" id="resetInitial-<%=i%>">初期表示に戻す</button>
     </div>
-    <% for(let j = 6; j >= 1;j--){ %>
-        <div class="input-group">
-            <input type="text"  name = <%="band[micNumber][" + i + "]"%> class="form-control" id = <%="micNumber"+i+"-"+j%>>
-            <input type="text" name = <%="band[part][" + i + "]"%> class="form-control" id = <%="part"+i+"-"+j%>>
-            <input type="text" name = <%="band[member][" + i + "]"%> class="form-control" id = <%="member"+i+"-"+j%>>
+    <% const defaultNumbers = ['6','5','4','3','2','1']; %>
+    <% const defaultParts = ['サード','セカンド','トップ','リード','ベース','ボイパ']; %>
+    <% const liveMicNumbers = (typeof live !== 'undefined' && Array.isArray(live.micNumber) && live.micNumber.length === 6) ? live.micNumber : defaultNumbers; %>
+    <% const liveMicParts = (typeof live !== 'undefined' && Array.isArray(live.micPart) && live.micPart.length === 6) ? live.micPart : defaultParts; %>
+    <div class="initial-order mb-2 text-muted small">
+        <% const dispNums = liveMicNumbers.join(' '); %>
+        <% const dispParts = liveMicParts.join(' '); %>
+        <strong>基本の並び：</strong>マイク番号は下手から <%= dispNums %>
+        <br>
+        パートは下手から <%= dispParts %>
+    </div>
+    <div class="stage-wrapper">
+        <div class="stage-area">
+            <div class="stage-label stage-label-top">ステージ下手<br><small class="muted">（ステージ向かって左）</small></div>
+            <div class="input-group">
+                <span class="input-group-text">マイク番号</span>
+                <span class="input-group-text">パート</span>
+                <span class="input-group-text">名前</span>
+            </div>
+            <% for(let j = 6; j >= 1;j--){ %>
+                <% const pos = 7 - j; %>
+                <div class="input-group">
+                    <input type="text"  name = <%="band[micNumber][" + i + "][]"%> class="form-control" id = <%="micNumber"+i+"-"+j%> value="<%= liveMicNumbers[pos-1] %>">
+                    <input type="text" name = <%="band[part][" + i + "][]"%> class="form-control" id = <%="part"+i+"-"+j%> value="<%= liveMicParts[pos-1] %>">
+                    <input type="text" name = <%="band[member][" + i + "][]"%> class="form-control" id = <%="member"+i+"-"+j%>>
+                </div>
+            <%  }%>
+            <div class="stage-label stage-label-bottom">ステージ上手<br><small class="muted">（ステージ向かって右）</small></div>
         </div>
-    <%  }%>
+        <div class="audience-label">客席</div>
+    </div>
 </div>
 <div class="form-groupe mb-3">
     

@@ -89,6 +89,11 @@
     const bands = <%-JSON.stringify(user.bands)%>
 
 </script>
+<script>
+    // Pass live mic defaults to client JS for pre-filling
+    const liveMicNumbers = <%- JSON.stringify(live && live.micNumber ? live.micNumber : []) %>;
+    const liveMicParts = <%- JSON.stringify(live && live.micPart ? live.micPart : []) %>;
+</script>
 <script src = "/javascript/spotify-web-api-js/spotify-web-api.js"></script>
 <script src = "/javascript/newBand.js"></script>
 <script src="/javascript/validateForms.js"></script>

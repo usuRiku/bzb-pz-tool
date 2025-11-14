@@ -39,8 +39,48 @@
                 OK!
             </div>
         </div>
+            <div class="my-3">
+                <label class="col-form-label">マイク番号初期配置</label>
+                <div class="alert alert-info mb-1">マイクの初期配置を指定してください。上から順に入力します。上が下手、下が上手です。</div>
+                <div class="stage-wrapper">
+                    <div class="stage-area">
+                        <div class="stage-label stage-label-top">ステージ下手<br><small class="muted">（ステージ向かって左）</small></div>
+                        <div class="mb-2 d-flex gap-2 justify-content-end">
+                            <button id="reverseNumbers" class="btn btn-sm btn-outline-secondary" type="button">マイク番号を上下反転</button>
+                            <button id="reverseParts" class="btn btn-sm btn-outline-secondary" type="button">パートを上下反転</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 25%;">マイク番号</th>
+                                        <th>パート</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% const defaultParts = ['サード','セカンド','トップ','リード','ベース','ボイパ']; %>
+                                    <% for(let j = 6; j >= 1; j--){ %>
+                                        <% const pos = 7 - j; %>
+                                        <tr>
+                                            <td>
+                                                <input type="text" name="live[micNumber][]" class="form-control form-control-sm" id="<%= `liveMicNumber-${j}` %>" value="<%= pos %>">
+                                            </td>
+                                            <td>
+                                                <input type="text" name="live[micPart][]" class="form-control form-control-sm" id="<%= `liveMicPart-${j}` %>" value="<%= defaultParts[pos-1] %>">
+                                            </td>
+                                        </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="stage-label stage-label-bottom">ステージ上手<br><small class="muted">（ステージ向かって右）</small></div>
+                    </div>
+                    <div class="audience-label">客席</div>
+                </div>
+            </div>
 
-        <button type="button" class="btn btn-success mt-3" id = "submitButton">ライブを新規作成</button>
+        <button type="submit" class="btn btn-success mt-3" id = "submitButton">ライブを新規作成</button>
     </form>
 </div>
 <script src="/javascript/validateForms.js"></script>
+<script src="/javascript/liveMicControls.js"></script>

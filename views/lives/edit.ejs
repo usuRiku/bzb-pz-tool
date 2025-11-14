@@ -40,6 +40,44 @@
                 OK!
             </div>
         </div>
+        <div class="my-3">
+          <label class="col-form-label">マイク番号初期配置（上から順に）</label>
+          <div class="alert alert-info mb-1">マイクの初期配置を指定してください。上から順に入力します。上が下手、下が上手です。</div>
+          <div class="stage-wrapper">
+            <div class="stage-area">
+              <div class="stage-label stage-label-top">ステージ下手<br><small class="muted">（ステージ向かって左）</small></div>
+              <div class="mb-2 d-flex gap-2 justify-content-end">
+                <button id="reverseNumbers" class="btn btn-sm btn-outline-secondary" type="button">マイク番号を上下反転</button>
+                <button id="reverseParts" class="btn btn-sm btn-outline-secondary" type="button">パートを上下反転</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered align-middle">
+                  <thead class="table-light">
+                    <tr>
+                      <th style="width:25%">マイク番号</th>
+                      <th>パート</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(let j = 6; j >= 1; j--){ %>
+                      <% const idx = 6 - j; %>
+                      <tr>
+                        <td>
+                          <input type="text" name="live[micNumber][]" class="form-control form-control-sm" id="<%= `liveMicNumber-${j}` %>" value="<%= (live.micNumber && live.micNumber[idx]) ? live.micNumber[idx] : j %>">
+                        </td>
+                        <td>
+                          <input type="text" name="live[micPart][]" class="form-control form-control-sm" id="<%= `liveMicPart-${j}` %>" value="<%= (live.micPart && live.micPart[idx]) ? live.micPart[idx] : '' %>" >
+                        </td>
+                      </tr>
+                    <% } %>
+                  </tbody>
+                </table>
+              </div>
+              <div class="stage-label stage-label-bottom">ステージ上手<br><small class="muted">（ステージ向かって右）</small></div>
+            </div>
+            <div class="audience-label">客席</div>
+          </div>
+        </div>
         <label for="" class="col-form-label">ライブのステータス</label>
         <div class="form-check">
             <input class="form-check-input" type="radio" name="live[statues]" id="liveStatues1" value=1>
@@ -74,3 +112,4 @@
     const statues = "<%=live.statues%>";
 </script>
 <script src="/javascript/liveEdit.js"></script>
+<script src="/javascript/liveMicControls.js"></script>

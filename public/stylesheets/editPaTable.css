@@ -36,3 +36,36 @@
 .tableHead{
     font-size: 0.8rem;
 }
+
+/* Stage / audience visual (copied from newPaTable.css) */
+.stage-wrapper{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+}
+.stage-area{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+}
+.stage-label{
+    text-align:center;
+    font-weight:600;
+    margin:8px 0;
+}
+.audience-label{
+    writing-mode:vertical-rl;
+    font-weight:700;
+    font-size:1.1rem;
+    align-self:center;
+    padding:4px 2px;
+    color:#444;
+    order: -1;
+    margin-right:2px;
+}
+.muted{
+    font-weight:400;
+    font-size:0.8rem;
+    color:#666;
+}

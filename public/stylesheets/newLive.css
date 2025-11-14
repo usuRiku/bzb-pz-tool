@@ -1,3 +1,37 @@
 #msg{
     color:red;
 }
+
+.stage-wrapper{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+}
+.stage-area{
+    /* Arrange labels and table vertically */
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+}
+.stage-label{
+    text-align:center;
+    font-weight:600;
+    margin:8px 0;
+}
+.audience-label{
+    writing-mode:vertical-rl;
+    font-weight:700;
+    font-size:1.1rem;
+    align-self:center;
+    padding:8px 4px;
+    color:#444;
+    /* place audience label to the left of the stage area */
+    order: -1;
+    margin-right:4px;
+}
+.muted{
+    font-weight:400;
+    font-size:0.8rem;
+    color:#666;
+}

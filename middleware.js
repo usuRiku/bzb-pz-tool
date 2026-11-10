@@ -70,3 +70,10 @@ module.exports.hasLightAuthority = async (req, res, next) => {
     }
     next();
 };
+
+// サービス終了に伴い、PA表の作成・編集を停止する
+module.exports.blockPaTableChanges = (req, res, next) => {
+    req.flash("error", "サービス終了に伴い、PA表の作成・編集はできません。新アプリ bzb-pa-tool (https://bzb-pa-tool.com) をご利用ください。");
+    const liveId = req.params.liveId;
+    return res.redirect(liveId ? `/lives/${liveId}` : "/lives");
+};

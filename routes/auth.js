@@ -5,7 +5,7 @@ const { catchAsync } = require("../utils/catchAsync");
 
 router.route("/register")
     .get(auth.renderNewForm)
-    .post(catchAsync(auth.register));
+    .post(auth.registerClosed);
 
 router.route("/login")
     .get(auth.renderLoginForm)

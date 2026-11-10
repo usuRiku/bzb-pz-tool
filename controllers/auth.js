@@ -13,6 +13,11 @@ module.exports.renderNewForm = (req, res) => {
     res.render("auth/new");
 };
 
+module.exports.registerClosed = (req, res) => {
+    req.flash("error", "新規会員登録は停止しています。");
+    res.redirect("/register");
+};
+
 module.exports.register = async (req, res) => {
     const { email, password } = req.body;
 

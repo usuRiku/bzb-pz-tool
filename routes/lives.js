@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const lives = require("../controllers/lives");
 const bands = require("../controllers/bands");
-const { isLoggedIn, hasEditBandAuthority, hasAdminAuthority , hasCreateBandAuthority} = require("../middleware");
+const { isLoggedIn, hasEditBandAuthority, hasAdminAuthority , hasCreateBandAuthority, blockPaTableChanges} = require("../middleware");
 const { catchAsync } = require("../utils/catchAsync");
 
 router.route("/")
@@ -16,14 +16,14 @@ router.route("/new")
     .get(isLoggedIn, hasAdminAuthority, lives.renderNewForm);
 
 router.route("/:liveId/new")
-    .get(isLoggedIn, hasCreateBandAuthority, catchAsync(bands.renderNewForm));
+    .get(blockPaTableChanges);
 
 router.route("/:liveId/:bandId/edit")
-    .get(isLoggedIn, hasEditBandAuthority, catchAsync(bands.renderEditForm));
+    .get(blockPaTableChanges);
     
 router.route("/:liveId")
     .get(catchAsync(lives.showLive))
-    .post(isLoggedIn, hasCreateBandAuthority, catchAsync(bands.createBand))
+    .post(blockPaTableChanges)
     .patch(isLoggedIn, hasAdminAuthority, catchAsync(lives.exchangeBandOrder))
     .delete(isLoggedIn, hasAdminAuthority, catchAsync(lives.delete))
     .put(isLoggedIn, hasAdminAuthority, catchAsync(lives.edit));
@@ -34,6 +34,6 @@ router.route("/:liveId/edit")
 router.route("/:liveId/:bandId")
     .get(isLoggedIn, hasEditBandAuthority,catchAsync(bands.showBand))
     .delete(isLoggedIn, hasEditBandAuthority, catchAsync(bands.delete))
-    .put(isLoggedIn, hasEditBandAuthority, catchAsync(bands.edit));
+    .put(blockPaTableChanges);
 
 module.exports = router;
